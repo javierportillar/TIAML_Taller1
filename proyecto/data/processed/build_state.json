@@ -9,8 +9,8 @@
     "data/config/prompts_config.json": {
       "path": "data/config/prompts_config.json",
       "exists": true,
-      "size": 2955,
-      "sha256": "a704600addad386c8041dd98089eccedfd49ea18c900e91580c3cf998af83184"
+      "size": 3127,
+      "sha256": "2cf15a597123f797ca017a220693c17a14c18f8014ea46780a5f9e939312abc6"
     },
     "src/prompts.py": {
       "path": "src/prompts.py",
@@ -43,7 +43,7 @@
       "sha256": "ffc5e09722c8e172ccdd158a2cd1cbae3645cbc7ba1da55b85bc3593835e13d5"
     }
   },
-  "generated_at": "2026-04-29T22:38:34.311428+00:00",
+  "generated_at": "2026-04-29T23:09:54.901053+00:00",
   "stats": {
     "documents": 25,
     "knowledge_chars": 186723,

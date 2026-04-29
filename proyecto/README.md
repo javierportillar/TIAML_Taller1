@@ -23,6 +23,8 @@ proyecto/
   .env.example
   README.md
   pipeline_explicacion.md
+  pipeline_codigo_explicacion.md
+  prompt_experimentacion.md
   src/
     config.py
     scraper.py
@@ -161,3 +163,5 @@ Si se entrega por GitHub, estos archivos quedan ignorados por `.gitignore`. Si s
 - `data/processed/source_index.md`: fuentes usadas.
 - `results/test_results.csv`: ejecucion de preguntas de prueba.
 - `pipeline_explicacion.md`: explicacion tecnica del flujo completo.
+- `pipeline_codigo_explicacion.md`: explicacion del pipeline con fragmentos de codigo.
+- `prompt_experimentacion.md`: evidencia de experimentacion y optimizacion de prompts.
