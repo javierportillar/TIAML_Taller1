@@ -1,0 +1,49 @@
+{
+  "company_name": "Sándwich Qbano",
+  "company_description": "Cadena colombiana de restaurantes de comida rápida enfocada en sándwiches, wraps, bowls, combos y productos complementarios. El asistente se orienta a responder preguntas de primer contacto sobre la marca, su oferta y su información institucional pública.",
+  "seed_urls": [
+    "https://www.sandwichqbano.com/"
+  ],
+  "additional_sources": [
+    "https://www.sandwichqbano.com/sandwich/individual",
+    "https://www.sandwichqbano.com/sandwich",
+    "https://www.sandwichqbano.com/sandwich?page=3",
+    "https://www.sandwichqbano.com/saludable/q-bowls",
+    "https://www.sandwichqbano.com/saludable?page=2",
+    "https://www.sandwichqbano.com/wraps",
+    "https://www.sandwichqbano.com/wraps?page=2",
+    "https://www.sandwichqbano.com/167?map=productClusterIds",
+    "https://www.sandwichqbano.com/otras-delicias?page=2",
+    "https://www.sandwichqbano.com/149?map=productClusterIds",
+    "https://www.sandwichqbano.com/promociones?order=OrderByBestDiscountDESC",
+    "https://www.sandwichqbano.com/saludable/ensaladas",
+    "https://www.sandwichqbano.com/saludable"
+  ],
+  "document_sources": [
+    "https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf"
+  ],
+  "allowed_domains": [
+    "www.sandwichqbano.com",
+    "sandwichqbano.com",
+    "tyc.sandwichqbano.com"
+  ],
+  "priority_topics": [
+    "historia",
+    "productos y servicios",
+    "contacto",
+    "sedes",
+    "horarios",
+    "sostenibilidad",
+    "noticias",
+    "franquicias",
+    "presencia geográfica"
+  ],
+  "excluded_keywords": [
+    "login",
+    "auth",
+    "checkout",
+    "politica",
+    "privacidad",
+    "terminos"
+  ]
+}

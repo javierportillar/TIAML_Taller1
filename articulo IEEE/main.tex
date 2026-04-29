@@ -1,0 +1,225 @@
+\documentclass[journal]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{array}
+
+\hyphenation{Lang-Chain Stream-lit}
+
+\begin{document}
+
+\title{Creacion de una base de conocimiento semantica y un sistema Q\&A para Sándwich Qbano}
+
+\author{
+[Integrante 1], [Integrante 2], [Integrante 3], [Integrante 4]\\
+\href{mailto:correo1@ejemplo.com}{correo1@ejemplo.com},
+\href{mailto:correo2@ejemplo.com}{correo2@ejemplo.com},
+\href{mailto:correo3@ejemplo.com}{correo3@ejemplo.com},
+\href{mailto:correo4@ejemplo.com}{correo4@ejemplo.com}
+}
+
+\maketitle
+
+\begin{abstract}
+This paper presents the construction of a semantic knowledge base and a question-answering prototype for Sándwich Qbano. The solution was built from public digital sources, including the corporate website and the official 2023 sustainability report. The proposed pipeline covers data extraction, text cleaning, semantic chunking, prompt engineering, and a lightweight web interface for validation. Although this first module does not implement a full vector-based retrieval system, it establishes the knowledge layer required for a future enterprise chatbot and documents the technical decisions, results, and limitations of the prototype.
+\end{abstract}
+
+\begin{IEEEkeywords}
+knowledge base, question answering, prompt engineering, LangChain, Streamlit, web scraping
+\end{IEEEkeywords}
+
+\IEEEpeerreviewmaketitle
+
+\section{Introduccion}
+Las empresas requieren canales de comunicacion rapidos, consistentes y escalables para resolver preguntas iniciales de clientes, aliados y usuarios. En ese contexto, los asistentes conversacionales soportados por modelos de lenguaje ofrecen una ruta viable para automatizar respuestas frecuentes, siempre que cuenten con una base de conocimiento confiable y delimitada.
+
+Este trabajo desarrolla el nucleo de conocimiento para un futuro asistente virtual de Sándwich Qbano. El objetivo del modulo fue construir una base de conocimiento semantica a partir de informacion publica, organizarla de forma util para tareas de lenguaje natural y validar su uso en un sistema de preguntas y respuestas. La implementacion uso \textit{Requests} \cite{requests_docs}, \textit{Beautiful Soup} \cite{beautifulsoup_docs}, \textit{LangChain} \cite{langchain_docs} y una interfaz en \textit{Streamlit} \cite{streamlit_docs}.
+
+\section{Descripcion del problema}
+Sándwich Qbano publica informacion relevante en diferentes canales digitales, pero esta informacion suele estar distribuida en varias secciones del sitio web comercial, categorias del menu y reportes corporativos. Esto dificulta responder de manera inmediata y uniforme preguntas de primer contacto, tales como:
+
+\begin{itemize}
+\item que hace la empresa;
+\item cuales son sus productos o servicios;
+\item donde opera;
+\item como puede ser contactada;
+\item que informacion institucional o comercial esta disponible.
+\end{itemize}
+
+El problema central consiste en consolidar dicha informacion publica en un repositorio textual limpio y utilizable por un modelo de lenguaje, reduciendo alucinaciones y manteniendo trazabilidad hacia las fuentes originales.
+
+\section{Empresa, alcance y estrategia de datos}
+\subsection{Empresa asignada}
+En esta seccion debe describirse la empresa asignada, su sector economico, cobertura geografica y el tipo de usuario que se busca atender con el asistente.
+
+\textbf{Texto base:} Sándwich Qbano es una empresa colombiana del sector gastronomico y de comidas rapidas. Segun su informe oficial de sostenibilidad 2023, opera en 53 municipios de Colombia, cuenta con 228 puntos de venta a nivel nacional y 4 puntos a nivel internacional, dentro de un modelo con alta participacion de franquicias. Para este taller se priorizaron preguntas de primer contacto relacionadas con informacion institucional, portafolio, menu, cobertura y sostenibilidad.
+
+\subsection{Alcance funcional del sistema}
+El sistema construido en este modulo busca responder preguntas iniciales de caracter informativo. No se orienta a transacciones, autenticacion, procesos de compra, ni respuestas sobre datos privados.
+
+\subsection{Fuentes de informacion}
+Las fuentes consideradas para construir la base de conocimiento fueron:
+
+\begin{itemize}
+\item sitio web oficial de Sándwich Qbano;
+\item categorias publicas del menu en linea, como productos destacados, individuales, wraps y q-bowls;
+\item informe de sostenibilidad 2023 publicado por FSQ Group y la marca Qbano.
+\end{itemize}
+
+Las URLs semilla utilizadas pueden documentarse de forma explicita en el repositorio y en el anexo tecnico del informe.
+
+\section{Preparacion de los datos}
+\subsection{Extraccion}
+La extraccion se realizo mediante scraping web sobre las URLs definidas como fuente primaria. La implementacion descarga el HTML de cada pagina, elimina elementos no relevantes para contenido semantico y conserva bloques textuales como titulos, parrafos y listas. Para este caso se combinaron paginas del sitio comercial y un documento PDF oficial de sostenibilidad. Adicionalmente, se construyo una ficha estructurada de hechos corporativos basada en fuentes oficiales para estabilizar respuestas numéricas y corporativas.
+
+\subsection{Limpieza}
+Una vez extraido el contenido, se aplico un proceso de normalizacion para:
+
+\begin{itemize}
+\item eliminar ruido estructural del HTML;
+\item unificar espacios y saltos de linea;
+\item descartar bloques demasiado cortos o repetidos;
+\item mantener el texto junto con su URL de origen.
+\end{itemize}
+
+El principal artefacto resultante fue un archivo de conocimiento consolidado en texto plano, util para alimentar el prompt del sistema. En la version final se consolidaron 7 documentos fuente entre HTML, PDF y ficha estructurada.
+
+\subsection{Segmentacion semantica}
+Adicional al archivo consolidado, el contenido se dividio en fragmentos o \textit{chunks}. Aunque en este modulo no se implemento una base vectorial completa, los fragmentos permiten organizar mejor la informacion y, en casos de contexto extenso, reducir el volumen enviado al modelo mediante una seleccion lexica simple.
+
+\section{Diseno del sistema}
+\subsection{Arquitectura general}
+La solucion se estructuro en cuatro capas:
+
+\begin{itemize}
+\item captura de datos mediante scraping;
+\item procesamiento y consolidacion del conocimiento;
+\item orquestacion de prompts con LangChain;
+\item interfaz web para demostracion y pruebas.
+\end{itemize}
+
+\begin{table}[htbp]
+\caption{Artefactos principales del entregable}
+\centering
+\begin{tabular}{p{3.0cm} p{4.5cm}}
+\toprule
+\textbf{Artefacto} & \textbf{Descripcion} \\
+\midrule
+Scraper & Extrae contenido textual desde URLs publicas. \\
+Knowledge base & Archivo limpio consolidado con las fuentes procesadas. \\
+Chunks & Fragmentos semanticos para manejo de contexto extenso. \\
+Prompts & Instrucciones para resumen, FAQ y Q\&A. \\
+Dashboard & Interfaz Streamlit para probar el sistema. \\
+\bottomrule
+\end{tabular}
+\label{tab:artefactos}
+\end{table}
+
+\subsection{Modelo y framework}
+La orquestacion del sistema se realizo con LangChain \cite{langchain_docs}. El proyecto fue preparado para trabajar con dos alternativas:
+
+\begin{itemize}
+\item modelos privados via API, como OpenAI \cite{openai_api_docs};
+\item modelos locales servidos con Ollama \cite{ollama_docs}.
+\end{itemize}
+
+Para la implementacion final del caso Qbano se utilizo Ollama \cite{ollama_docs} con el modelo local \texttt{gemma4:latest}. Esta decision permitio evitar dependencias de API paga y mantener el prototipo operativo en entorno local.
+
+\subsection{Prompt engineering}
+Se definieron tres tareas de lenguaje:
+
+\begin{itemize}
+\item \textbf{Resumen}: sintetiza el contenido disponible de la empresa.
+\item \textbf{FAQ}: genera preguntas frecuentes y respuestas basadas en el contexto.
+\item \textbf{Q\&A}: responde preguntas del usuario utilizando solo la informacion suministrada.
+\end{itemize}
+
+La instruccion mas importante del prompt fue restringir la respuesta al contexto disponible e indicar de forma explicita cuando la informacion no se encontraba en la base de conocimiento actual.
+
+\subsection{Interfaz de validacion}
+La interfaz se implemento con Streamlit \cite{streamlit_docs}. Esta incluye tres pestanas, una por cada funcionalidad central del taller:
+
+\begin{itemize}
+\item resumen ejecutivo;
+\item generacion de FAQ;
+\item preguntas y respuestas libres.
+\end{itemize}
+
+\section{Resultados}
+La evaluacion se realizo con al menos 20 preguntas de primer contacto. En la construccion final de la base se consolidaron 7 documentos fuente, un archivo de conocimiento de 96\,336 caracteres y 81 fragmentos o \textit{chunks}. Estos resultados muestran que fue posible integrar informacion institucional, comercial y de sostenibilidad en un mismo repositorio semantico.
+
+\begin{table}[htbp]
+\caption{Metricas del prototipo construido}
+\centering
+\begin{tabular}{p{3.2cm} p{3.7cm}}
+\toprule
+\textbf{Metrica} & \textbf{Valor} \\
+\midrule
+Fuentes procesadas & 7 documentos \\
+Archivo consolidado & 96\,336 caracteres \\
+Fragmentos generados & 81 chunks \\
+Proveedor del modelo & Ollama \\
+Modelo usado & \texttt{gemma4:latest} \\
+Interfaz de prueba & Streamlit \\
+\bottomrule
+\end{tabular}
+\label{tab:metricas}
+\end{table}
+
+En la validacion se observaron dos comportamientos relevantes. Primero, el sistema respondió de forma satisfactoria preguntas sobre menu, productos, historia, cobertura y sostenibilidad cuando la informacion estaba claramente estructurada. Segundo, la extraccion cruda del PDF podia mezclar cifras corporativas dentro de una misma linea, por lo cual se incorporo una ficha estructurada de hechos oficiales derivada del mismo reporte para mejorar la precision.
+
+En esta seccion se deben incluir evidencias como:
+
+\begin{itemize}
+\item cantidad de paginas procesadas;
+\item longitud del archivo de conocimiento consolidado;
+\item numero de chunks generados;
+\item ejemplos representativos de respuestas correctas;
+\item ejemplos de vacios o limites detectados.
+\end{itemize}
+
+\subsection{Ejemplos de interaccion}
+\textbf{Pregunta 1:} ¿Qué productos o categorías ofrece Sándwich Qbano?\\
+\textbf{Respuesta del sistema:} El prototipo identificó categorías como productos destacados, individuales, Q-Bowls, wraps y saludable, además de ejemplos concretos como Sándwich Ropa Vieja Combo, Sándwich al Pastor Combo, Combo Qbowl Costilla y Combo Wrap Al Pastor.\\
+\textbf{Analisis:} Correcta. La respuesta se sustentó en las páginas del menú público y fue consistente con el sitio oficial.
+
+\vspace{0.2cm}
+
+\textbf{Pregunta 2:} ¿En cuántos municipios y puntos de venta opera Qbano según el informe 2023?\\
+\textbf{Respuesta del sistema:} El sistema respondió que Qbano tiene presencia en 53 municipios de Colombia y 228 puntos de venta a nivel nacional.\\
+\textbf{Analisis:} Correcta tras la incorporación de la ficha estructurada. Inicialmente la lectura cruda del PDF generaba ambigüedad entre puntos de venta y franquiciados.
+
+\vspace{0.2cm}
+
+\textbf{Pregunta 3:} ¿Qué acciones de sostenibilidad reporta Qbano en 2023?\\
+\textbf{Respuesta del sistema:} El prototipo recuperó hechos como el reciclaje de 95.6 toneladas de aceite de cocina usado, el aprovechamiento de 34.8 toneladas de residuos, la instalación de 228 trampas de grasa y la siembra de 50 árboles en el Amazonas.\\
+\textbf{Analisis:} Correcta. La respuesta sintetiza datos medibles del informe oficial y evidencia la utilidad del PDF dentro de la base de conocimiento.
+
+\subsection{Discusion}
+En esta parte el grupo debe analizar la precision y coherencia de las respuestas, asi como la dependencia del sistema frente a la calidad del scraping, el cubrimiento de fuentes y la claridad de los prompts. En particular, para este caso se identificó que las preguntas institucionales con cifras exactas exigen una representacion del conocimiento más estructurada que la simple extracción lineal de un PDF.
+
+\section{Limitaciones y trabajo futuro}
+Las principales limitaciones del prototipo fueron:
+
+\begin{itemize}
+\item dependencia de la informacion publica disponible;
+\item posible ausencia de datos sobre horarios, procesos internos o cobertura especifica;
+\item sensibilidad del modelo al tamano del contexto;
+\item falta de una capa vectorial completa en este primer modulo.
+\end{itemize}
+
+Como trabajo futuro, el sistema puede evolucionar hacia una arquitectura RAG con embeddings y base vectorial, permitiendo una recuperacion mas precisa para colecciones documentales mas grandes.
+
+\section{Conclusiones}
+El proyecto permitio construir una base de conocimiento empresarial operativa para Sándwich Qbano, junto con un prototipo de preguntas y respuestas usable en una demostracion academica. El principal aporte del modulo fue organizar la informacion publica de la empresa en una estructura lista para ser consultada por un modelo de lenguaje, con controles basicos para reducir alucinaciones y un flujo reproducible de scraping, limpieza, consolidacion y validacion.
+
+La implementacion deja preparado el camino para un segundo modulo con capacidades RAG completas, sin perder la trazabilidad del trabajo realizado en esta primera fase.
+
+\bibliographystyle{IEEEtran}
+\bibliography{biblio}
+
+\end{document}

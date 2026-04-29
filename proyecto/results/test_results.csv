@@ -1,0 +1,143 @@
+id,question,expected_answer,model_answer,evaluation,notes,context_mode,sources
+1,¿Qué es Sándwich Qbano?,Empresa colombiana del sector gastronómico y de comidas rápidas.,No encontre esa informacion en la base de conocimiento actual.,,,focused,https://www.sandwichqbano.com/ | https://www.sandwichqbano.com/sandwich/individual
+2,¿Cuántos años de trayectoria tiene Qbano según el informe 2023?,44 años de trayectoria.,El informe no especifica la antigüedad o el número de años de trayectoria de Qbano.,,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+3,¿Cuál es el propósito de la marca Qbano?,Alimentar con felicidad.,"El propósito de la marca Qbano es:
+
+*   **Propósito:** Alimentar con felicidad.
+
+Además, la marca busca:
+
+*   **Objetivo de Producto y Servicio:** Preparar y entregar un producto delicioso, fresco, de alta calidad y diferente en la categoría de comidas rápidas, ofreciendo variedad en el menú. También busca brindar una gran experiencia en servicio contando con espacios modernos y acogedores.
+*   **Misión:** Mantenerse como líder en el mercado, ofreciendo productos de calidad y servicio excepcional.",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+4,¿Cuál es la misión de Qbano?,Mantener el liderazgo en la categoría de sándwiches en Colombia por calidad sabor innovación y servicio.,"La misión de Qbano es: Mantener el liderazgo en la categoría de Sándwiches en Colombia siendo reconocidos por la calidad, el gran sabor, la innovación y la excelencia en el servicio.",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf | https://www.sandwichqbano.com/
+5,¿Qué categorías o productos ofrece Sándwich Qbano?,Sándwiches wraps q-bowls ensaladas hamburguesas línea vegetariana e infantil además de combos y productos destacados.,"**Categorías visibles del sitio:**
+*   Sandwiches
+*   Combos
+*   Qbowls
+*   Wrap
+*   Saludable
+
+**Productos visibles:**
+
+**Qbowls y Combos:**
+*   Combo Qbowl Costilla
+*   Combo Qbowl Pollo
+*   Combo Qbowl Criollo
+*   Sándwich Ropa Vieja Combo
+*   Sándwich al Pastor Combo
+*   Combo Hamburguesa Hawaiana
+*   Sándwich Súper Especial Combo
+*   Sándwich Qumbia Combo
+*   Sándwich al Pastor Combo
+*   Sándwich Costilla Combo
+*   Sándwich Cordero Combo
+*   Sándwich Hawaiano Combo
+*   Sándwich Pollo Combo
+*   Sándwich Especial Combo
+*   Sándwich Burguer Combo
+*   Sándwich Roast Beef Combo
+*   Sándwich Vegetariano Combo
+
+**Individuales:**
+*   Sándwich Roast Beef Individual
+*   Sándwich Ropa Vieja Individual
+*   Sándwich Pollo Individual
+*   Sándwich Súper Especial Individual
+*   Sándwich Especial Individual
+*   Sándwich Qumbia Individual
+*   Sándwich Pavo Individual
+*   Sándwich Costilla Individual
+*   Sándwich Cordero Individual
+*   Sándwich Hawaiano Individual
+*   Sándwich al Pastor Individual
+*   Sandwich Burger
+*   Sándwich Vegetariano Individual
+
+**Otros productos:**
+*   Salsa Qbano
+*   Qbanito Jamón y Queso
+*   Qbanito Pollo & Champiñones
+*   Qbanito Hawaiano",,,focused,https://www.sandwichqbano.com/ | https://www.sandwichqbano.com/sandwich/individual | https://www.sandwichqbano.com/sandwich | https://www.sandwichqbano.com/sandwich?page=3
+6,¿En cuántos municipios de Colombia tiene presencia Qbano?,53 municipios en Colombia.,Qbano tiene presencia a lo largo de 53 municipios en Colombia.,,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+7,¿Cuántos puntos de venta nacionales e internacionales reporta Qbano?,228 puntos en Colombia y 4 internacionales.,"Qbano tiene:
+* **Puntos de venta a nivel nacional:** 228
+* **Puntos de venta internacionales:** 20",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+8,¿Qué porcentaje de la operación funciona bajo franquicias?,96 por ciento del modelo de operación en franquicias.,"La información proporcionada no indica un porcentaje específico de la operación que se realiza bajo el modelo de franquicia.
+
+Sin embargo, se menciona en el texto:
+*   ""**...con el modelo de franquicia.**"" (Esto indica que el modelo de franquicia es parte de su operación).
+*   ""**...se comprometen a trabajar con el modelo de franquicia.**"" (Esto refuerza que es un modelo operativo clave).
+
+Para obtener el porcentaje exacto, sería necesario consultar un informe financiero o operativo más detallado.",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+9,¿Cuántos franquiciados reporta la empresa?,84 franquiciados.,La empresa reporta contar con 93 franquiciados.,,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+10,¿Dónde está ubicado el corporativo de FSQ Group y Qbano?,Calle 15 No. 25A-467 Yumbo Valle del Cauca.,"El corporativo de FSQ Group se encuentra en:
+
+**Calle 15, No. 25A-467, Yumbo, Valle del Cauca.**",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+11,¿Qué canales de atención o contacto público aparecen en el informe?,WhatsApp 300 912 5454 call center mismo número página web correos de servicio y redes sociales.,"Basado en la información proporcionada, los puntos de contacto y la cobertura de servicio mencionados son:
+
+**Ubicaciones Geográficas:**
+*   La empresa opera en las ciudades de:
+    *   Bogotá
+    *   Medellín
+
+**Puntos de Servicio:**
+*   Se hace referencia a la cobertura de servicio en la tienda física.
+
+**Contacto General:**
+*   Para consultas o información, se pueden utilizar los canales de comunicación de la empresa (aunque no se especifican números de teléfono o correos electrónicos generales, se menciona la existencia de un equipo de atención).",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+12,¿Qué correo de servicio al cliente aparece en la base de conocimiento?,servicioalcliente@sandwichcubano.com.,El correo electrónico de servicio al cliente es: servicioalcliente@sandwichcubano.com.,,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+13,¿Qué dice la historia de Qbano sobre su origen?,Nació del negocio comprado por dos jóvenes emprendedores y de la creación de la salsa Qbano en Cali.,No encontre esa informacion en la base de conocimiento actual.,,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+14,¿Qué hitos internacionales menciona la historia de Qbano?,Llegó a Panamá y a Estados Unidos según la cronología histórica.,"Los hitos internacionales mencionados en la historia de Qbano son:
+
+*   **1998:** Llegada a Panamá.
+*   **2004:** Llegada a Estados Unidos.
+
+Actualmente, la empresa cuenta con:
+*   2 puntos de venta en Panamá.
+*   1 PDV en Miami.",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+15,¿Qué información pública de sostenibilidad tiene Qbano?,Informe de sostenibilidad 2023 con GRI y temas de residuos agua energía biodiversidad y huella de carbono.,"Qbano ha publicado información de sostenibilidad en varios frentes, cubriendo aspectos ambientales, sociales y de gobernanza (ESG). A continuación, se resumen los puntos clave extraídos de los documentos proporcionados:
+
+### 1. Gobernanza y Cumplimiento (G)
+* **Reporte de Sostenibilidad:** La empresa emite informes que detallan su compromiso con la sostenibilidad, lo cual es un pilar de la gobernanza corporativa.
+* **Cumplimiento Normativo:** Se hace mención al cumplimiento de normativas y estándares en sus operaciones.
+
+### 2. Aspectos Sociales (S)
+* **Capital Humano y Cultura:**
+    * **Formación y Desarrollo:** Se enfatiza la importancia de la capacitación y el desarrollo del personal.
+    * **Bienestar Laboral:** Se mencionan iniciativas para crear un ambiente de trabajo positivo y seguro.
+    * **Participación de Empleados:** La existencia de comités como el de Seguridad y Salud en el Trabajo indica la participación activa de los empleados en la mejora de las condiciones laborales.
+* **Relaciones Comunitarias:**
+    * **Impacto Social:** Se aborda el impacto de la empresa en las comunidades donde opera.
+
+### 3. Aspectos Ambientales (E)
+* **Gestión de Residuos y Recursos:**
+    * **Eficiencia Energética:** Se implementan prácticas para reducir el consumo de energía.
+    * **Gestión de Residuos:** Se trabaja en la minimización de residuos y el manejo adecuado de desechos.
+* **Cadena de Suministro:**
+    * **Proveedores Sostenibles:** Se busca integrar criterios de sostenibilidad en la selección y gestión de proveedores.
+
+### 4. Compromiso General y Estrategia
+* **Visión a Largo Plazo:** La sostenibilidad no es un evento aislado, sino un eje transversal que guía la estrategia de negocio, buscando la resiliencia y el crecimiento responsable.
+* **Transparencia:** La publicación periódica de informes y la comunicación de sus avances demuestran un compromiso con la transparencia ante sus *stakeholders*.
+
+**En resumen, la información de sostenibilidad de Qbano abarca un enfoque integral que busca equilibrar el rendimiento económico con la responsabilidad social y ambiental, respaldado por estructuras de gobernanza sólidas.**",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+16,¿Cuántos empleos generados reporta Qbano en 2023?,2954 empleos generados.,Qbano reporta que en el año 2023 generó **más de 1000 empleos**.,,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+17,¿Cuánto aceite de cocina usado recicló Qbano en 2023?,95.6 toneladas.,"Según la información proporcionada, en el año 2023, la cantidad de aceite reciclado fue de **95.6 toneladas**.",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+18,¿Cuántas toneladas de residuos aprovechó Qbano en 2023?,34.8 toneladas de residuos aprovechados.,"En el contexto de la gestión de residuos, la información proporcionada detalla acciones como la gestión de residuos y el uso de materiales, pero no especifica una cifra total de ""toneladas de residuos"" gestionadas en el año 2023.
+
+Se mencionan acciones relacionadas con:
+*   **Gestión de residuos:** Se menciona la gestión de residuos en general.
+*   **Materiales:** Se habla de la gestión de residuos y el uso de materiales.
+
+**No se encuentra un dato numérico específico de toneladas de residuos gestionadas para el año 2023.**",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+19,¿Cuántas trampas de grasa instaló Qbano según el informe?,228 trampas de grasa.,El texto proporcionado no contiene información específica sobre la cantidad de trampas de grasa instaladas por parte de Qbano.,,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
+20,¿Qué limitación importante tiene esta base de conocimiento para un usuario final?,No cubre inventario tiempo real horarios por sede ni promociones dinámicas y depende de fuentes públicas.,"La principal limitación de la información proporcionada es que **carece de un contexto operativo o de datos específicos de rendimiento** que permitan realizar análisis predictivos o recomendaciones accionables más allá de la descripción de políticas y compromisos.
+
+Específicamente, las limitaciones incluyen:
+
+1. **Ausencia de Métricas de Desempeño (KPIs):** Aunque se mencionan iniciativas (ej. sostenibilidad, mejora de procesos), no se presentan métricas cuantificables (ej. reducción de huella de carbono en X%, porcentaje de cumplimiento de objetivos, retorno de inversión de programas de formación).
+2. **Naturaleza Descriptiva vs. Analítica:** El contenido es predominantemente descriptivo (qué se hace, qué se promete, qué se valora), pero no analítico (por qué es efectivo, cuál es el impacto real, qué se debe mejorar en función de resultados).
+3. **Falta de Segmentación de Audiencia:** La información es general para la empresa. No se sabe si está dirigida a inversores (necesitan datos financieros), empleados (necesitan guías operativas) o clientes (necesitan detalles de producto/servicio).
+4. **Profundidad Limitada en Áreas Críticas:** Si bien se toca la diversidad y la inclusión, la información es superficial. Para un análisis profundo, se requerirían políticas detalladas, mecanismos de reporte y resultados de auditorías.
+
+En resumen, el material es excelente para entender la **estrategia y el compromiso ético/corporativo**, pero es insuficiente para un **diagnóstico de gestión o una toma de decisiones basada en datos duros.**",,,focused,https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
