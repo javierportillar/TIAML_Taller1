@@ -57,6 +57,7 @@ def _watched_local_files(config: AppConfig) -> list[Path]:
         base_dir / "src" / "scraper.py",
         base_dir / "src" / "processing.py",
         base_dir / "src" / "structured_tool.py",
+        base_dir / "src" / "tools.py",
         base_dir / "src" / "vector_store.py",
         base_dir / "app.py",
     ]

@@ -148,7 +148,7 @@ if rebuild_required:
             st.stop()
 
 st.title("Sistema Q&A Empresarial")
-st.caption("Taller 2: agente conversacional con memoria, router, RAG vectorial y herramienta estructurada.")
+st.caption("Taller 3: agente conversacional con Function Calling, memoria, RAG vectorial y tools Pydantic.")
 
 if st.session_state.rebuild_notice:
     st.info(st.session_state.rebuild_notice)
@@ -202,8 +202,8 @@ agent_tab, summary_tab, faq_tab, qa_tab, config_tab = st.tabs(
 
 with agent_tab:
     st.write(
-        "Chat principal del Taller 2. El agente decide entre memoria conversacional, "
-        "herramienta estructurada o RAG con indice vectorial persistido."
+        "Chat principal del Taller 3. El agente usa create_agent con tools Pydantic, "
+        "memoria conversacional y RAG con indice vectorial persistido."
     )
     left, right = st.columns([0.75, 0.25])
     with right:
@@ -213,8 +213,9 @@ with agent_tab:
             st.rerun()
         st.markdown("**Herramientas disponibles**")
         st.write("- `memory`: seguimiento por historial")
-        st.write("- `structured_tool`: JSON de datos puntuales")
-        st.write("- `rag_vector`: base documental vectorial")
+        st.write("- `consultar_datos_contacto`: JSON de datos puntuales")
+        st.write("- `buscar_catalogo_productos`: catalogo, precios, combos y promociones")
+        st.write("- `consultar_informacion_corporativa`: base documental vectorial")
         st.caption(f"Indice vectorial: `{config.paths.vector_index_path.name}`")
 
     with left:

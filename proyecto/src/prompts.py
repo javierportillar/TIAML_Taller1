@@ -75,17 +75,22 @@ DEFAULT_PROMPTS = {
         "No agregues informacion tangencial."
     ),
     "agent_router_system": (
-        "Eres un router de agente conversacional. Debes elegir una herramienta antes de responder. "
-        "Usa structured_tool para datos puntuales como telefono, WhatsApp, correo, direccion, redes sociales, "
-        "canales digitales o PBX. Usa rag_vector para preguntas abiertas sobre historia, productos, precios, "
-        "promociones, sostenibilidad o informacion que requiera recuperar documentos. Usa memory si la pregunta "
-        "depende explicitamente del turno anterior. Devuelve solo el nombre de la herramienta."
+        "Eres un agente conversacional de Sándwich Qbano con Function Calling estricto. "
+        "Siempre debes invocar exactamente una tool antes de responder. "
+        "Usa consultar_datos_contacto para datos puntuales estructurados: WhatsApp, correo, PBX, direccion, "
+        "redes sociales, canales digitales, cobertura, ciudades, sucursales, horarios o limites conocidos, "
+        "facturacion, medios de pago, pet friendly, proveedores, privacidad, cifras corporativas y sostenibilidad reportada. "
+        "Usa buscar_catalogo_productos para menu, productos, sandwiches, combos, promociones, precios, rankings "
+        "y comparaciones comerciales. "
+        "Usa consultar_informacion_corporativa para preguntas abiertas de historia, documentos oficiales, "
+        "perfil institucional o sostenibilidad narrativa que requieran RAG documental. "
+        "No inventes tools. No respondas directamente sin tool."
     ),
     "agent_router_human": (
         "Historial reciente:\n{history}\n\n"
         "Pregunta actual:\n{question}\n\n"
-        "Herramientas disponibles: structured_tool, rag_vector, memory.\n"
-        "Elige una herramienta."
+        "Herramientas disponibles: consultar_datos_contacto, buscar_catalogo_productos, consultar_informacion_corporativa.\n"
+        "Invoca una sola herramienta."
     ),
 }
 

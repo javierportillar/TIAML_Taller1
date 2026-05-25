@@ -3,10 +3,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 import re
+from typing import Any
+
+from langchain.agents import create_agent
 
 from .chains import QAResult, answer_question
 from .memory import answer_follow_up_from_memory, format_chat_history
-from .structured_tool import search_structured_data
+from .prompts import load_prompt_config
+from .tools import ToolRuntimeContext, build_agent_tools, decode_tool_payload
 
 
 @dataclass(slots=True)
@@ -463,6 +467,96 @@ def _rewrite_combo_difference_follow_up(
     return question
 
 
+AGENT_TOOL_NAMES = {
+    "consultar_datos_contacto",
+    "buscar_catalogo_productos",
+    "consultar_informacion_corporativa",
+}
+
+
+def _build_agent_system_prompt() -> str:
+    prompts = load_prompt_config()
+    return prompts["agent_router_system"]
+
+
+def _build_agent_user_message(question: str, history: str) -> str:
+    return (
+        "Historial reciente:\n"
+        f"{history}\n\n"
+        "Pregunta actual:\n"
+        f"{question}\n\n"
+        "Elige exactamente una de las tools disponibles. No respondas directamente sin invocar una tool."
+    )
+
+
+def _extract_tool_payload(agent_output: Any) -> dict[str, Any] | None:
+    if not isinstance(agent_output, dict):
+        return None
+
+    messages = agent_output.get("messages", [])
+    if not isinstance(messages, list):
+        return None
+
+    for message in reversed(messages):
+        payload = decode_tool_payload(getattr(message, "content", None))
+        if not payload:
+            continue
+        route = str(payload.get("route", ""))
+        if route in AGENT_TOOL_NAMES:
+            return payload
+    return None
+
+
+def _select_fallback_tool_name(question: str) -> str:
+    is_commercial = _looks_like_commercial_catalog_query(question)
+    has_strong_structured = _has_strong_structured_signal(question)
+    if (has_strong_structured or not is_commercial) and (
+        _looks_like_structured_query(question) or _looks_like_location_query(question)
+    ):
+        return "consultar_datos_contacto"
+    if is_commercial:
+        return "buscar_catalogo_productos"
+    return "consultar_informacion_corporativa"
+
+
+def _run_named_tool(tools: list[Any], tool_name: str, question: str) -> dict[str, Any] | None:
+    tool_by_name = {tool.name: tool for tool in tools}
+    selected_tool = tool_by_name.get(tool_name)
+    if selected_tool is None:
+        return None
+
+    if tool_name == "consultar_datos_contacto":
+        content = selected_tool.invoke({"categoria": question})
+    else:
+        content = selected_tool.invoke({"query": question})
+    return decode_tool_payload(content)
+
+
+def _agent_result_from_payload(payload: dict[str, Any]) -> AgentResult:
+    sources = payload.get("sources", [])
+    if not isinstance(sources, list):
+        sources = []
+
+    clean_sources: list[dict[str, str]] = []
+    for item in sources:
+        if not isinstance(item, dict):
+            continue
+        clean_sources.append(
+            {
+                "title": str(item.get("title", "")),
+                "url": str(item.get("url", "")),
+            }
+        )
+
+    return AgentResult(
+        answer=str(payload.get("answer", "")).strip(),
+        route=str(payload.get("route", "")),
+        reasoning=str(payload.get("reasoning", "")).strip(),
+        context_mode=str(payload.get("context_mode", "")),
+        sources=clean_sources,
+    )
+
+
 def run_agent(
     *,
     model,
@@ -495,26 +589,52 @@ def run_agent(
             sources=[],
         )
 
-    is_commercial = _looks_like_commercial_catalog_query(question)
-    has_strong_structured = _has_strong_structured_signal(question)
-    if (has_strong_structured or not is_commercial) and (
-        _looks_like_structured_query(question) or _looks_like_location_query(question)
-    ):
-        structured_result = search_structured_data(question, structured_data_path)
-        if structured_result:
-            return AgentResult(
-                answer=structured_result.answer,
-                route="structured_tool",
-                reasoning=(
-                    "La consulta pide un dato puntual estructurado. "
-                    "Se uso la herramienta deterministica de datos estructurados."
-                ),
-                context_mode="structured_json",
-                sources=structured_result.sources,
-            )
-
     effective_question = _rewrite_combo_difference_follow_up(question, chat_history)
     history_context = format_chat_history(chat_history)
+    runtime_context = ToolRuntimeContext(
+        model=model,
+        company_name=company_name,
+        original_question=effective_question,
+        knowledge_text=knowledge_text,
+        chunks=chunks,
+        max_context_chars=max_context_chars,
+        structured_data_path=structured_data_path,
+        vector_index_path=vector_index_path,
+        conversation_history=history_context,
+    )
+    tools = build_agent_tools(runtime_context)
+
+    try:
+        graph = create_agent(
+            model=model,
+            tools=tools,
+            system_prompt=_build_agent_system_prompt(),
+        )
+        agent_output = graph.invoke(
+            {
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": _build_agent_user_message(effective_question, history_context),
+                    }
+                ]
+            }
+        )
+        payload = _extract_tool_payload(agent_output)
+        if payload:
+            return _agent_result_from_payload(payload)
+    except Exception:
+        payload = None
+
+    fallback_tool_name = _select_fallback_tool_name(effective_question)
+    payload = _run_named_tool(tools, fallback_tool_name, effective_question)
+    if payload:
+        payload["reasoning"] = (
+            f"{payload.get('reasoning', '')} "
+            "Se uso como respaldo porque el modelo no completo una invocacion de tool valida."
+        ).strip()
+        return _agent_result_from_payload(payload)
+
     qa_result: QAResult = answer_question(
         model=model,
         company_name=company_name,
@@ -527,10 +647,9 @@ def run_agent(
     )
     return AgentResult(
         answer=qa_result.answer,
-        route="rag_vector",
+        route="consultar_informacion_corporativa",
         reasoning=(
-            "La consulta requiere informacion abierta de la base documental. "
-            "Se enruto al RAG con indice vectorial persistido e historial conversacional."
+            "No se obtuvo una tool valida; se respondio con RAG documental como respaldo final."
         ),
         context_mode=qa_result.context_mode,
         sources=qa_result.sources,

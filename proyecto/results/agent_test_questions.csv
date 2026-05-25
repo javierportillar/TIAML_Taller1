@@ -1,34 +1,34 @@
 case_id,question,expected_route,purpose
-rag_001,Que productos venden?,rag_vector,Prueba general de RAG con catalogo
-structured_001,Cual es el WhatsApp de servicio al cliente?,structured_tool,Prueba directa de herramienta estructurada
-structured_002,Cual es el correo de servicio al cliente?,structured_tool,Prueba secundaria de dato puntual estructurado
+rag_001,Que productos venden?,buscar_catalogo_productos,Prueba general de RAG con catalogo
+structured_001,Cual es el WhatsApp de servicio al cliente?,consultar_datos_contacto,Prueba directa de herramienta estructurada
+structured_002,Cual es el correo de servicio al cliente?,consultar_datos_contacto,Prueba secundaria de dato puntual estructurado
 memory_001,Y cuanto cuesta el primero que mencionaste?,memory,Prueba de seguimiento dependiente del turno anterior con productos listados
-structured_014,Que acciones de sostenibilidad menciona la empresa?,structured_tool,Prueba estructurada sobre sostenibilidad para evitar alucinaciones
-router_001,Dame las redes sociales y luego dime que promociones hay,structured_tool,Prueba de enrutamiento priorizando estructurado sobre RAG
-structured_003,Cual es la direccion fisica reportada?,structured_tool,Prueba estructurada de canal de contacto fisico
-structured_015,Cuantos empleos generados reporta Qbano en 2023?,structured_tool,Prueba estructurada sobre cifras de empleo
-rag_004,quiero pedir un sandwich pero me gustaria saber que sabores tienes,rag_vector,Prueba de intencion comercial con sabores que debe activar catalogo deterministico
-rag_005,Enlistame de los sandiwches los que son en combos y sus precios,rag_vector,Prueba de typo en sandwich y filtro de combos
-rag_006,indicame solo los productos que sean en combo,rag_vector,Prueba de filtro general por productos en combo
-structured_004,En que sucursales esta Sandwich Qbano?,structured_tool,Prueba estructurada de cobertura y sucursales
-structured_005,En que ciudades tuvo nuevas aperturas en 2023?,structured_tool,Prueba estructurada de aperturas por ciudad
-structured_006,Cuantos empleos genero Qbano en 2023?,structured_tool,Prueba estructurada de empleo
-structured_007,Que hace Qbano en medio ambiente y residuos?,structured_tool,Prueba estructurada ambiental
-structured_008,Cuales son sus proveedores o aliados estrategicos?,structured_tool,Prueba estructurada de abastecimiento
-structured_009,Que es FSQ Group y que relacion tiene con Qbano?,structured_tool,Prueba estructurada de identidad corporativa
-structured_010,Que cifras tiene Qbano sobre tiendas y franquicias?,structured_tool,Prueba estructurada de cifras corporativas
-structured_011,Que reporta Qbano sobre huella de carbono?,structured_tool,Prueba estructurada de emisiones
-structured_012,Tienen puntos pet friendly?,structured_tool,Prueba estructurada de pet friendly
-structured_013,Como manejan la privacidad de datos de clientes?,structured_tool,Prueba estructurada de privacidad
+structured_014,Que acciones de sostenibilidad menciona la empresa?,consultar_datos_contacto,Prueba estructurada sobre sostenibilidad para evitar alucinaciones
+router_001,Dame las redes sociales y luego dime que promociones hay,consultar_datos_contacto,Prueba de enrutamiento priorizando estructurado sobre RAG
+structured_003,Cual es la direccion fisica reportada?,consultar_datos_contacto,Prueba estructurada de canal de contacto fisico
+structured_015,Cuantos empleos generados reporta Qbano en 2023?,consultar_datos_contacto,Prueba estructurada sobre cifras de empleo
+rag_004,quiero pedir un sandwich pero me gustaria saber que sabores tienes,buscar_catalogo_productos,Prueba de intencion comercial con sabores que debe activar catalogo deterministico
+rag_005,Enlistame de los sandiwches los que son en combos y sus precios,buscar_catalogo_productos,Prueba de typo en sandwich y filtro de combos
+rag_006,indicame solo los productos que sean en combo,buscar_catalogo_productos,Prueba de filtro general por productos en combo
+structured_004,En que sucursales esta Sandwich Qbano?,consultar_datos_contacto,Prueba estructurada de cobertura y sucursales
+structured_005,En que ciudades tuvo nuevas aperturas en 2023?,consultar_datos_contacto,Prueba estructurada de aperturas por ciudad
+structured_006,Cuantos empleos genero Qbano en 2023?,consultar_datos_contacto,Prueba estructurada de empleo
+structured_007,Que hace Qbano en medio ambiente y residuos?,consultar_datos_contacto,Prueba estructurada ambiental
+structured_008,Cuales son sus proveedores o aliados estrategicos?,consultar_datos_contacto,Prueba estructurada de abastecimiento
+structured_009,Que es FSQ Group y que relacion tiene con Qbano?,consultar_datos_contacto,Prueba estructurada de identidad corporativa
+structured_010,Que cifras tiene Qbano sobre tiendas y franquicias?,consultar_datos_contacto,Prueba estructurada de cifras corporativas
+structured_011,Que reporta Qbano sobre huella de carbono?,consultar_datos_contacto,Prueba estructurada de emisiones
+structured_012,Tienen puntos pet friendly?,consultar_datos_contacto,Prueba estructurada de pet friendly
+structured_013,Como manejan la privacidad de datos de clientes?,consultar_datos_contacto,Prueba estructurada de privacidad
 conversation_001,Hola me llamo Javier y voy a hacerte unas preguntas vale?,conversation,Prueba conversacional sin consulta documental
-rag_007,Cuanto cuesta el sanwdich al pastor en combo y sin combo?,rag_vector,Prueba de precio especifico con typo y dos variantes
-structured_016,En Narino Colombia hay sanwich qbano?,structured_tool,Prueba de ubicacion por departamento sin activar catalogo
-rag_008,Que tipo de productos tienes hay productos en combos?,rag_vector,Prueba de vista general de categorias sin listado exhaustivo
-structured_017,A que hora abren los restaurantes?,structured_tool,Prueba de limite conocido sobre horarios
-structured_018,Hay domicilio en Pasto?,structured_tool,Prueba de limite conocido sobre cobertura de domicilios
-structured_019,Que medios de pago aceptan?,structured_tool,Prueba de limite conocido sobre medios de pago
-structured_020,Puedo pedir factura electronica?,structured_tool,Prueba de limite conocido sobre facturacion
-rag_009,Cual es el sandwich mas barato?,rag_vector,Prueba deterministica de ranking por menor precio
-rag_010,Cual es el combo mas caro?,rag_vector,Prueba deterministica de ranking por mayor precio
-rag_011,compara los precios entre combo y sin combo y dime la diferencia de precios,rag_vector,Prueba deterministica de diferencias combo vs individual
-rag_012,Y la diferencia de precios?,rag_vector,Prueba de follow-up corto sobre diferencias despues de hablar de combos
+rag_007,Cuanto cuesta el sanwdich al pastor en combo y sin combo?,buscar_catalogo_productos,Prueba de precio especifico con typo y dos variantes
+structured_016,En Narino Colombia hay sanwich qbano?,consultar_datos_contacto,Prueba de ubicacion por departamento sin activar catalogo
+rag_008,Que tipo de productos tienes hay productos en combos?,buscar_catalogo_productos,Prueba de vista general de categorias sin listado exhaustivo
+structured_017,A que hora abren los restaurantes?,consultar_datos_contacto,Prueba de limite conocido sobre horarios
+structured_018,Hay domicilio en Pasto?,consultar_datos_contacto,Prueba de limite conocido sobre cobertura de domicilios
+structured_019,Que medios de pago aceptan?,consultar_datos_contacto,Prueba de limite conocido sobre medios de pago
+structured_020,Puedo pedir factura electronica?,consultar_datos_contacto,Prueba de limite conocido sobre facturacion
+rag_009,Cual es el sandwich mas barato?,buscar_catalogo_productos,Prueba deterministica de ranking por menor precio
+rag_010,Cual es el combo mas caro?,buscar_catalogo_productos,Prueba deterministica de ranking por mayor precio
+rag_011,compara los precios entre combo y sin combo y dime la diferencia de precios,buscar_catalogo_productos,Prueba deterministica de diferencias combo vs individual
+rag_012,Y la diferencia de precios?,buscar_catalogo_productos,Prueba de follow-up corto sobre diferencias despues de hablar de combos
