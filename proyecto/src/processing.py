@@ -6,6 +6,7 @@ from pathlib import Path
 
 from .config import PathConfig
 from .scraper import ScrapedDocument
+from .vector_store import build_vector_index
 
 STOPWORDS = {
     "de",
@@ -37,6 +38,17 @@ MENU_HINTS = {
     "menú",
     "producto",
     "productos",
+    "catalogo",
+    "catálogo",
+    "carta",
+    "opcion",
+    "opciones",
+    "venden",
+    "vende",
+    "ofrecen",
+    "ofrece",
+    "portafolio",
+    "comer",
     "oferta",
     "ofertas",
     "promocion",
@@ -200,6 +212,7 @@ def save_processed_artifacts(
     knowledge_base = build_knowledge_base(company_name, documents)
     chunks = build_chunks(documents)
     source_index = build_source_index(documents)
+    vector_stats = build_vector_index(chunks, paths.vector_index_path)
 
     paths.knowledge_base_path.write_text(knowledge_base, encoding="utf-8")
     paths.chunks_path.write_text(
@@ -212,6 +225,8 @@ def save_processed_artifacts(
         "documents": len(documents),
         "knowledge_chars": len(knowledge_base),
         "chunks": len(chunks),
+        "vectors": vector_stats["vectors"],
+        "vector_dimensions": vector_stats["dimensions"],
     }
 
 

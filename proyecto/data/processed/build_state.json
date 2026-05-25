@@ -3,26 +3,50 @@
     "data/config/company_profile.json": {
       "path": "data/config/company_profile.json",
       "exists": true,
-      "size": 1701,
-      "sha256": "321ccb1818102fec8a793f3e81d4f2b0232f4178b84e2547fb75b5baaf86fcf1"
+      "size": 1754,
+      "sha256": "c3429c8391d6fc22012758daebd585876058adecd7409be971852334d9e9bb95"
+    },
+    "data/structured/company_structured_data.json": {
+      "path": "data/structured/company_structured_data.json",
+      "exists": true,
+      "size": 26232,
+      "sha256": "fa34894fd1b45b393d2ba61537584ac288f2d479b5accba1628a682ff05b9403"
     },
     "data/config/prompts_config.json": {
       "path": "data/config/prompts_config.json",
       "exists": true,
-      "size": 3127,
-      "sha256": "2cf15a597123f797ca017a220693c17a14c18f8014ea46780a5f9e939312abc6"
+      "size": 5760,
+      "sha256": "b1199be3297196b445fc228d38d9acc0b256640cda38ca2cc3f49ce032529e48"
+    },
+    "src/agent.py": {
+      "path": "src/agent.py",
+      "exists": true,
+      "size": 13407,
+      "sha256": "52c289239a5a68c23bf8afe142fced0b5ed8c68cc2e618e34169ef72f1dabd0b"
+    },
+    "src/config.py": {
+      "path": "src/config.py",
+      "exists": true,
+      "size": 5227,
+      "sha256": "413dd055267bab1897a3ae63004cee0884aa521decdd92ac7390bf0a9356abd9"
+    },
+    "src/memory.py": {
+      "path": "src/memory.py",
+      "exists": true,
+      "size": 2139,
+      "sha256": "6889db02c5d791bdcbb417e7f33b69909cb9454b4bc769b0dad0e6ece9886dbc"
     },
     "src/prompts.py": {
       "path": "src/prompts.py",
       "exists": true,
-      "size": 5544,
-      "sha256": "f69eec0f89cbeebfd12b978a4a6db47517a4606ac33f7431cd2e1eab42627bbe"
+      "size": 6881,
+      "sha256": "f3327d56a2c826bf9ccda3c2961f4573403777f6e3200e6383023873e8bc414d"
     },
     "src/chains.py": {
       "path": "src/chains.py",
       "exists": true,
-      "size": 22043,
-      "sha256": "f1c9f24af0013b9f6fdfa5e57b6233985042c430aca8ff1cbb885c7be9853083"
+      "size": 49382,
+      "sha256": "f82eeea3c1be5fbebff21eea2c1ba6010bf755fe87443a3eb6761ef407e35371"
     },
     "src/scraper.py": {
       "path": "src/scraper.py",
@@ -33,21 +57,35 @@
     "src/processing.py": {
       "path": "src/processing.py",
       "exists": true,
-      "size": 8583,
-      "sha256": "b06309e0314a06fb05eebcc9707776c695b140d9405d228a450c3b419425949d"
+      "size": 8963,
+      "sha256": "acaef66b247ec0524cbe440da47e60f9423bec4272f05cefbf916076ca8b98fe"
+    },
+    "src/structured_tool.py": {
+      "path": "src/structured_tool.py",
+      "exists": true,
+      "size": 8164,
+      "sha256": "22620b84bd053582c7e6a0e70173abdb14a913584748b39baacc1b829e283175"
+    },
+    "src/vector_store.py": {
+      "path": "src/vector_store.py",
+      "exists": true,
+      "size": 7673,
+      "sha256": "e7f8a7b2320243edd093a86c39a5585c6d3a52ce61b0d93c61c120c647d8dee1"
     },
     "app.py": {
       "path": "app.py",
       "exists": true,
-      "size": 15304,
-      "sha256": "ffc5e09722c8e172ccdd158a2cd1cbae3645cbc7ba1da55b85bc3593835e13d5"
+      "size": 20130,
+      "sha256": "d96ff5291b5ee16b4b9a35cf29ccc41cf74b52fb1b01b608d86eebba0b5db474"
     }
   },
-  "generated_at": "2026-04-29T23:09:54.901053+00:00",
+  "generated_at": "2026-05-16T20:06:30.968733+00:00",
   "stats": {
     "documents": 25,
-    "knowledge_chars": 186723,
-    "chunks": 168
+    "knowledge_chars": 195111,
+    "chunks": 176,
+    "vectors": 176,
+    "vector_dimensions": 384
   },
   "max_pages": 25
 }

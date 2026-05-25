@@ -6,14 +6,16 @@ from urllib.parse import urlparse
 
 import streamlit as st
 
+from src.agent import run_agent
 from src.chains import answer_question, generate_faq, generate_summary
 from src.config import build_app_config
 from src.llm import create_chat_model
 from src.processing import load_chunks, load_knowledge_base
+from src.vector_store import load_vector_index
 from src.project_state import detect_local_state_changes, rebuild_processed_state
 from src.prompts import DEFAULT_PROMPTS, load_prompt_config, save_prompt_config
 
-st.set_page_config(page_title="Taller 1 - Q&A Empresarial", layout="wide")
+st.set_page_config(page_title="Taller 2 - Agente Conversacional", layout="wide")
 
 st.markdown(
     """
@@ -78,7 +80,7 @@ def _save_company_profile(config, payload: dict[str, object]) -> None:
     )
 
 
-def _init_session_state() -> None:
+def _init_session_state(config) -> None:
     defaults = {
         "summary_output": "",
         "summary_error": "",
@@ -91,6 +93,10 @@ def _init_session_state() -> None:
         "rebuild_notice": "",
         "runtime_signature": "",
         "config_save_notice": "",
+        "agent_messages": [],
+        "agent_events": [],
+        "temperature_param": float(config.runtime.temperature),
+        "max_context_chars_param": int(config.runtime.max_context_chars),
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -109,7 +115,7 @@ def _reset_generated_outputs() -> None:
 
 
 config, knowledge_exists, chunks_exists = _load_project_state()
-_init_session_state()
+_init_session_state(config)
 
 runtime_signature = "|".join(
     [
@@ -142,7 +148,7 @@ if rebuild_required:
             st.stop()
 
 st.title("Sistema Q&A Empresarial")
-st.caption("Pipeline de scraping, consolidacion de conocimiento y tareas LLM para el modulo 1.")
+st.caption("Taller 2: agente conversacional con memoria, router, RAG vectorial y herramienta estructurada.")
 
 if st.session_state.rebuild_notice:
     st.info(st.session_state.rebuild_notice)
@@ -175,15 +181,111 @@ knowledge_text, chunks = _load_knowledge(config.paths)
 col1, col2, col3 = st.columns(3)
 col1.metric("Fuentes procesadas", len({str(chunk["url"]) for chunk in chunks}))
 col2.metric("Chunks", len(chunks))
-col3.metric("Caracteres conocimiento", len(knowledge_text))
+vector_payload = load_vector_index(config.paths.vector_index_path)
+vector_count = int(vector_payload.get("vectors", 0) or 0)
+if vector_count == 0:
+    fallback_records = vector_payload.get("records", [])
+    if isinstance(fallback_records, list):
+        vector_count = len(fallback_records)
+col3.metric("Vectores Chroma", vector_count)
+st.caption(
+    f"Vector store: Chroma · Embeddings: {vector_payload.get('embedding_model', 'sentence-transformers')}"
+)
 
 with st.expander("URLs configuradas"):
     for url in config.company.seed_urls + config.company.additional_sources:
         st.write(f"- {url}")
 
-summary_tab, faq_tab, qa_tab, config_tab = st.tabs(
-    ["Resumen", "FAQ", "Q&A", "Configuracion"]
+agent_tab, summary_tab, faq_tab, qa_tab, config_tab = st.tabs(
+    ["Agente conversacional", "Resumen", "FAQ", "Q&A clasico", "Configuracion"]
 )
+
+with agent_tab:
+    st.write(
+        "Chat principal del Taller 2. El agente decide entre memoria conversacional, "
+        "herramienta estructurada o RAG con indice vectorial persistido."
+    )
+    left, right = st.columns([0.75, 0.25])
+    with right:
+        if st.button("Limpiar conversacion", use_container_width=True):
+            st.session_state.agent_messages = []
+            st.session_state.agent_events = []
+            st.rerun()
+        st.markdown("**Herramientas disponibles**")
+        st.write("- `memory`: seguimiento por historial")
+        st.write("- `structured_tool`: JSON de datos puntuales")
+        st.write("- `rag_vector`: base documental vectorial")
+        st.caption(f"Indice vectorial: `{config.paths.vector_index_path.name}`")
+
+    with left:
+        for index, message in enumerate(st.session_state.agent_messages):
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
+                event = (
+                    st.session_state.agent_events[index]
+                    if index < len(st.session_state.agent_events)
+                    else {}
+                )
+                if message["role"] == "assistant" and event:
+                    st.caption(
+                        f"Ruta: {event.get('route', 'n/a')} | "
+                        f"Contexto: {event.get('context_mode', 'n/a')}"
+                    )
+                    if event.get("reasoning"):
+                        with st.expander("Decision del agente"):
+                            st.write(event["reasoning"])
+                    if event.get("sources"):
+                        with st.expander("Fuentes usadas"):
+                            for source in event["sources"]:
+                                st.write(f"- {source['title']} - {source['url']}")
+
+        agent_question = st.chat_input(
+            "Pregunta al agente. Ej: ¿Cuál es el WhatsApp? / Enlista productos / ¿Y cuánto cuesta el primero?"
+        )
+        if agent_question:
+            st.session_state.agent_messages.append(
+                {"role": "user", "content": agent_question}
+            )
+            st.session_state.agent_events.append({})
+            try:
+                model = create_chat_model(
+                    provider=provider, model_name=model_name, temperature=temperature
+                )
+                result = run_agent(
+                    model=model,
+                    company_name=config.company.company_name,
+                    question=agent_question,
+                    chat_history=st.session_state.agent_messages[:-1],
+                    knowledge_text=knowledge_text,
+                    chunks=chunks,
+                    max_context_chars=max_context_chars,
+                    structured_data_path=config.paths.structured_data_path,
+                    vector_index_path=config.paths.vector_index_path,
+                )
+                st.session_state.agent_messages.append(
+                    {"role": "assistant", "content": result.answer}
+                )
+                st.session_state.agent_events.append(
+                    {
+                        "route": result.route,
+                        "reasoning": result.reasoning,
+                        "context_mode": result.context_mode,
+                        "sources": result.sources,
+                    }
+                )
+            except Exception as exc:
+                st.session_state.agent_messages.append(
+                    {"role": "assistant", "content": f"Error del agente: {exc}"}
+                )
+                st.session_state.agent_events.append(
+                    {
+                        "route": "error",
+                        "reasoning": str(exc),
+                        "context_mode": "error",
+                        "sources": [],
+                    }
+                )
+            st.rerun()
 
 with summary_tab:
     st.write(
@@ -253,6 +355,7 @@ with qa_tab:
                     knowledge_text=knowledge_text,
                     chunks=chunks,
                     max_context_chars=max_context_chars,
+                    vector_index_path=config.paths.vector_index_path,
                 )
                 st.session_state.qa_output = result.answer
                 st.session_state.qa_context_mode = result.context_mode
@@ -393,6 +496,8 @@ with config_tab:
             "faq_human": "FAQ - human",
             "qa_system": "Q&A - system",
             "qa_human": "Q&A - human",
+            "agent_router_system": "Agente router - system",
+            "agent_router_human": "Agente router - human",
         }
         for key, label in prompt_labels.items():
             edited_prompts[key] = st.text_area(

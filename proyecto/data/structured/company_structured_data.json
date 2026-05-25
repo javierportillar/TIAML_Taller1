@@ -1,0 +1,350 @@
+{
+  "company": "Sándwich Qbano",
+  "description": "Datos estructurados para consultas directas del agente conversacional. Esta fuente es deterministica y no usa la base vectorial.",
+  "records": [
+    {
+      "id": "servicio_cliente_whatsapp",
+      "label": "WhatsApp de servicio al cliente",
+      "category": "contacto",
+      "value": "300 912 5454",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros canales",
+      "keywords": ["whatsapp", "servicio cliente", "telefono", "teléfono", "contacto", "call center"]
+    },
+    {
+      "id": "call_center",
+      "label": "Call center",
+      "category": "contacto",
+      "value": "300 912 5454",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros canales",
+      "keywords": ["call center", "telefono", "teléfono", "linea", "línea", "servicio cliente"]
+    },
+    {
+      "id": "pbx",
+      "label": "PBX",
+      "category": "contacto",
+      "value": "(602) 312 7272",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros canales",
+      "keywords": ["pbx", "telefono fijo", "teléfono fijo", "contacto", "yumbo"]
+    },
+    {
+      "id": "correo_servicio_cliente",
+      "label": "Correo electrónico de servicio al cliente",
+      "category": "contacto",
+      "value": "servicioalcliente@sandwichcubano.com",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros canales",
+      "keywords": ["correo", "email", "e-mail", "servicio cliente", "contacto", "pqrs"]
+    },
+    {
+      "id": "direccion_fisica",
+      "label": "Correo físico / dirección reportada",
+      "category": "contacto",
+      "value": "Calle 15 #25A-467 Acopi, Yumbo",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros canales",
+      "keywords": ["direccion", "dirección", "correo fisico", "correo físico", "yumbo", "acopi"]
+    },
+    {
+      "id": "pagina_contactanos",
+      "label": "Página de contacto",
+      "category": "canal_digital",
+      "value": "https://tyc.sandwichqbano.com/contactanos/",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros canales",
+      "keywords": ["contactanos", "contáctanos", "pagina contacto", "página contacto", "contacto"]
+    },
+    {
+      "id": "experiencia_cliente",
+      "label": "Portal de experiencia del cliente",
+      "category": "canal_digital",
+      "value": "https://experiencia.qbano.com/",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros canales",
+      "keywords": ["experiencia", "calificar", "visita", "cliente", "pqrs", "satisfaccion", "satisfacción"]
+    },
+    {
+      "id": "pedidos_online",
+      "label": "Página web para pedidos e información comercial",
+      "category": "canal_digital",
+      "value": "https://www.sandwichqbano.com/. La base local contiene el canal web de pedidos, pero no confirma cobertura exacta de domicilios por dirección, barrio o ciudad.",
+      "source": "Sitio web oficial Sándwich Qbano",
+      "keywords": ["pagina web", "página web", "pedido", "pedidos", "domicilio", "domicilios", "comprar", "web"]
+    },
+    {
+      "id": "redes_sociales",
+      "label": "Redes sociales reportadas",
+      "category": "canal_digital",
+      "value": "Instagram: sandwich_qbano; Facebook: Sandwich Qbano; X: @Sandwich_qbano; TikTok: @sandwich_qbano; YouTube: @SandwichQbanoOficial; LinkedIn: Qbano",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros canales",
+      "keywords": ["instagram", "facebook", "twitter", "x", "tiktok", "youtube", "linkedin", "redes", "sociales"]
+    },
+    {
+      "id": "cobertura_general",
+      "label": "Cobertura y presencia reportada",
+      "category": "cobertura",
+      "value": "Sándwich Qbano reporta presencia a lo largo de 53 municipios en Colombia, más de 220 puntos de venta en Colombia, 2 puntos en Panamá, 1 food truck y 1 punto de venta en Miami. La base local no incluye el directorio completo de direcciones por sucursal.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - secciones Nuestro corporativo y Nuestra deliciosa historia",
+      "keywords": ["sucursal", "sucursales", "sede", "sedes", "ciudad", "ciudades", "municipio", "municipios", "departamento", "departamentos", "cobertura", "presencia", "punto de venta", "puntos de venta", "restaurante", "restaurantes", "colombia", "panama", "panamá", "miami", "amazonas", "antioquia", "arauca", "atlantico", "atlántico", "bolivar", "bolívar", "boyaca", "boyacá", "caldas", "caqueta", "caquetá", "casanare", "cauca", "cesar", "choco", "chocó", "cordoba", "córdoba", "cundinamarca", "guainia", "guainía", "guaviare", "huila", "la guajira", "magdalena", "meta", "narino", "nariño", "norte de santander", "putumayo", "quindio", "quindío", "risaralda", "san andres", "san andrés", "santander", "sucre", "tolima", "valle", "valle del cauca", "vaupes", "vaupés", "vichada", "pasto", "ipiales"]
+    },
+    {
+      "id": "nuevas_aperturas_2023",
+      "label": "Nuevas aperturas reportadas en 2023",
+      "category": "cobertura",
+      "value": "En 2023 se reportaron 8 nuevas aperturas en Cali, Cúcuta, Jamundí, Neiva, Palmira, Quibdó y Tunja.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Crecimiento 2023",
+      "keywords": ["apertura", "aperturas", "nuevas aperturas", "2023", "ciudad", "ciudades", "cali", "cucuta", "cúcuta", "jamundi", "jamundí", "neiva", "palmira", "quibdo", "quibdó", "tunja", "cobertura"]
+    },
+    {
+      "id": "ciudades_conocidas",
+      "label": "Ciudades reportadas en el informe (no es el listado completo de 53 municipios)",
+      "category": "cobertura",
+      "value": "El informe 2023 cuantifica 53 municipios en Colombia pero NO publica el listado oficial completo. Sin embargo, sí menciona explícitamente 32 ciudades en la sección de responsabilidad social (donaciones): Apartadó, Armenia, Barrancabermeja, Barranquilla, Bello, Bogotá, Bucaramanga, Buenaventura, Buga, Cali, Cartagena, Duitama, Envigado, Funza, Ibagué, Ipiales, Jamundí, Madrid, Manizales, Medellín, Mosquera, Neiva, Pasto, Pereira, Popayán, Sabaneta, San Andrés, Santa Marta, Soacha, Villavicencio, Yumbo y Zipaquirá. Adicionalmente, en 2023 hubo nuevas aperturas en Cúcuta, Palmira, Quibdó y Tunja. Las 53 sedes restantes no están enumeradas en la base local; para verlas todas hay que consultar el directorio del sitio web oficial.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Responsabilidad social (Donaciones) y sección Crecimiento 2023",
+      "keywords": ["enlista municipios", "lista de municipios", "todos los municipios", "lista municipios", "enumera municipios", "enlista ciudades", "lista de ciudades", "todas las ciudades", "lista ciudades", "enumera ciudades", "que municipios", "cuales municipios", "que ciudades", "cuales ciudades", "donde esta qbano", "donde estan", "ubicaciones", "donde se encuentra", "directorio", "municipio", "municipios", "ciudades", "53 municipios"]
+    },
+    {
+      "id": "hitos_expansion",
+      "label": "Hitos de expansión",
+      "category": "cobertura",
+      "value": "La historia corporativa reporta una segunda sucursal al sur de Cali en 1981, 30 puntos de venta en 5 ciudades en 1993, expansión a Panamá y Estados Unidos, y el punto de venta número 100 en el año 2000.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestra deliciosa historia",
+      "keywords": ["historia", "expansion", "expansión", "sucursal", "sucursales", "cali", "puntos de venta", "ciudades", "panama", "panamá", "estados unidos", "miami"]
+    },
+    {
+      "id": "identidad_corporativa",
+      "label": "Identidad corporativa",
+      "category": "empresa",
+      "value": "FSQ Group es la empresa encargada de la operación y concesión de franquicias de Qbano. La marca se presenta como referente del sector gastronómico y opera bajo un modelo de franquicias.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Quiénes somos",
+      "keywords": ["quienes son", "quiénes son", "que es", "qué es", "empresa", "marca", "fsq group", "qbano", "franquicia", "franquicias", "modelo de negocio", "operacion", "operación"]
+    },
+    {
+      "id": "modelo_tiendas_cifras",
+      "label": "Qbano en cifras - tiendas y franquicias",
+      "category": "cobertura",
+      "value": "El informe reporta 53 municipios en Colombia, 96% de la operación bajo modelo de franquicias, 84 franquiciados, 228 puntos de venta nacionales y 4 puntos de venta internacionales. También reporta 69% de puntos en centros comerciales, 29% en calle, 1% en centros de eventos y 1% express.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Qbano en cifras",
+      "keywords": ["qbano en cifras", "tiendas", "puntos de venta", "franquicias", "franquiciados", "modelo de franquicia", "nacional", "internacional", "centros comerciales", "calle", "express", "municipios"]
+    },
+    {
+      "id": "crecimiento_2023",
+      "label": "Crecimiento 2023",
+      "category": "crecimiento",
+      "value": "En 2023 Qbano reportó 8 nuevas aperturas, ventas superiores a $300.000 MM y crecimiento de 9% comparado con 2022.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Crecimiento 2023",
+      "keywords": ["crecimiento", "ventas", "2023", "aperturas", "nuevas aperturas", "300.000", "9%", "indicadores", "cifras"]
+    },
+    {
+      "id": "empleo_2023",
+      "label": "Empleos generados",
+      "category": "personas",
+      "value": "Qbano reportó 2.954 empleos generados en 2023, con un incremento del 12% frente a 2022. El informe también indica que 42% de sus colaboradores cuentan con contrato a término indefinido.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestra gente",
+      "keywords": ["empleo", "empleos", "colaboradores", "trabajadores", "contrato", "termino indefinido", "término indefinido", "personas", "nuestra gente", "2954", "2.954"]
+    },
+    {
+      "id": "equidad_genero",
+      "label": "Representación femenina",
+      "category": "personas",
+      "value": "El informe reporta 42% de franquiciadas mujeres, 60% de mujeres en puntos de venta, 67% de líderes en punto de venta, 61% de personal administrativo, 36% de mujeres en la Junta Asesora y 63% de líderes del grupo primario.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Representación femenina en Qbano",
+      "keywords": ["mujeres", "equidad de genero", "equidad de género", "representacion femenina", "representación femenina", "inclusion", "inclusión", "franquiciadas", "lideres", "líderes"]
+    },
+    {
+      "id": "gobernanza",
+      "label": "Gobernanza corporativa",
+      "category": "gobernanza",
+      "value": "La Junta Asesora está conformada por los dos socios fundadores, un hijo de cada uno, la gerente general de FSQ Group y dos asesores externos. Se reúne seis veces al año en sesiones bimensuales y supervisa la estrategia, rentabilidad y sostenibilidad de las marcas.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Gobernanza corporativa",
+      "keywords": ["gobernanza", "junta asesora", "gerente general", "socios fundadores", "asesores externos", "estrategia", "rentabilidad", "sostenibilidad", "gobierno corporativo"]
+    },
+    {
+      "id": "etica_conflictos_interes",
+      "label": "Ética y conflictos de interés",
+      "category": "gobernanza",
+      "value": "FSQ Group declara comprometerse a actuar en beneficio del corporativo y sus marcas, evitar ventajas personales con activos o información no pública, gestionar posibles conflictos de interés y mantener transparencia en la contratación de proveedores.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Conflictos de interés",
+      "keywords": ["etica", "ética", "conflicto de interes", "conflictos de interés", "integridad", "transparencia", "proveedores", "informacion no publica", "información no pública", "gobernanza"]
+    },
+    {
+      "id": "estrategia_sostenibilidad",
+      "label": "Estrategia de sostenibilidad",
+      "category": "sostenibilidad",
+      "value": "La estrategia de sostenibilidad se centra en tres pilares: personas, planeta y prosperidad. En 2023 reforzó prácticas de gestión de residuos, relación con proveedores locales y sostenibles, e innovación de productos con menor impacto ambiental.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - mensaje de Gerencia General y estrategia de sostenibilidad",
+      "keywords": ["sostenibilidad", "sostenible", "personas", "planeta", "prosperidad", "residuos", "proveedores locales", "impacto ambiental", "ods", "materialidad"]
+    },
+    {
+      "id": "ods_compromisos",
+      "label": "Compromisos ODS",
+      "category": "sostenibilidad",
+      "value": "El informe relaciona compromisos con ODS como hambre cero, educación de calidad, trabajo decente, reducción de desigualdades, agua limpia y saneamiento, producción y consumo responsables, acción por el clima, industria/innovación e infraestructura y vida de ecosistemas terrestres.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros compromisos con los ODS",
+      "keywords": ["ods", "objetivos de desarrollo sostenible", "hambre cero", "educacion", "educación", "trabajo decente", "agua limpia", "accion por el clima", "acción por el clima", "ecosistemas", "sostenibilidad"]
+    },
+    {
+      "id": "cadena_suministro",
+      "label": "Cadena de suministro",
+      "category": "abastecimiento",
+      "value": "La cadena de suministro contempla necesidad de materia prima, licitación de proveedores, pruebas piloto, revisión y aprobación, abastecimiento, bodegas de distribución, despacho a puntos de venta, recepción, almacenamiento, preparación y pruebas de calidad, sensoriales y de costo.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestra cadena de suministro",
+      "keywords": ["cadena de suministro", "abastecimiento", "proveedores", "materia prima", "licitacion", "licitación", "bodegas", "despacho", "calidad", "prueba piloto"]
+    },
+    {
+      "id": "seleccion_proveedores",
+      "label": "Selección de proveedores",
+      "category": "abastecimiento",
+      "value": "Los proveedores se evalúan por calidad, capacidad de entrega nacional, análisis sensorial, costo, confiabilidad, origen de materias primas, certificados, responsabilidad ambiental y salud de consumidores. Se realizan auditorías y reevaluación anual.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Selección de proveedores",
+      "keywords": ["proveedor", "proveedores", "seleccion de proveedores", "selección de proveedores", "auditorias", "auditorías", "calidad", "certificados", "materias primas", "responsabilidad ambiental"]
+    },
+    {
+      "id": "practicas_abastecimiento",
+      "label": "Prácticas de abastecimiento responsable",
+      "category": "abastecimiento",
+      "value": "El informe reporta que 92% de proveedores deben contar con sistema de gestión ambiental y certificaciones; 10% de insumos provienen de pequeños proveedores; 99,5% de productos terminados fueron comprados en Colombia; y 92% de envases y empaques provienen de proveedores nacionales.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestras prácticas de abastecimiento",
+      "keywords": ["abastecimiento responsable", "proveedores", "gestion ambiental", "gestión ambiental", "pequeños proveedores", "productos nacionales", "envases", "empaques", "99,5", "92%"]
+    },
+    {
+      "id": "aliados_estrategicos",
+      "label": "Aliados estratégicos mencionados",
+      "category": "abastecimiento",
+      "value": "El informe menciona aliados como Coca-Cola FEMSA Colombia, McCain y Alimentos Enriko, asociados a iniciativas de sostenibilidad, cadena de abastecimiento, calidad e inocuidad.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Nuestros aliados estratégicos",
+      "keywords": ["aliados", "aliado", "coca cola", "coca-cola", "mccain", "enriko", "proveedores", "abastecimiento", "calidad", "inocuidad"]
+    },
+    {
+      "id": "seguridad_alimentaria_auditorias",
+      "label": "Seguridad alimentaria y auditorías",
+      "category": "calidad",
+      "value": "En 2023 se reportaron 643 auditorías realizadas con cumplimiento de 94%, visitando todas las ciudades donde se encontraban. También se reportaron 14 visitas a proveedores clave para la operación.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Seguridad y salud para nuestros clientes",
+      "keywords": ["seguridad alimentaria", "inocuidad", "calidad", "auditorias", "auditorías", "cumplimiento", "proveedores", "643", "94%", "14 visitas"]
+    },
+    {
+      "id": "servicio_cliente_resultados",
+      "label": "Resultados de servicio al cliente",
+      "category": "servicio_cliente",
+      "value": "En 2023 Qbano reportó más de 25.000 contactos de clientes; 60% fueron elogios. También reportó un nivel de experiencia en servicio acumulada de 90% frente a una meta inicial de 85%.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Servicio al cliente",
+      "keywords": ["servicio al cliente", "clientes", "contactos", "elogios", "satisfaccion", "satisfacción", "experiencia", "90%", "25.000", "85%"]
+    },
+    {
+      "id": "privacidad_datos",
+      "label": "Privacidad y tratamiento de datos",
+      "category": "servicio_cliente",
+      "value": "Qbano reporta una política de tratamiento de datos para proteger la información personal. Indica que solo recolecta información proporcionada voluntariamente y que los usuarios pueden acceder, rectificar y eliminar sus datos.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Privacidad del cliente",
+      "keywords": ["privacidad", "datos personales", "tratamiento de datos", "politica de datos", "política de datos", "clientes", "rectificar", "eliminar datos"]
+    },
+    {
+      "id": "pet_friendly",
+      "label": "Puntos pet-friendly",
+      "category": "servicio_cliente",
+      "value": "En 2023 Qbano convirtió algunos restaurantes en espacios pet-friendly. El informe reporta 20 puntos de venta pet-friendly ubicados en Cali, Bogotá y Medellín.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Servicio al cliente",
+      "keywords": ["pet friendly", "pet-friendly", "mascotas", "perros", "cali", "bogota", "bogotá", "medellin", "medellín", "20 puntos"]
+    },
+    {
+      "id": "responsabilidad_social",
+      "label": "Responsabilidad social y donaciones",
+      "category": "responsabilidad_social",
+      "value": "En 2023 Qbano reportó donaciones de más de 3.000 sándwiches, más de 2.000 unidades de alimentos y más de 200 enseres. También reportó más de 2.500 sándwiches donados en el Día del Sándwich.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Responsabilidad social",
+      "keywords": ["responsabilidad social", "donaciones", "sandwiches donados", "sándwiches donados", "alimentos", "enseres", "dia del sandwich", "día del sándwich", "comunidad"]
+    },
+    {
+      "id": "empaques_sostenibles",
+      "label": "Empaques sostenibles",
+      "category": "medio_ambiente",
+      "value": "Desde 2022 Qbano reporta una disminución de 42% de empaques plásticos. Para 2023 reporta 80 toneladas de materiales no renovables, 7.537 toneladas de materiales renovables y que 56% de empaques a base de fibra provienen de fuentes recicladas o certificadas.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Camino a una economía circular",
+      "keywords": ["empaques", "plasticos", "plásticos", "materiales renovables", "materiales no renovables", "fibra", "fuentes recicladas", "certificadas", "42%", "56%"]
+    },
+    {
+      "id": "residuos_reciclaje",
+      "label": "Residuos y reciclaje",
+      "category": "medio_ambiente",
+      "value": "En 2023 Qbano reportó un piloto de residuos aprovechables en Cali con Coca-Cola y WERO en 7 puntos estratégicos; 95,6 toneladas de aceite de cocina usado reciclado; y 34,8 toneladas de residuos aprovechados.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Camino a una economía circular",
+      "keywords": ["residuos", "reciclaje", "aceite de cocina usado", "acu", "coca cola", "coca-cola", "wero", "cali", "95,6", "34,8", "7 puntos"]
+    },
+    {
+      "id": "huella_carbono",
+      "label": "Huella de carbono 2023",
+      "category": "medio_ambiente",
+      "value": "Qbano calculó por primera vez su huella de carbono en 2023 como línea base. Reporta GEI calculados CO2, CH4, N2O y HCFC; Alcance 1: 166,15 tCO2e; Alcance 2: 93,756 tCO2e; y otras emisiones indirectas reportadas como 35.289,22 tCO2e.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Mitigación al cambio climático",
+      "keywords": ["huella de carbono", "carbono", "gei", "emisiones", "alcance 1", "alcance 2", "alcance 3", "co2", "ch4", "n2o", "hcfc", "166,15", "93,756", "35.289"]
+    },
+    {
+      "id": "energia",
+      "label": "Uso eficiente de energía",
+      "category": "medio_ambiente",
+      "value": "El informe indica que las tiendas se abastecen de energía eléctrica de empresas municipales locales, priorizan luz natural cuando es posible, usan gas natural en cocina y equipan todos los puntos de venta con luminarias LED.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Uso eficiente y ahorro de energía",
+      "keywords": ["energia", "energía", "luminarias led", "led", "luz natural", "gas natural", "eficiencia energetica", "eficiencia energética"]
+    },
+    {
+      "id": "agua_vertimientos",
+      "label": "Gestión del agua",
+      "category": "medio_ambiente",
+      "value": "Qbano reporta 228 trampas de grasa instaladas y afirma evitar la contaminación de más de 100.000 litros de agua mediante la gestión de aceite de cocina usado. También reporta uso de productos Klaxen ecológicos y biodegradables.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Manejo de recursos hídricos",
+      "keywords": ["agua", "recursos hidricos", "recursos hídricos", "trampas de grasa", "vertimientos", "aceite de cocina usado", "klaxen", "100.000 litros", "228"]
+    },
+    {
+      "id": "biodiversidad_bosque",
+      "label": "Biodiversidad y bosque Qbano",
+      "category": "medio_ambiente",
+      "value": "En 2023 Qbano inició su bosque en el Amazonas con Saving the Amazon y reportó 50 árboles sembrados. Para 2024 planeó sembrar más de 800 árboles.",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Protección de la biodiversidad",
+      "keywords": ["biodiversidad", "bosque", "amazonas", "saving the amazon", "arboles", "árboles", "50", "800", "reforestacion", "reforestación"]
+    },
+    {
+      "id": "contacto_sostenibilidad",
+      "label": "Contacto de sostenibilidad e innovación",
+      "category": "sostenibilidad",
+      "value": "vivian.reyes@fsqgroup.com.co; valeria.garcia@fsqgroup.com.co",
+      "source": "Informe de Sostenibilidad QBANO 2023 - sección Sobre este reporte",
+      "keywords": ["sostenibilidad", "innovacion", "innovación", "reporte", "informe", "vivian", "valeria"]
+    },
+    {
+      "id": "limite_horarios",
+      "label": "Horarios por restaurante no disponibles",
+      "category": "limite_informacion",
+      "value": "La base local no incluye horarios de apertura o cierre por restaurante. Para confirmar horarios se debe consultar el punto de venta específico o los canales oficiales de contacto.",
+      "source": "Límite de la base de conocimiento local",
+      "keywords": ["horario", "horarios", "hora", "abre", "abren", "abrir", "apertura", "cierra", "cierran", "cierre", "restaurante", "restaurantes", "punto de venta", "puntos de venta"]
+    },
+    {
+      "id": "limite_domicilios_cobertura",
+      "label": "Cobertura exacta de domicilios no disponible",
+      "category": "limite_informacion",
+      "value": "La base local no confirma cobertura de domicilios por dirección, barrio, ciudad o departamento. Solo contiene canales generales de pedido como la página web y referencias a domicilios en el informe.",
+      "source": "Límite de la base de conocimiento local",
+      "keywords": ["domicilio", "domicilios", "entrega", "entregas", "cobertura domicilio", "cobertura domicilios", "ciudad", "departamento", "direccion", "dirección", "barrio", "pedido", "pedidos"]
+    },
+    {
+      "id": "limite_disponibilidad_inventario",
+      "label": "Disponibilidad por sede no disponible",
+      "category": "limite_informacion",
+      "value": "La base local no permite confirmar disponibilidad en tiempo real por sede, ciudad o inventario. Sí puede listar productos y precios reportados, pero no validar si un producto está disponible en un punto de venta específico.",
+      "source": "Límite de la base de conocimiento local",
+      "keywords": ["disponible", "disponibilidad", "inventario", "agotado", "agotados", "hay en", "tienen en", "venden en", "sede", "sedes", "ciudad", "punto de venta"]
+    },
+    {
+      "id": "limite_medios_pago",
+      "label": "Medios de pago no disponibles",
+      "category": "limite_informacion",
+      "value": "La base local no contiene información confirmada sobre medios de pago aceptados. Para ese dato se debe consultar el canal oficial de pedidos o el punto de venta.",
+      "source": "Límite de la base de conocimiento local",
+      "keywords": ["pago", "pagos", "medio de pago", "medios de pago", "tarjeta", "efectivo", "nequi", "daviplata", "pse", "credito", "crédito", "debito", "débito"]
+    },
+    {
+      "id": "limite_facturacion",
+      "label": "Facturación no disponible",
+      "category": "limite_informacion",
+      "value": "La base local no contiene instrucciones confirmadas sobre facturación o factura electrónica. Para ese trámite se debe consultar directamente a Sándwich Qbano por sus canales oficiales.",
+      "source": "Límite de la base de conocimiento local",
+      "keywords": ["facturacion", "facturación", "factura", "factura electronica", "factura electrónica", "nit", "razon social", "razón social"]
+    }
+  ]
+}

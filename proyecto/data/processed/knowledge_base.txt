@@ -7,7 +7,7 @@ Titulo: Sandwich Qbano - Haz tu pedido online
 URL: https://www.sandwichqbano.com/
 Descripcion: Disfruta el auténtico sabor del mejor Sándwich de Colombia con Salsa Qbano. ¡Elige y compra online tu combo favorito!
 Contenido:
-Producto: Salsa Qbano. Descripcion: Salsa Qbano.. Precio reportado: 15.900 COP.
+Producto: Salsa Qbano. Descripcion: Disfruta de un producto fresco, elaborado sin conservantes ni preservantes.<ul><li><strong>Vida útil:</strong> 15 días calendario a partir de la entrega.</li></ul><br/><ul><li><strong>Conservación:</strong> Mantener siempre refrigerado (2°C a 5°C).</li></ul><br/><ul><li><strong>Consumo:</strong> Una vez abierto, consumirlo en el menor tiempo posible y antes de la fecha de vencimiento. Evita exponerlo a temperatura ambiente.</li></ul>. Precio reportado: 15.900 COP.
 Producto: Combo Qbowl Criollo. Descripcion: Arroz, Cilantro, Guacamole, Cebolla Blanca, Tomate, Carne de Res Desmechada, Hogo, Chorizo, Frijol. Precio reportado: 36.900 COP.
 Producto: Sándwich Ropa Vieja Combo. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: desde 35.900 COP hasta 49.900 COP.
 Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: desde 35.900 COP hasta 49.900 COP.
@@ -30,19 +30,19 @@ Titulo: Individual - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/sandwich/individual
 Descripcion: Individual
 Contenido:
+Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
 Producto: Sándwich Ropa Vieja Individual. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Sándwich Pollo Individual. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzrella, Lechuga, y Mayonesa.. Precio reportado: 26.600 COP.
 Producto: Sándwich Súper Especial Individual. Descripcion: Mix de jamones (res y cerdo), tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 25.600 COP.
-Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
 Producto: Sándwich Qumbia Individual. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 29.600 COP.
+Producto: Sándwich al Pastor Individual. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
 Producto: Sándwich Pavo Individual. Descripcion: Pan Francés, Pechuga de Pavo, Tocineta, Queso Mozzarella, Lechuga, Salsa Qbano y Miel Mostaza.. Precio reportado: 32.600 COP.
 Producto: Sándwich Costilla Individual. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Sándwich Cordero Individual. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 26.600 COP.
 Producto: Sándwich Hawaiano Individual. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 25.600 COP.
-Producto: Sándwich al Pastor Individual. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
 Producto: Sandwich Burger. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: 26.600 COP.
 Producto: Sándwich Roast Beef Individual. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 29.600 COP.
-Productos visibles en la pagina: Sándwich Ropa Vieja Individual, Sándwich Pollo Individual, Sándwich Súper Especial Individual, Sándwich Especial Individual, Sándwich Qumbia Individual, Sándwich Pavo Individual, Sándwich Costilla Individual, Sándwich Cordero Individual, Sándwich Hawaiano Individual, Sándwich al Pastor Individual, Sandwich Burger, Sándwich Roast Beef Individual.
+Productos visibles en la pagina: Sándwich Especial Individual, Sándwich Ropa Vieja Individual, Sándwich Pollo Individual, Sándwich Súper Especial Individual, Sándwich Qumbia Individual, Sándwich al Pastor Individual, Sándwich Pavo Individual, Sándwich Costilla Individual, Sándwich Cordero Individual, Sándwich Hawaiano Individual, Sandwich Burger, Sándwich Roast Beef Individual.
 Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: desde 20.900 COP hasta 28.900 COP.
 Producto: Sandwich Burger. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: desde 26.600 COP hasta 37.600 COP.
 Producto: Sándwich Súper Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: desde 25.600 COP hasta 34.600 COP.
@@ -72,25 +72,25 @@ Descripcion: Sandwich
 Contenido:
 Producto: Sándwich Ropa Vieja Combo. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Sándwich Qumbia Combo. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 35.900 COP.
-Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
 Producto: Sándwich Costilla Combo. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Sándwich Cordero Combo. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 32.900 COP.
-Producto: Sándwich Hawaiano Combo. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
 Producto: Sándwich Pollo Combo. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzarella, Lechuga, y Mayonesa.. Precio reportado: 32.900 COP.
 Producto: Sándwich Súper Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 30.900 COP.
 Producto: Sándwich Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 27.900 COP.
+Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
+Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
 Producto: Sándwich Burguer Combo. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: 32.900 COP.
 Producto: Sándwich Roast Beef Combo. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Sándwich Hawaiano Combo. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
 Producto: Sándwich Ropa Vieja Individual. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Sándwich Pollo Individual. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzrella, Lechuga, y Mayonesa.. Precio reportado: 26.600 COP.
 Producto: Sándwich Súper Especial Individual. Descripcion: Mix de jamones (res y cerdo), tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 25.600 COP.
-Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
 Producto: Sándwich Qumbia Individual. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 29.600 COP.
+Producto: Sándwich al Pastor Individual. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
 Producto: Sándwich Pavo Individual. Descripcion: Pan Francés, Pechuga de Pavo, Tocineta, Queso Mozzarella, Lechuga, Salsa Qbano y Miel Mostaza.. Precio reportado: 32.600 COP.
 Producto: Sándwich Costilla Individual. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Sándwich Cordero Individual. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 26.600 COP.
 Producto: Sándwich Hawaiano Individual. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 25.600 COP.
-Producto: Sándwich al Pastor Individual. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
 Producto: Sandwich Burger. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: 26.600 COP.
 Producto: Sándwich Roast Beef Individual. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Qbanito Jamón y Queso. Descripcion: lonchas de cerdo con pollo** y queso + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
@@ -98,7 +98,7 @@ Producto: Sándwich Vegetariano Combo. Descripcion: Pan Francés, Champiñones F
 Producto: Qbanito Pollo & Champiñones. Descripcion: Qbanito Pollo & Champiñones + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
 Producto: Qbanito Hawaiano. Descripcion: Qbanito Hawaiano + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
 Producto: Sándwich Vegetariano Individual. Descripcion: Pan Francés, Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: 25.600 COP.
-Productos visibles en la pagina: Sándwich Ropa Vieja Combo, Sándwich Qumbia Combo, Sándwich al Pastor Combo, Sándwich Costilla Combo, Sándwich Cordero Combo, Sándwich Hawaiano Combo, Sándwich Pollo Combo, Sándwich Súper Especial Combo, Sándwich Especial Combo, Sándwich Burguer Combo, Sándwich Roast Beef Combo, Sándwich Ropa Vieja Individual, Sándwich Pollo Individual, Sándwich Súper Especial Individual, Sándwich Especial Individual, Sándwich Qumbia Individual, Sándwich Pavo Individual, Sándwich Costilla Individual, Sándwich Cordero Individual, Sándwich Hawaiano Individual, Sándwich al Pastor Individual, Sandwich Burger, Sándwich Roast Beef Individual, Qbanito Jamón y Queso, Sándwich Vegetariano Combo, Qbanito Pollo & Champiñones, Qbanito Hawaiano, Sándwich Vegetariano Individual.
+Productos visibles en la pagina: Sándwich Ropa Vieja Combo, Sándwich Qumbia Combo, Sándwich Costilla Combo, Sándwich Cordero Combo, Sándwich Pollo Combo, Sándwich Súper Especial Combo, Sándwich Especial Combo, Sándwich Especial Individual, Sándwich al Pastor Combo, Sándwich Burguer Combo, Sándwich Roast Beef Combo, Sándwich Hawaiano Combo, Sándwich Ropa Vieja Individual, Sándwich Pollo Individual, Sándwich Súper Especial Individual, Sándwich Qumbia Individual, Sándwich al Pastor Individual, Sándwich Pavo Individual, Sándwich Costilla Individual, Sándwich Cordero Individual, Sándwich Hawaiano Individual, Sandwich Burger, Sándwich Roast Beef Individual, Qbanito Jamón y Queso, Sándwich Vegetariano Combo, Qbanito Pollo & Champiñones, Qbanito Hawaiano, Sándwich Vegetariano Individual.
 Producto: Sándwich Súper Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: desde 30.900 COP hasta 41.900 COP.
 Producto: Qbanito Jamón y Queso. Descripcion: lonchas de cerdo con pollo** y queso + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
 Producto: Sándwich Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: desde 27.900 COP hasta 37.900 COP.
@@ -124,30 +124,30 @@ Sándwich Cordero Combo
 
 Fuente 4
 Titulo: Sandwich - Sandwich Qbano- Haz tu pedido online
-URL: https://www.sandwichqbano.com/sandwich?page=3
+URL: https://www.sandwichqbano.com/sandwich?page=2
 Descripcion: Sandwich
 Contenido:
 Producto: Sándwich Ropa Vieja Combo. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Sándwich Qumbia Combo. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 35.900 COP.
-Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
 Producto: Sándwich Costilla Combo. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Sándwich Cordero Combo. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 32.900 COP.
-Producto: Sándwich Hawaiano Combo. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
 Producto: Sándwich Pollo Combo. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzarella, Lechuga, y Mayonesa.. Precio reportado: 32.900 COP.
 Producto: Sándwich Súper Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 30.900 COP.
 Producto: Sándwich Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 27.900 COP.
+Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
+Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
 Producto: Sándwich Burguer Combo. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: 32.900 COP.
 Producto: Sándwich Roast Beef Combo. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Sándwich Hawaiano Combo. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
 Producto: Sándwich Ropa Vieja Individual. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Sándwich Pollo Individual. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzrella, Lechuga, y Mayonesa.. Precio reportado: 26.600 COP.
 Producto: Sándwich Súper Especial Individual. Descripcion: Mix de jamones (res y cerdo), tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 25.600 COP.
-Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
 Producto: Sándwich Qumbia Individual. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 29.600 COP.
+Producto: Sándwich al Pastor Individual. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
 Producto: Sándwich Pavo Individual. Descripcion: Pan Francés, Pechuga de Pavo, Tocineta, Queso Mozzarella, Lechuga, Salsa Qbano y Miel Mostaza.. Precio reportado: 32.600 COP.
 Producto: Sándwich Costilla Individual. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Sándwich Cordero Individual. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 26.600 COP.
 Producto: Sándwich Hawaiano Individual. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 25.600 COP.
-Producto: Sándwich al Pastor Individual. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
 Producto: Sandwich Burger. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: 26.600 COP.
 Producto: Sándwich Roast Beef Individual. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Qbanito Jamón y Queso. Descripcion: lonchas de cerdo con pollo** y queso + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
@@ -155,7 +155,62 @@ Producto: Sándwich Vegetariano Combo. Descripcion: Pan Francés, Champiñones F
 Producto: Qbanito Pollo & Champiñones. Descripcion: Qbanito Pollo & Champiñones + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
 Producto: Qbanito Hawaiano. Descripcion: Qbanito Hawaiano + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
 Producto: Sándwich Vegetariano Individual. Descripcion: Pan Francés, Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: 25.600 COP.
-Productos visibles en la pagina: Sándwich Ropa Vieja Combo, Sándwich Qumbia Combo, Sándwich al Pastor Combo, Sándwich Costilla Combo, Sándwich Cordero Combo, Sándwich Hawaiano Combo, Sándwich Pollo Combo, Sándwich Súper Especial Combo, Sándwich Especial Combo, Sándwich Burguer Combo, Sándwich Roast Beef Combo, Sándwich Ropa Vieja Individual, Sándwich Pollo Individual, Sándwich Súper Especial Individual, Sándwich Especial Individual, Sándwich Qumbia Individual, Sándwich Pavo Individual, Sándwich Costilla Individual, Sándwich Cordero Individual, Sándwich Hawaiano Individual, Sándwich al Pastor Individual, Sandwich Burger, Sándwich Roast Beef Individual, Qbanito Jamón y Queso, Sándwich Vegetariano Combo, Qbanito Pollo & Champiñones, Qbanito Hawaiano, Sándwich Vegetariano Individual.
+Productos visibles en la pagina: Sándwich Ropa Vieja Combo, Sándwich Qumbia Combo, Sándwich Costilla Combo, Sándwich Cordero Combo, Sándwich Pollo Combo, Sándwich Súper Especial Combo, Sándwich Especial Combo, Sándwich Especial Individual, Sándwich al Pastor Combo, Sándwich Burguer Combo, Sándwich Roast Beef Combo, Sándwich Hawaiano Combo, Sándwich Ropa Vieja Individual, Sándwich Pollo Individual, Sándwich Súper Especial Individual, Sándwich Qumbia Individual, Sándwich al Pastor Individual, Sándwich Pavo Individual, Sándwich Costilla Individual, Sándwich Cordero Individual, Sándwich Hawaiano Individual, Sandwich Burger, Sándwich Roast Beef Individual, Qbanito Jamón y Queso, Sándwich Vegetariano Combo, Qbanito Pollo & Champiñones, Qbanito Hawaiano, Sándwich Vegetariano Individual.
+Producto: Sándwich Roast Beef Combo. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Qbanito Hawaiano. Descripcion: Qbanito Hawaiano + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
+Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: desde 20.900 COP hasta 28.900 COP.
+Producto: Sandwich Burger. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: desde 26.600 COP hasta 37.600 COP.
+Producto: Sándwich Súper Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: desde 25.600 COP hasta 34.600 COP.
+Producto: Sándwich Pavo Individual. Descripcion: Pan Francés, Pechuga de Pavo, Tocineta, Queso Mozzarella, Lechuga, Salsa Qbano y Miel Mostaza.. Precio reportado: 32.600 COP.
+Producto: Sándwich Vegetariano Individual. Descripcion: Pan Francés, Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: 25.600 COP.
+Producto: Sándwich Cordero Individual. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: desde 26.600 COP hasta 37.600 COP.
+Producto: Sándwich Ropa Vieja Individual. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano. Precio reportado: desde 29.600 COP hasta 42.600 COP.
+Producto: Sándwich Pollo Individual. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzrella, Lechuga, y Mayonesa.. Precio reportado: desde 26.600 COP hasta 37.600 COP.
+Producto: Sándwich Costilla Individual. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: desde 29.600 COP hasta 42.600 COP.
+Producto: Sándwich Hawaiano Individual. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: desde 25.600 COP hasta 34.600 COP.
+Productos visibles en la pagina: Sándwich Roast Beef Combo, Qbanito Hawaiano, Sándwich Especial Individual, Sandwich Burger, Sándwich Súper Especial Individual, Sándwich Pavo Individual, Sándwich Vegetariano Individual, Sándwich Cordero Individual.
+Sándwich Roast Beef Combo
+Promo de la casa a $23.900
+Sándwich Especial Individual
+Sándwich Súper Especial Individual
+Sándwich Pavo Individual
+Sándwich Vegetariano Individual
+Sándwich Cordero Individual
+
+Fuente 5
+Titulo: Sandwich - Sandwich Qbano- Haz tu pedido online
+URL: https://www.sandwichqbano.com/sandwich?page=3
+Descripcion: Sandwich
+Contenido:
+Producto: Sándwich Ropa Vieja Combo. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Sándwich Qumbia Combo. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Sándwich Costilla Combo. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Sándwich Cordero Combo. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 32.900 COP.
+Producto: Sándwich Pollo Combo. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzarella, Lechuga, y Mayonesa.. Precio reportado: 32.900 COP.
+Producto: Sándwich Súper Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 30.900 COP.
+Producto: Sándwich Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 27.900 COP.
+Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
+Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
+Producto: Sándwich Burguer Combo. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: 32.900 COP.
+Producto: Sándwich Roast Beef Combo. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Sándwich Hawaiano Combo. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
+Producto: Sándwich Ropa Vieja Individual. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 29.600 COP.
+Producto: Sándwich Pollo Individual. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzrella, Lechuga, y Mayonesa.. Precio reportado: 26.600 COP.
+Producto: Sándwich Súper Especial Individual. Descripcion: Mix de jamones (res y cerdo), tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 25.600 COP.
+Producto: Sándwich Qumbia Individual. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 29.600 COP.
+Producto: Sándwich al Pastor Individual. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
+Producto: Sándwich Pavo Individual. Descripcion: Pan Francés, Pechuga de Pavo, Tocineta, Queso Mozzarella, Lechuga, Salsa Qbano y Miel Mostaza.. Precio reportado: 32.600 COP.
+Producto: Sándwich Costilla Individual. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 29.600 COP.
+Producto: Sándwich Cordero Individual. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 26.600 COP.
+Producto: Sándwich Hawaiano Individual. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 25.600 COP.
+Producto: Sandwich Burger. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: 26.600 COP.
+Producto: Sándwich Roast Beef Individual. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 29.600 COP.
+Producto: Qbanito Jamón y Queso. Descripcion: lonchas de cerdo con pollo** y queso + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
+Producto: Sándwich Vegetariano Combo. Descripcion: Pan Francés, Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: 30.900 COP.
+Producto: Qbanito Pollo & Champiñones. Descripcion: Qbanito Pollo & Champiñones + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
+Producto: Qbanito Hawaiano. Descripcion: Qbanito Hawaiano + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
+Producto: Sándwich Vegetariano Individual. Descripcion: Pan Francés, Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: 25.600 COP.
+Productos visibles en la pagina: Sándwich Ropa Vieja Combo, Sándwich Qumbia Combo, Sándwich Costilla Combo, Sándwich Cordero Combo, Sándwich Pollo Combo, Sándwich Súper Especial Combo, Sándwich Especial Combo, Sándwich Especial Individual, Sándwich al Pastor Combo, Sándwich Burguer Combo, Sándwich Roast Beef Combo, Sándwich Hawaiano Combo, Sándwich Ropa Vieja Individual, Sándwich Pollo Individual, Sándwich Súper Especial Individual, Sándwich Qumbia Individual, Sándwich al Pastor Individual, Sándwich Pavo Individual, Sándwich Costilla Individual, Sándwich Cordero Individual, Sándwich Hawaiano Individual, Sandwich Burger, Sándwich Roast Beef Individual, Qbanito Jamón y Queso, Sándwich Vegetariano Combo, Qbanito Pollo & Champiñones, Qbanito Hawaiano, Sándwich Vegetariano Individual.
 Producto: Sándwich al Pastor Individual. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: desde 29.600 COP hasta 42.600 COP.
 Producto: Sándwich Roast Beef Individual. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Sándwich Vegetariano Combo. Descripcion: Pan Francés, Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: desde 30.900 COP hasta 41.900 COP.
@@ -167,7 +222,7 @@ Sándwich Roast Beef Individual
 Sándwich Vegetariano Combo
 Sándwich Qumbia Individual
 
-Fuente 5
+Fuente 6
 Titulo: Q-Bowls - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/saludable/q-bowls
 Descripcion: Q-Bowls
@@ -194,7 +249,7 @@ Promo de la casa a $23.900
 Combo Qbowl Costilla
 Combo Qbowl Vegetariano
 
-Fuente 6
+Fuente 7
 Titulo: Saludable - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/saludable?page=2
 Descripcion: Saludable
@@ -225,7 +280,7 @@ Promo de la casa a $23.900
 Combo Ensalada Mexicana
 Combo Ensalada Pollo BBQ
 
-Fuente 7
+Fuente 8
 Titulo: Wraps - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/wraps
 Descripcion: Wraps
@@ -253,23 +308,23 @@ Producto: Wrap Vegetariano. Descripcion: Champiñones Frescos, Pimenton Rojo, Ce
 Productos visibles en la pagina: Combo Wrap Pollo, Combo Wrap Al Pastor, Wrap Pollo, Combo Wrap Costilla, Combo Wrap Qumbia, Combo Wrap Ropa Vieja, Combo Wrap Super Especial, Wrap Ropa Vieja, Combo Wrap Roast Beef, Combo Wrap Hawaiano, Combo Wrap Vegetariano, Combo Wrap Especial, Wrap Al Pastor, Wrap Qumbia, Wrap Hawaiano, Wrap Costilla, Wrap Roast Beef, Wrap Super Especial, Wrap Especial, Wrap Vegetariano.
 Producto: Combo Wrap Pollo. Descripcion: Pechuga de Pollo Desmechada, Tomate, Queso Mozzrella, Lechuga, y Mayonesa.. Precio reportado: 32.900 COP.
 Producto: Combo Wrap Al Pastor. Descripcion: Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
+Producto: Combo Wrap Qumbia. Descripcion: Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Wrap Pollo. Descripcion: Pechuga de Pollo Desmechada, Tomate, Queso Mozzrella, Lechuga, y Mayonesa.. Precio reportado: 26.600 COP.
 Producto: Combo Wrap Super Especial. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 30.900 COP.
-Producto: Combo Wrap Qumbia. Descripcion: Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 35.900 COP.
-Producto: Combo Wrap Vegetariano. Descripcion: Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: 30.900 COP.
 Producto: Combo Wrap Especial. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 27.900 COP.
 Producto: Wrap Vegetariano. Descripcion: Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: 25.600 COP.
-Producto: Combo Wrap Costilla. Descripcion: Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano. Precio reportado: 35.900 COP.
 Producto: Combo Wrap Ropa Vieja. Descripcion: Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimenton, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Combo Wrap Vegetariano. Descripcion: Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: 30.900 COP.
 Producto: Wrap Qumbia. Descripcion: Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 29.600 COP.
-Producto: Wrap Al Pastor. Descripcion: Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
-Productos visibles en la pagina: Combo Wrap Pollo, Combo Wrap Al Pastor, Wrap Pollo, Combo Wrap Super Especial, Combo Wrap Qumbia, Combo Wrap Vegetariano, Combo Wrap Especial, Wrap Vegetariano.
+Producto: Combo Wrap Costilla. Descripcion: Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano. Precio reportado: 35.900 COP.
+Producto: Wrap Ropa Vieja. Descripcion: Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 29.600 COP.
+Productos visibles en la pagina: Combo Wrap Pollo, Combo Wrap Al Pastor, Combo Wrap Qumbia, Wrap Pollo, Combo Wrap Super Especial, Combo Wrap Especial, Wrap Vegetariano, Combo Wrap Ropa Vieja.
 Promo de la casa a $23.900
 Combo Wrap Al Pastor
 Combo Wrap Super Especial
-Combo Wrap Vegetariano
+Combo Wrap Ropa Vieja
 
-Fuente 8
+Fuente 9
 Titulo: Wraps - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/wraps?page=2
 Descripcion: Wraps
@@ -295,19 +350,19 @@ Producto: Wrap Super Especial. Descripcion: Lonchas de Cerdo con pollo**, jamona
 Producto: Wrap Especial. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
 Producto: Wrap Vegetariano. Descripcion: Champiñones Frescos, Pimenton Rojo, Cebolla Cabezona Roja, Queso Mozzarella y Salsa Qbano.. Precio reportado: 25.600 COP.
 Productos visibles en la pagina: Combo Wrap Pollo, Combo Wrap Al Pastor, Wrap Pollo, Combo Wrap Costilla, Combo Wrap Qumbia, Combo Wrap Ropa Vieja, Combo Wrap Super Especial, Wrap Ropa Vieja, Combo Wrap Roast Beef, Combo Wrap Hawaiano, Combo Wrap Vegetariano, Combo Wrap Especial, Wrap Al Pastor, Wrap Qumbia, Wrap Hawaiano, Wrap Costilla, Wrap Roast Beef, Wrap Super Especial, Wrap Especial, Wrap Vegetariano.
-Producto: Wrap Super Especial. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 25.600 COP.
-Producto: Wrap Ropa Vieja. Descripcion: Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 29.600 COP.
-Producto: Combo Wrap Hawaiano. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
+Producto: Wrap Al Pastor. Descripcion: Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
 Producto: Combo Wrap Roast Beef. Descripcion: Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Wrap Super Especial. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 25.600 COP.
 Producto: Wrap Especial. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
 Producto: Wrap Costilla. Descripcion: Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 29.600 COP.
+Producto: Combo Wrap Hawaiano. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
 Producto: Wrap Hawaiano. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 25.600 COP.
 Producto: Wrap Roast Beef. Descripcion: Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 29.600 COP.
-Productos visibles en la pagina: Wrap Super Especial, Wrap Ropa Vieja, Combo Wrap Hawaiano, Combo Wrap Roast Beef, Wrap Especial, Wrap Costilla, Wrap Hawaiano, Wrap Roast Beef.
+Productos visibles en la pagina: Wrap Al Pastor, Combo Wrap Roast Beef, Wrap Super Especial, Wrap Especial, Wrap Costilla, Combo Wrap Hawaiano, Wrap Hawaiano, Wrap Roast Beef.
 Promo de la casa a $23.900
 Combo Wrap Roast Beef
 
-Fuente 9
+Fuente 10
 Titulo: Veggie - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/167?map=productClusterIds
 Descripcion: Disfruta el auténtico sabor del mejor Sándwich de Colombia con Salsa Qbano. ¡Elige y compra online tu combo favorito!
@@ -328,7 +383,7 @@ Combo Wrap Vegetariano
 Combo Qbowl Vegetariano
 Combo Hamburguesa Veggie
 
-Fuente 10
+Fuente 11
 Titulo: Otras delicias - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/otras-delicias?page=2
 Descripcion: Otras delicias
@@ -361,7 +416,7 @@ Hamburguesa de Pollo Desmechado
 Combo Perro Desgranado (Exclusivo barranquilla)
 Perro Sencillo (Exclusivo barranquilla)
 
-Fuente 11
+Fuente 12
 Titulo: Favoritos Menú - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/149?map=productClusterIds
 Descripcion: Disfruta el auténtico sabor del mejor Sándwich de Colombia con Salsa Qbano. ¡Elige y compra online tu combo favorito!
@@ -380,25 +435,24 @@ Combo Hamburguesa Veggie
 Sándwich Costilla Combo
 Combo Ensalada Pollo BBQ
 
-Fuente 12
+Fuente 13
 Titulo: Promociones - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/promociones?order=OrderByBestDiscountDESC
 Descripcion: Promociones
 Contenido:
+Producto: Salsa Qbano. Descripcion: Disfruta de un producto fresco, elaborado sin conservantes ni preservantes. • Vida útil: 15 días calendario a partir de la entrega. • Conservación: Mantener siempre refrigerado (2°C a 5°C). • Consumo: Una vez abierto, consumirlo en el menor tiempo posible y antes de la fecha de vencimiento. Evita exponerlo a temperatura ambiente.. Precio reportado: 15.900 COP.
 Producto: Combo Para Dos. Descripcion: 2 sándwiches de 17cm aprox, 2 papas pequeñas y 2 limonadas de 16oz.. Precio reportado: 44.600 COP.
 Producto: Combo Mix opc 1. Descripcion: 1 sándwich Especial personal 21 cm + 1 sándwich Ropa Vieja o Pollo personal 21 cm+ 2 limonadas de 16 oz o 2 gaseosas 250 ml + 2 papas pequeñas. Precio reportado: 46.900 COP.
 Producto: Promo de la Casa. Descripcion: 1 sándwich especial o hawaiano (21cm) + 1 papas pequeñas + 1 coca cola 250ml.. Precio reportado: 23.900 COP.
-Producto: Promo Hawaiano. Descripcion: 1 Sandwich personal Hawaiano de 21 cm + 1 limonada de 16 oz. Precio reportado: 20.900 COP.
 Producto: Sandwich Pollo BBQ. Descripcion: 1 Sandwich Personal De 21cm Pollo BBQ + 1 Papas Pequeñas + bebida 250ml. Precio reportado: 23.900 COP.
-Producto: Salsa Qbano. Descripcion: Salsa Qbano 200 gr. Precio reportado: 15.900 COP.
-Producto: Promo Dulce Especial. Descripcion: 1 Sandwich personal Especial de 21 cm + 1 limonada de 16 oz + 1 churros personales. Precio reportado: 30.900 COP.
+Producto: Promo Familiar. Descripcion: (1) Sándwich Pollo BBQ personal (21cms aproximadamente) con (1) una porción de papas pequeñas y (1) una limonada 16oz+ (1) Sándwich Especial personal (21cms aproximadamente) + (1) un sándwich hawaiano (21cms aproximadamente) + (2) dos porciones de papas pequeñas + (2) dos limonadas 16oz + (1) un paquete de Churros personales por$79.900. Precio reportado: 79.900 COP.
 Producto: Combo Mix + Churros. Descripcion: (1) un sándwich personal especial de 21cm aproximadamente, (1) un sándwich personal ropa vieja o pollo de 21cm aproximadamente (2) dos porciones de papas pequeñas, (2) dos gaseosas 250ml y (1) una porción de churros personal con arequipe. Precio reportado: 58.800 COP.
-Producto: Miercoles Combo Pollo Personal. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzarella, Lechuga, y Mayonesa.. Precio reportado: 32.900 COP.
-Producto: Miercoles Combo Pollo Grande. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzarella, Lechuga, y Mayonesa.. Precio reportado: 44.900 COP.
+Producto: Sabado Combo Ropa Vieja Personal. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Sabado Combo Ropa Vieja Grande. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 49.900 COP.
 Producto: Qbanisima. Descripcion: 1 hamburguesa traidiconal + 1 papas pequeñas + bebida 250ml. Precio reportado: 30.900 COP.
-Productos visibles en la pagina: Combo Para Dos, Combo Mix opc 1, Promo de la Casa, Promo Hawaiano, Sandwich Pollo BBQ, Salsa Qbano, Promo Dulce Especial, Combo Mix + Churros, Miercoles Combo Pollo Personal, Miercoles Combo Pollo Grande, Qbanisima.
+Productos visibles en la pagina: Salsa Qbano, Combo Para Dos, Combo Mix opc 1, Promo de la Casa, Sandwich Pollo BBQ, Promo Familiar, Combo Mix + Churros, Sabado Combo Ropa Vieja Personal, Sabado Combo Ropa Vieja Grande, Qbanisima.
 
-Fuente 13
+Fuente 14
 Titulo: Ensaladas - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/saludable/ensaladas
 Descripcion: Ensaladas
@@ -414,20 +468,20 @@ Producto: Ensalada Pollo BBQ. Descripcion: Pechuga Pollo Desmechado, Lechuga Bat
 Productos visibles en la pagina: Combo Ensalada Tropical, Ensalada Tropical, Ensalada Pavo, Combo Ensalada Mexicana, Ensalada Mexicana Individual, Combo Ensalada Pavo, Combo Ensalada Pollo BBQ, Ensalada Pollo BBQ.
 Producto: Ensalada Tropical. Descripcion: Pechuga de pollo desmechada, Lonchas de Cerdo con pollo**, queso amarillo, piña calada, lechuga batavia y mayonesa.. Precio reportado: 27.900 COP.
 Producto: Combo Ensalada Tropical. Descripcion: Pechuga de pollo desmechada, Lonchas de Cerdo con pollo**, queso amarillo, piña calada, lechuga batavia y mayonesa.. Precio reportado: 33.900 COP.
-Producto: Ensalada Mexicana Individual. Descripcion: Deliciosa Carne de Costilla de Cerdo Desmechada, Frijoles Negros, Maíz tierno, Queso mozzarella, Guacamole, Pico de gallo, Lechuga Batavia.. Precio reportado: 26.900 COP.
 Producto: Ensalada Pavo. Descripcion: Pechuga de Pavo, Lechuga Batavia, Miel Mostaza, Maiz Tierno, Tomate Chonto, Croutones, Tocineta.. Precio reportado: 29.900 COP.
+Producto: Ensalada Mexicana Individual. Descripcion: Deliciosa Carne de Costilla de Cerdo Desmechada, Frijoles Negros, Maíz tierno, Queso mozzarella, Guacamole, Pico de gallo, Lechuga Batavia.. Precio reportado: 26.900 COP.
 Producto: Ensalada Pollo BBQ. Descripcion: Pechuga Pollo Desmechado, Lechuga Batavia, Salsa BBQ, Tomate Chonto, Queso Mozzarella, Cebola cabezona Roja, Croutones.. Precio reportado: 27.900 COP.
 Producto: Combo Ensalada Mexicana. Descripcion: Deliciosa Carne de Costilla de Cerdo Desmechada, Frijoles Negros, Maíz tierno, Queso mozzarella, Guacamole, Pico de gallo, Lechuga Batavia.. Precio reportado: 32.900 COP.
 Producto: Combo Ensalada Pavo. Descripcion: Fresca y deliciosa ensalada con acompañante y bebida. Precio reportado: 35.900 COP.
 Producto: Combo Ensalada Pollo BBQ. Descripcion: Pechuga Pollo Desmechado, Lechuga Batavia, Salsa BBQ, Tomate Chonto, Queso Mozzarella, Cebola cabezona Roja, Croutones.. Precio reportado: 33.900 COP.
-Productos visibles en la pagina: Ensalada Tropical, Combo Ensalada Tropical, Ensalada Mexicana Individual, Ensalada Pavo, Ensalada Pollo BBQ, Combo Ensalada Mexicana, Combo Ensalada Pavo, Combo Ensalada Pollo BBQ.
+Productos visibles en la pagina: Ensalada Tropical, Combo Ensalada Tropical, Ensalada Pavo, Ensalada Mexicana Individual, Ensalada Pollo BBQ, Combo Ensalada Mexicana, Combo Ensalada Pavo, Combo Ensalada Pollo BBQ.
 Promo de la casa a $23.900
 Combo Ensalada Tropical
 Ensalada Mexicana Individual
 Combo Ensalada Mexicana
 Combo Ensalada Pollo BBQ
 
-Fuente 14
+Fuente 15
 Titulo: Saludable - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/saludable
 Descripcion: Saludable
@@ -459,14 +513,14 @@ Producto: Combo Qbowl Costilla. Descripcion: Arroz, Cilantro, Guacamole, Cebolla
 Producto: Combo Qbowl Vegetariano. Descripcion: Arroz, Cilantro, Guacamole, Cebolla Blanca, Tomate, Champiñones, Maiz, Cebolla Roja.. Precio reportado: 36.900 COP.
 Producto: Ensalada Tropical. Descripcion: Pechuga de pollo desmechada, Lonchas de Cerdo con pollo**, queso amarillo, piña calada, lechuga batavia y mayonesa.. Precio reportado: 27.900 COP.
 Producto: Combo Ensalada Tropical. Descripcion: Pechuga de pollo desmechada, Lonchas de Cerdo con pollo**, queso amarillo, piña calada, lechuga batavia y mayonesa.. Precio reportado: 33.900 COP.
-Producto: Ensalada Mexicana Individual. Descripcion: Deliciosa Carne de Costilla de Cerdo Desmechada, Frijoles Negros, Maíz tierno, Queso mozzarella, Guacamole, Pico de gallo, Lechuga Batavia.. Precio reportado: 26.900 COP.
 Producto: Ensalada Pavo. Descripcion: Pechuga de Pavo, Lechuga Batavia, Miel Mostaza, Maiz Tierno, Tomate Chonto, Croutones, Tocineta.. Precio reportado: 29.900 COP.
+Producto: Ensalada Mexicana Individual. Descripcion: Deliciosa Carne de Costilla de Cerdo Desmechada, Frijoles Negros, Maíz tierno, Queso mozzarella, Guacamole, Pico de gallo, Lechuga Batavia.. Precio reportado: 26.900 COP.
 Productos visibles en la pagina: Qbowl Criollo, Qbowl Pollo, Qbowl Costilla, Qbowl Vegetariano, Combo Qbowl Criollo, Combo Qbowl Pollo, Combo Qbowl Costilla, Combo Qbowl Vegetariano.
 Promo de la casa a $23.900
 Combo Qbowl Costilla
 Combo Qbowl Vegetariano
 
-Fuente 15
+Fuente 16
 Titulo: Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
 URL: https://tyc.sandwichqbano.com/wp-content/Informe%20de%20Sostenibilidad%20QBANO%202023.pdf
 Descripcion: Documento PDF oficial
@@ -552,19 +606,16 @@ INDICE ESTANDAR GRI FSQ GROUP y su marca Qbano ha elaborado el informe conforme 
 INDICE ESTANDAR GRI FSQ GROUP y su marca Qbano ha elaborado el informe conforme a los Estándares GRI para el periodo comprendido entre el 1 de enero de 2023 y el 31 de diciembre de 2023. GRI 3: Temas Materiales 2021 GRI 412: Evaluación de Derechos Humanos 2012 GRI 3: Temas Materiales 2021 GRI 3: Temas Materiales 2021 GRI 205: Anticorrupción 2016 GRI 3: Temas Materiales 2021 GRI 3: Temas Materiales 2021 GRI 302: Energía 2016 GRI 303: Agua y Eﬂuentes 2018 3-3 Gestión de los temas materiales 3-3 Gestión de los temas materiales 205-1 Operaciones evaluadas en función de los riesgos relacionados con la corrupción 3-3 Gestión de los temas materiales 3-3 Gestión de los temas materiales 412-1 Operaciones sometidas a revisiones o evaluaciones de impacto sobre los derechos humanos 412-2 Formación de empleados en políticas o procedimientos sobre derechos humanos 412-3 Acuerdos y contratos de inversión signiﬁcativos con cláusulas sobre derechos humanos o sometidos a evaluación de derechos humanos 403-1 Sistema de gestión de la seguridad y salud en el trabajo 403-2 Identiﬁcación de peligros, evaluación de riesgos e investigación de incidentes 403-5 Formación de trabajadores sobre salud y seguridad en el trabajo 403-6 Promoción de la salud de los trabajadores 403-7 Prevención y mitigación de los impactos para la salud y la seguridad en el trabajo directamente vinculados a través de las relaciones comerciales 403-8 Cobertura del sistema de gestión de la salud y la seguridad en el trabajo 403-9 Lesiones por accidente laboral 403-10 Las dolencias y enfermedades laborales Trabajamos año tras año para que cada una de las franquicias cumpla con la implementación correcta del SG-SST Información no disponible. Trabajaremos en 2025 para implementar acciones relacionadas a derechos humanos que permita la obtención de la información. 403-3 Servicios de salud en el trabajo 403-4 Participación de los trabajadores, consultas y comunicación sobre salud y seguridad en el trabajo 205-2 Comunicación y formación sobre políticas y procedimientos anticorrupción 205-3 Incidentes de corrupción conﬁrmados y medidas tomadas 303-1 Interacción con el agua como recurso compartido 303-2 Gestión de los impactos relacionados con el vertido de agua 303-3 Extracción de agua 303-4 Vertido de agua 303-5 Consumo de agua 3-3 Gestión de los temas materiales 302-1 Consumo de energía dentro de la organización Información no disponible. Información no medida durante el período del informe. Para el cálculo de la huella de carbono se realizaron estimaciones con extrapolaciones de datos. Seguiremos trabajando en 2025 para obtener la información y disminuir la incertidumbre. Información no disponible. Información no medida durante el período del informe. Para el cálculo de la huella de carbono se realizaron estimaciones con extrapolaciones de datos. Seguiremos trabajando en los siguientes años para obtener la información y disminuir la incertidumbre. Información no disponible. Nos encontramos trabajando para levantar nuestra política anticorrupción. En el 2024 iniciaremos con un plan de acción con el objetivo de levantar la política de la marca. No procede. En el período de informe, no consumimos energía fuera de la operación.302-2 Consumo de energía fuera de la organización 302-3 Intensidad energética GRI 403: Salud y seguridad en el trabajo 2018 - - - - 46 46 46 47 45, 47 47 47 46 46 48 48 - - - - 75 75, 76 75 - - - 74 - - 74 Derechos humanos Seguridad y salud en el trabajo Código de ética y conducta PLANETA Uso de agua Uso de energía ESTANDAR GRI CONTENIDO RESPUESTA UBICACIÓN
 INDICE ESTANDAR GRI FSQ GROUP y su marca Qbano ha elaborado el informe conforme a los Estándares GRI para el periodo comprendido entre el 1 de enero de 2023 y el 31 de diciembre de 2023. 302-4 Reducción del consumo energético 3-3 Gestión de los temas materiales 305-1 Emisiones directas de GEI (alcance 1) 305-2 Emisiones indirectas de GEI asociadas a la energía (alcance 2) 305-3 Otras emisiones indirectas de GEI (alcance 3) 305-4 Intensidad de las emisiones de GEI 305-5 Reducción de las emisiones de GEI 305-6 Emisiones de sustancias que agotan la capa de ozono (ODS) 3-3 Gestión de los temas materiales 306-1 Generación de residuos e impactos signiﬁcativos relacionados con los residuos Información no disponible. No realizamos esta medición en el período del informe. Desde el 2024 trabajaremos en un piloto para realizar esta medición. Nuestras emisiones provenientes de GEI HCFC fueron de 97,84 tCO2e, representando el mayor aporte del total de las emisiones del Alcance 1. Información no disponible. En el 2023 realizamos nuestro primer cálculo de huella de carbono, a partir de esta base trabajaremos por reducir y/o compensar nuestras emisiones. Emisiones biogénicas. Los consumos de Etanol Anhidro en fuentes móviles de equipos propios u operados por la organización generaron un total de 5,29 tCO2e Información no disponible. Información no medida durante el período del informe. Seguiremos trabajando en 2025 para obtener la información con la implementación de un piloto. No procede. En el período del informe no vendimos este tipo de servicios. No procede. No hay emisión de este tipo de contaminantes en nuestra empresa. 3-3 Gestión de los temas materiales 306-2 Gestión de impactos signiﬁcativos relacionados con los residuos 306-3 Residuos generados 306-4 Residuos no destinados a eliminación 306-5 Residuos destinados a eliminación 301-1 Materiales utilizados por peso o volumen 301-2 Insumos reciclados utilizados 301-3 Productos y materiales de envasado recuperados 305-7 Óxidos de nitrógeno (No), óxidos de azufre (SOx) y otras emisiones signiﬁcativas al aire 302-5 Reducción de los requerimientos energéticos de productos y servicios 74 - 73 73 73 73 73 - - - 68 68 68 72 69 69, 70, 71, 72 69, 70, 71, 72 - - - ESTANDAR GRI CONTENIDO RESPUESTA UBICACIÓN GRI 302: Energía 2016 GRI 3: Temas Materiales 2021 GRI 305: Emisiones 2016 GRI 3: Temas Materiales 2021 GRI 301: Materiales 2016 GRI 3: Temas Materiales 2021 GRI 306: Residuos 2020 Uso de energía Mitigación del cambio climático Uso de energía Uso de energía
 
-Fuente 16
-Titulo: Engallado Del Dia - Sandwich Qbano- Haz tu pedido online
-URL: https://www.sandwichqbano.com/181?map=productClusterIds
+Fuente 17
+Titulo: Promo Semanal - Sandwich Qbano- Haz tu pedido online
+URL: https://www.sandwichqbano.com/192?map=productClusterIds
 Descripcion: Disfruta el auténtico sabor del mejor Sándwich de Colombia con Salsa Qbano. ¡Elige y compra online tu combo favorito!
 Contenido:
-Producto: Miercoles Combo Pollo Personal. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzarella, Lechuga, y Mayonesa.. Precio reportado: 32.900 COP.
-Producto: Miercoles Combo Pollo Grande. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzarella, Lechuga, y Mayonesa.. Precio reportado: 44.900 COP.
-Productos visibles en la pagina: Miercoles Combo Pollo Personal, Miercoles Combo Pollo Grande.
-Miercoles Combo Pollo Personal
+Producto: Promo Familiar. Descripcion: (1) Sándwich Pollo BBQ personal (21cms aproximadamente) con (1) una porción de papas pequeñas y (1) una limonada 16oz+ (1) Sándwich Especial personal (21cms aproximadamente) + (1) un sándwich hawaiano (21cms aproximadamente) + (2) dos porciones de papas pequeñas + (2) dos limonadas 16oz + (1) un paquete de Churros personales. Precio reportado: 79.900 COP.
+Productos visibles en la pagina: Promo Familiar.
 Promo de la casa a $23.900
-Miercoles Combo Pollo Grande
 
-Fuente 17
+Fuente 18
 Titulo: Salsa Qbano - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/salsa-qbano/p
 Descripcion: Salsa Qbano
@@ -584,7 +635,7 @@ Productos visibles en la pagina: Qbowl Criollo, Qbowl Pollo, Qbowl Costilla, Qbo
 Promo de la casa a $23.900
 Que tal un antojo adicional
 
-Fuente 18
+Fuente 19
 Titulo: Combo Qbowl Criollo - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/combo-qbowl-criollo/p
 Descripcion: Combo Qbowl Criollo
@@ -604,7 +655,7 @@ Productos visibles en la pagina: Qbowl Criollo, Qbowl Pollo, Qbowl Costilla, Qbo
 Promo de la casa a $23.900
 Que tal un antojo adicional
 
-Fuente 19
+Fuente 20
 Titulo: Sándwich Ropa Vieja - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/combo-sandwich-ropavieja/p
 Descripcion: Sándwich Ropa Vieja
@@ -625,7 +676,7 @@ Promo de la casa a $23.900
 Sándwich Ropa Vieja Combo
 Que tal un antojo adicional
 
-Fuente 20
+Fuente 21
 Titulo: Sándwich al Pastor - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/combo-sandwich-alpastor/p
 Descripcion: Sándwich al Pastor
@@ -646,7 +697,7 @@ Promo de la casa a $23.900
 Sándwich al Pastor Combo
 Que tal un antojo adicional
 
-Fuente 21
+Fuente 22
 Titulo: Combo Hamburguesa Hawaiana - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/combo-hamburguesa-hawaiana/p
 Descripcion: Combo Hamburguesa Hawaiana
@@ -667,37 +718,38 @@ Promo de la casa a $23.900
 Combo Hamburguesa Hawaiana
 Que tal un antojo adicional
 
-Fuente 22
+Fuente 23
 Titulo: Combo - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/sandwich/combo?order=OrderByPriceDESC
 Descripcion: Combo
 Contenido:
 Producto: Sándwich Ropa Vieja Combo. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Sándwich Qumbia Combo. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 35.900 COP.
-Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
 Producto: Sándwich Costilla Combo. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Sándwich Cordero Combo. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 32.900 COP.
-Producto: Sándwich Hawaiano Combo. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
 Producto: Sándwich Pollo Combo. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzarella, Lechuga, y Mayonesa.. Precio reportado: 32.900 COP.
 Producto: Sándwich Súper Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 30.900 COP.
 Producto: Sándwich Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 27.900 COP.
+Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
 Producto: Sándwich Burguer Combo. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: 32.900 COP.
 Producto: Sándwich Roast Beef Combo. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 35.900 COP.
-Productos visibles en la pagina: Sándwich Ropa Vieja Combo, Sándwich Qumbia Combo, Sándwich al Pastor Combo, Sándwich Costilla Combo, Sándwich Cordero Combo, Sándwich Hawaiano Combo, Sándwich Pollo Combo, Sándwich Súper Especial Combo, Sándwich Especial Combo, Sándwich Burguer Combo, Sándwich Roast Beef Combo.
+Producto: Sándwich Hawaiano Combo. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
+Productos visibles en la pagina: Sándwich Ropa Vieja Combo, Sándwich Qumbia Combo, Sándwich Costilla Combo, Sándwich Cordero Combo, Sándwich Pollo Combo, Sándwich Súper Especial Combo, Sándwich Especial Combo, Sándwich al Pastor Combo, Sándwich Burguer Combo, Sándwich Roast Beef Combo, Sándwich Hawaiano Combo.
 
-Fuente 23
+Fuente 24
 Titulo: churros - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/churros?_q=churros&map=ft
 Descripcion: Disfruta el auténtico sabor del mejor Sándwich de Colombia con Salsa Qbano. ¡Elige y compra online tu combo favorito!
 Contenido:
 Producto: Papa. Descripcion: Crocantes y deliciosas papitas para llevar en tu combo favorito. Precio reportado: 7.300 COP.
 Producto: Limonada Natural Mediana. Descripcion: Refrescante, natural y deliciosa para acompañar tu Qbano favorito. Precio reportado: 7.300 COP.
-Producto: Coca Cola 400ml. Descripcion: Deliciosa y refrescante. Precio reportado: 6.300 COP.
+Producto: Coca Cola 400ml. Descripcion: Deliciosa y refrescante.. Precio reportado: 6.300 COP.
 Producto: Papa. Descripcion: Crocantes y deliciosas papitas para llevar en tu combo favorito.. Precio reportado: 9.300 COP.
 Producto: Agua Saborizada. Descripcion: Agua Saborizada. Precio reportado: 7.300 COP.
 Producto: Coca Cola 400ml Zero. Descripcion: Deliciosa y refrescante. Precio reportado: 6.300 COP.
 Producto: Sándwich Ropa Vieja Combo. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Churros con Arequipe Personal. Descripcion: Churros Qbano con arequipe, combinación perfecta de crujiente, cremoso y dulce.. Precio reportado: 11.900 COP.
+Producto: Salsa Qbano. Descripcion: Disfruta de un producto fresco, elaborado sin conservantes ni preservantes. • Vida útil: 15 días calendario a partir de la entrega. • Conservación: Mantener siempre refrigerado (2°C a 5°C). • Consumo: Una vez abierto, consumirlo en el menor tiempo posible y antes de la fecha de vencimiento. Evita exponerlo a temperatura ambiente.. Precio reportado: 15.900 COP.
 Producto: Combo Para Dos. Descripcion: 2 sándwiches de 17cm aprox, 2 papas pequeñas y 2 limonadas de 16oz.. Precio reportado: 44.600 COP.
 Producto: Sándwich Qumbia Combo. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Combo Mix opc 1. Descripcion: 1 sándwich Especial personal 21 cm + 1 sándwich Ropa Vieja o Pollo personal 21 cm+ 2 limonadas de 16 oz o 2 gaseosas 250 ml + 2 papas pequeñas. Precio reportado: 46.900 COP.
@@ -705,27 +757,25 @@ Producto: Promo de la Casa. Descripcion: 1 sándwich especial o hawaiano (21cm) 
 Producto: Limonada Natural Grande. Descripcion: Refrescante, natural y deliciosa para acompañar tu Qbano favorito. Precio reportado: 8.300 COP.
 Producto: Limonada Panela Mediana. Descripcion: Refrescante, natural y deliciosa para acompañar tu Qbano favorito. Precio reportado: 7.300 COP.
 Producto: Limonada Cero Mediana. Descripcion: Refrescante, natural y deliciosa para acompañar tu Qbano favorito. Precio reportado: 7.300 COP.
+Producto: Coca Cola 600ml. Descripcion: Deliciosa y refrescante. Precio reportado: 7.300 COP.
 Producto: Agua Manantial Sin Gas. Descripcion: Deliciosa y refrescante. Precio reportado: 6.300 COP.
 Producto: Quatro 400ml. Descripcion: Deliciosa y refrescante. Precio reportado: 6.300 COP.
-Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
 Producto: Sándwich Costilla Combo. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 35.900 COP.
 Producto: Sándwich Cordero Combo. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 32.900 COP.
-Producto: Sándwich Hawaiano Combo. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
 Producto: Sándwich Pollo Combo. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzarella, Lechuga, y Mayonesa.. Precio reportado: 32.900 COP.
 Producto: Sándwich Súper Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 30.900 COP.
 Producto: Sándwich Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 27.900 COP.
-Producto: Promo Hawaiano. Descripcion: 1 Sandwich personal Hawaiano de 21 cm + 1 limonada de 16 oz. Precio reportado: 20.900 COP.
+Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
 Producto: Sandwich Pollo BBQ. Descripcion: 1 Sandwich Personal De 21cm Pollo BBQ + 1 Papas Pequeñas + bebida 250ml. Precio reportado: 23.900 COP.
-Producto: Salsa Qbano. Descripcion: Salsa Qbano 200 gr. Precio reportado: 15.900 COP.
-Producto: Coca Cola 600ml. Descripcion: Deliciosa y refrescante. Precio reportado: 7.300 COP.
 Producto: Sprite 400ml. Descripcion: Deliciosa y refrescante. Precio reportado: 6.300 COP.
+Producto: Sándwich al Pastor Combo. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 35.900 COP.
 Producto: Sándwich Burguer Combo. Descripcion: Pan Francés, Carne Hamburguesa de Res y Cerdo, Queso Mozzarella, Tocineta, Lechuga Batavia, Tomate, Pepinillos, Salsa BBQ, Salsa Qbano.. Precio reportado: 32.900 COP.
 Producto: Sándwich Roast Beef Combo. Descripcion: Pan Francés, Roast Beef, Tomate, Queso Mozzarella, Lechuga, Salsa BBQ y Salsa Qbano.. Precio reportado: 35.900 COP.
+Producto: Sándwich Hawaiano Combo. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 30.900 COP.
 Producto: Sándwich Ropa Vieja Individual. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Sándwich Pollo Individual. Descripcion: Pan Francés, Pechuga de Pollo Desmechada, Tomate, Queso Mozzrella, Lechuga, y Mayonesa.. Precio reportado: 26.600 COP.
 Producto: Sándwich Súper Especial Individual. Descripcion: Mix de jamones (res y cerdo), tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 25.600 COP.
-Producto: Sándwich Especial Individual. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 20.900 COP.
-Producto: Promo Dulce Especial. Descripcion: 1 Sandwich personal Especial de 21 cm + 1 limonada de 16 oz + 1 churros personales. Precio reportado: 30.900 COP.
+Producto: Promo Familiar. Descripcion: (1) Sándwich Pollo BBQ personal (21cms aproximadamente) con (1) una porción de papas pequeñas y (1) una limonada 16oz+ (1) Sándwich Especial personal (21cms aproximadamente) + (1) un sándwich hawaiano (21cms aproximadamente) + (2) dos porciones de papas pequeñas + (2) dos limonadas 16oz + (1) un paquete de Churros personales por$79.900. Precio reportado: 79.900 COP.
 Producto: Combo Mix + Churros. Descripcion: (1) un sándwich personal especial de 21cm aproximadamente, (1) un sándwich personal ropa vieja o pollo de 21cm aproximadamente (2) dos porciones de papas pequeñas, (2) dos gaseosas 250ml y (1) una porción de churros personal con arequipe. Precio reportado: 58.800 COP.
 Producto: Churros con Arequipe Agrandado. Descripcion: Churros Qbano con arequipe, combinación perfecta de crujiente, cremoso y dulce.. Precio reportado: 14.900 COP.
 Producto: Sándwich Qumbia Individual. Descripcion: Pan Frances, Carne de res Desmechada, Hogo, Maduro, Chorizo de Cerdo, Maiz Tierno y Salsa Qbano.. Precio reportado: 29.600 COP.
@@ -735,12 +785,13 @@ Producto: Combo Qbowl Criollo. Descripcion: Arroz, Cilantro, Guacamole, Cebolla 
 Producto: Limonada Panela Grande. Descripcion: Refrescante, natural y deliciosa para acompañar tu Qbano favorito. Precio reportado: 8.300 COP.
 Producto: Coca Cola 600ml Zero. Descripcion: Deliciosa y refrescante. Precio reportado: 7.300 COP.
 Producto: Yuca. Descripcion: Crocantes y deliciosas yuquitas para llevar en tu combo favorito. Precio reportado: 9.300 COP.
+Producto: Sándwich al Pastor Individual. Descripcion: Pan Francés, Carne Costilla de Cerdo, Lechuga Batavia, Hogo, Pasta Tomate, Piña Calada Asada, Pico de Gallo (Cebolla Blanca, Cilantro, Tomate).. Precio reportado: 29.600 COP.
 Producto: Sándwich Pavo Individual. Descripcion: Pan Francés, Pechuga de Pavo, Tocineta, Queso Mozzarella, Lechuga, Salsa Qbano y Miel Mostaza.. Precio reportado: 32.600 COP.
 Producto: Sándwich Costilla Individual. Descripcion: Pan Francés, Costilla de Cerdo, Salsa BBQ, Maiz Tierno, Queso Mozzarella, Lechuga y Salsa Qbano.. Precio reportado: 29.600 COP.
 Producto: Sándwich Cordero Individual. Descripcion: Lonchas de cerdo con cordero*, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: 26.600 COP.
 Producto: Sándwich Hawaiano Individual. Descripcion: Lonchas de Cerdo con pollo**, piña calada, queso mozzarella y mayonesa.. Precio reportado: 25.600 COP.
-Producto: Combo Hamburguesa Hawaiana. Descripcion: Deliciosa Hamburguesa hawaiana con 125 g de carne, piña calada, tocineta, tomate, cebolla y queso con papas medianas y gaseosa 400ml. Precio reportado: 34.600 COP.
-Productos visibles en la pagina: Papa, Limonada Natural Mediana, Coca Cola 400ml, Agua Saborizada, Coca Cola 400ml Zero, Sándwich Ropa Vieja Combo, Churros con Arequipe Personal, Combo Para Dos, Sándwich Qumbia Combo, Combo Mix opc 1, Promo de la Casa, Limonada Natural Grande, Limonada Panela Mediana, Limonada Cero Mediana, Agua Manantial Sin Gas, Quatro 400ml, Sándwich al Pastor Combo, Sándwich Costilla Combo, Sándwich Cordero Combo, Sándwich Hawaiano Combo, Sándwich Pollo Combo, Sándwich Súper Especial Combo, Sándwich Especial Combo, Promo Hawaiano, Sandwich Pollo BBQ, Salsa Qbano, Coca Cola 600ml, Sprite 400ml, Sándwich Burguer Combo, Sándwich Roast Beef Combo, Sándwich Ropa Vieja Individual, Sándwich Pollo Individual, Sándwich Súper Especial Individual, Sándwich Especial Individual, Promo Dulce Especial, Combo Mix + Churros, Churros con Arequipe Agrandado, Sándwich Qumbia Individual, Combo Hamburguesa Tradicional, Combo Ensalada Tropical, Combo Qbowl Criollo, Limonada Panela Grande, Coca Cola 600ml Zero, Yuca, Sándwich Pavo Individual, Sándwich Costilla Individual, Sándwich Cordero Individual, Sándwich Hawaiano Individual, Combo Hamburguesa Hawaiana.
+Producto: Sabado Combo Ropa Vieja Personal. Descripcion: Pan Francés, Carne de Res Desmechada, Queso Amarillo, Lechuga, Tomate, Pimentón, Apio, Mostaza, Salsa BBQ, Pasta de Tomate, Cebolla Roja y Salsa Qbano.. Precio reportado: 35.900 COP.
+Productos visibles en la pagina: Papa, Limonada Natural Mediana, Coca Cola 400ml, Agua Saborizada, Coca Cola 400ml Zero, Sándwich Ropa Vieja Combo, Churros con Arequipe Personal, Salsa Qbano, Combo Para Dos, Sándwich Qumbia Combo, Combo Mix opc 1, Promo de la Casa, Limonada Natural Grande, Limonada Panela Mediana, Limonada Cero Mediana, Coca Cola 600ml, Agua Manantial Sin Gas, Quatro 400ml, Sándwich Costilla Combo, Sándwich Cordero Combo, Sándwich Pollo Combo, Sándwich Súper Especial Combo, Sándwich Especial Combo, Sándwich Especial Individual, Sandwich Pollo BBQ, Sprite 400ml, Sándwich al Pastor Combo, Sándwich Burguer Combo, Sándwich Roast Beef Combo, Sándwich Hawaiano Combo, Sándwich Ropa Vieja Individual, Sándwich Pollo Individual, Sándwich Súper Especial Individual, Promo Familiar, Combo Mix + Churros, Churros con Arequipe Agrandado, Sándwich Qumbia Individual, Combo Hamburguesa Tradicional, Combo Ensalada Tropical, Combo Qbowl Criollo, Limonada Panela Grande, Coca Cola 600ml Zero, Yuca, Sándwich al Pastor Individual, Sándwich Pavo Individual, Sándwich Costilla Individual, Sándwich Cordero Individual, Sándwich Hawaiano Individual, Sabado Combo Ropa Vieja Personal.
 Producto: Churros con Arequipe Personal. Descripcion: Churros Qbano con arequipe, combinación perfecta de crujiente, cremoso y dulce.. Precio reportado: 11.900 COP.
 Producto: Churros con Arequipe Agrandado. Descripcion: Churros Qbano con arequipe, combinación perfecta de crujiente, cremoso y dulce.. Precio reportado: 14.900 COP.
 Producto: Combo Mix + Churros. Descripcion: (1) un sándwich personal especial de 21cm aproximadamente, (1) un sándwich personal ropa vieja o pollo de 21cm aproximadamente (2) dos porciones de papas pequeñas, (2) dos gaseosas 250ml y (1) una porción de churros personal con arequipe. Precio reportado: 58.800 COP.
@@ -749,7 +800,7 @@ Churros con Arequipe Personal
 Promo de la casa a $23.900
 Churros con Arequipe Agrandado
 
-Fuente 24
+Fuente 25
 Titulo: Sándwich Especial - Sandwich Qbano- Haz tu pedido online
 URL: https://www.sandwichqbano.com/sandwich-especial/p
 Descripcion: Sándwich Especial
@@ -768,24 +819,4 @@ Producto: Combo Qbowl Costilla. Descripcion: Arroz, Cilantro, Guacamole, Cebolla
 Productos visibles en la pagina: Qbowl Criollo, Qbowl Pollo, Qbowl Costilla, Qbowl Vegetariano, Combo Qbowl Criollo.
 Promo de la casa a $23.900
 Sándwich Especial Individual
-Que tal un antojo adicional
-
-Fuente 25
-Titulo: Sandwich Burger - Sandwich Qbano- Haz tu pedido online
-URL: https://www.sandwichqbano.com/sandwich-burger/p
-Descripcion: Sandwich Burger
-Contenido:
-Producto: Sandwich Burger. Descripcion: Sandwich Burger. Precio reportado: desde 26.600 COP hasta 37.600 COP.
-Producto: Qbowl Criollo. Descripcion: Arroz, Cilantro, Guacamole, Cebolla Blanca, Tomate, Carne de Res Desmechada, Hogo, Chorizo, Frijol.. Precio reportado: 29.900 COP.
-Producto: Qbowl Pollo. Descripcion: Arroz, Cilantro, Guacamole, Cebolla Blanca, Tomate, Pechuga de Pollo Desmechada, Hogo, Maiz.. Precio reportado: 29.900 COP.
-Producto: Qbowl Costilla. Descripcion: Arroz, Cilantro, Guacamole, Cebolla Blanca, Tomate, Carne de Costilla Desmechada, Piña Calada.. Precio reportado: 29.900 COP.
-Producto: Qbowl Vegetariano. Descripcion: Arroz, Cilantro, Guacamole, Cebolla Blanca, Tomate, Champiñones, Maiz, Cebolla Roja.. Precio reportado: 29.900 COP.
-Producto: Combo Qbowl Criollo. Descripcion: Arroz, Cilantro, Guacamole, Cebolla Blanca, Tomate, Carne de Res Desmechada, Hogo, Chorizo, Frijol. Precio reportado: 36.900 COP.
-Producto: Sándwich Súper Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, salchichón, tomate, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: desde 30.900 COP hasta 41.900 COP.
-Producto: Combo Qbowl Pollo. Descripcion: Arroz, Cilantro, Guacamole, Cebolla Blanca, Tomate, Pechuga de Pollo Desmechada, Hogo, Maiz.. Precio reportado: 36.900 COP.
-Producto: Qbanito Jamón y Queso. Descripcion: lonchas de cerdo con pollo** y queso + papa pequeña + coca cola 250ml o jugo cajita + obsequio. Precio reportado: 22.900 COP.
-Producto: Sándwich Especial Combo. Descripcion: Lonchas de Cerdo con pollo**, jamonada mixta, Lonchas de cerdo, cordero y res***, queso mozzarella, lechuga batavia y salsa Qbano.. Precio reportado: desde 27.900 COP hasta 37.900 COP.
-Producto: Combo Qbowl Costilla. Descripcion: Arroz, Cilantro, Guacamole, Cebolla Blanca, Tomate, Carne de Costilla Desmechada, Piña Calada.. Precio reportado: 36.900 COP.
-Productos visibles en la pagina: Qbowl Criollo, Qbowl Pollo, Qbowl Costilla, Qbowl Vegetariano, Combo Qbowl Criollo.
-Promo de la casa a $23.900
 Que tal un antojo adicional

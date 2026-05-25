@@ -37,6 +37,8 @@ class PathConfig:
     knowledge_base_path: Path
     chunks_path: Path
     source_index_path: Path
+    vector_index_path: Path
+    structured_data_path: Path
     build_state_path: Path
     batch_results_path: Path
 
@@ -45,6 +47,8 @@ class PathConfig:
             self.company_config_path.parent,
             self.raw_documents_path.parent,
             self.knowledge_base_path.parent,
+            self.vector_index_path.parent,
+            self.structured_data_path.parent,
             self.build_state_path.parent,
             self.batch_results_path.parent,
         ):
@@ -143,6 +147,8 @@ def build_app_config(company_config_path: Path | None = None) -> AppConfig:
         knowledge_base_path=base_dir / "data" / "processed" / "knowledge_base.txt",
         chunks_path=base_dir / "data" / "processed" / "chunks.json",
         source_index_path=base_dir / "data" / "processed" / "source_index.md",
+        vector_index_path=base_dir / "data" / "vector" / "vector_index.json",
+        structured_data_path=base_dir / "data" / "structured" / "company_structured_data.json",
         build_state_path=base_dir / "data" / "processed" / "build_state.json",
         batch_results_path=base_dir / "results" / "test_results.csv",
     )

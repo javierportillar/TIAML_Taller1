@@ -47,11 +47,17 @@ def _watched_local_files(config: AppConfig) -> list[Path]:
     base_dir = config.paths.base_dir
     return [
         config.paths.company_config_path,
+        config.paths.structured_data_path,
         base_dir / "data" / "config" / "prompts_config.json",
+        base_dir / "src" / "agent.py",
+        base_dir / "src" / "config.py",
+        base_dir / "src" / "memory.py",
         base_dir / "src" / "prompts.py",
         base_dir / "src" / "chains.py",
         base_dir / "src" / "scraper.py",
         base_dir / "src" / "processing.py",
+        base_dir / "src" / "structured_tool.py",
+        base_dir / "src" / "vector_store.py",
         base_dir / "app.py",
     ]
 
@@ -77,11 +83,13 @@ def load_local_state(path: Path) -> dict[str, object]:
 
 
 def detect_local_state_changes(config: AppConfig) -> tuple[bool, list[str], dict[str, object]]:
+    chroma_persist_dir = config.paths.vector_index_path.with_name("chroma")
     required_outputs = [
         config.paths.raw_documents_path,
         config.paths.knowledge_base_path,
         config.paths.chunks_path,
         config.paths.source_index_path,
+        chroma_persist_dir,
     ]
     missing_outputs = [path.name for path in required_outputs if not path.exists()]
 
