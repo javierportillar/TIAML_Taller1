@@ -4,6 +4,8 @@ import json
 import re
 from pathlib import Path
 
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 from .config import PathConfig
 from .scraper import ScrapedDocument
 from .vector_store import build_vector_index
@@ -124,70 +126,42 @@ def build_knowledge_base(company_name: str, documents: list[ScrapedDocument]) ->
     return normalize_text("\n\n".join(sections))
 
 
-def _chunk_paragraphs(paragraphs: list[str], chunk_size: int, overlap: int) -> list[str]:
-    chunks: list[str] = []
-    current: list[str] = []
-    current_length = 0
-
-    def build_overlap(source: list[str]) -> list[str]:
-        if overlap <= 0 or not source:
-            return []
-
-        selected: list[str] = []
-        total = 0
-        for paragraph in reversed(source):
-            paragraph_length = len(paragraph)
-            if selected and total + paragraph_length > overlap:
-                break
-            selected.insert(0, paragraph)
-            total += paragraph_length
-            if total >= overlap:
-                break
-        return selected
-
-    for paragraph in paragraphs:
-        paragraph = paragraph.strip()
-        if not paragraph:
-            continue
-
-        paragraph_length = len(paragraph)
-        if current and current_length + paragraph_length > chunk_size:
-            chunks.append("\n".join(current).strip())
-
-            overlap_paragraphs = build_overlap(current)
-            current = overlap_paragraphs + [paragraph]
-            current_length = len("\n".join(current))
-            continue
-
-        current.append(paragraph)
-        current_length += paragraph_length
-
-    if current:
-        chunks.append("\n".join(current).strip())
-
-    return [chunk for chunk in chunks if chunk]
-
-
 def build_chunks(
     documents: list[ScrapedDocument],
     chunk_size: int = 1400,
     overlap: int = 180,
 ) -> list[dict[str, str | int]]:
     chunks: list[dict[str, str | int]] = []
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=overlap,
+        separators=["\n\n", "\n", ". ", " ", ""],
+    )
 
     for document_index, document in enumerate(documents, start=1):
-        paragraphs = [item.strip() for item in document.text.split("\n") if item.strip()]
-        for chunk_index, chunk in enumerate(
-            _chunk_paragraphs(paragraphs, chunk_size=chunk_size, overlap=overlap),
-            start=1,
-        ):
-            chunks.append(
+        split_documents = splitter.create_documents(
+            [normalize_text(document.text)],
+            metadatas=[
                 {
-                    "id": f"doc-{document_index}-chunk-{chunk_index}",
                     "title": document.title,
                     "url": document.url,
-                    "content": chunk,
-                    "char_count": len(chunk),
+                }
+            ],
+        )
+        for chunk_index, split_document in enumerate(split_documents, start=1):
+            content = split_document.page_content.strip()
+            if not content:
+                continue
+            chunk_id = f"doc-{document_index}-chunk-{chunk_index}"
+            metadata = dict(split_document.metadata or {})
+            metadata["id"] = chunk_id
+            chunks.append(
+                {
+                    "id": str(metadata["id"]),
+                    "title": str(metadata.get("title", document.title)),
+                    "url": str(metadata.get("url", document.url)),
+                    "content": content,
+                    "char_count": len(content),
                 }
             )
 

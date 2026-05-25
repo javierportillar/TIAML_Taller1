@@ -57,8 +57,8 @@
     "src/processing.py": {
       "path": "src/processing.py",
       "exists": true,
-      "size": 8963,
-      "sha256": "acaef66b247ec0524cbe440da47e60f9423bec4272f05cefbf916076ca8b98fe"
+      "size": 8265,
+      "sha256": "36de8b5025f06fbbd968564aa441182ccd79d4079decb9a55e242bda958c63e1"
     },
     "src/structured_tool.py": {
       "path": "src/structured_tool.py",
@@ -79,12 +79,12 @@
       "sha256": "d96ff5291b5ee16b4b9a35cf29ccc41cf74b52fb1b01b608d86eebba0b5db474"
     }
   },
-  "generated_at": "2026-05-16T20:06:30.968733+00:00",
+  "generated_at": "2026-05-25T22:35:39.957045+00:00",
   "stats": {
     "documents": 25,
-    "knowledge_chars": 195111,
-    "chunks": 176,
-    "vectors": 176,
+    "knowledge_chars": 199250,
+    "chunks": 185,
+    "vectors": 185,
     "vector_dimensions": 384
   },
   "max_pages": 25

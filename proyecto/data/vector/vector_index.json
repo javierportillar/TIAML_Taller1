@@ -4,6 +4,6 @@
   "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
   "collection_name": "qbano_kb",
   "dimensions": 384,
-  "vectors": 176,
+  "vectors": 185,
   "persist_directory": "/Users/javierportillarosero/Documents/Maestria/3_er Semestre/TÉCNICAS DE IA APLICADAS EN MODELOS DE LENGUAJE /taller1/proyecto/data/vector/chroma"
 }

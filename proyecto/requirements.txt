@@ -6,6 +6,7 @@ langchain-google-genai>=2.0
 langchain-huggingface>=0.1
 langchain-ollama>=0.2
 langchain-openai>=0.2
+langchain-text-splitters>=0.3
 lxml>=5.2
 pandas>=2.2
 pypdf>=5.0
