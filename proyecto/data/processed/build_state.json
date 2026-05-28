@@ -17,78 +17,12 @@
       "exists": true,
       "size": 6155,
       "sha256": "f7177722624c51486ebe6b5e02f2c67cac855a6fd9e9ef878f9c06ec54b8e6de"
-    },
-    "src/agent.py": {
-      "path": "src/agent.py",
-      "exists": true,
-      "size": 16959,
-      "sha256": "a689cf66c7a960c233978cedc9738f966a0c96fa7272b3b663a1574d3e821b0b"
-    },
-    "src/config.py": {
-      "path": "src/config.py",
-      "exists": true,
-      "size": 5227,
-      "sha256": "413dd055267bab1897a3ae63004cee0884aa521decdd92ac7390bf0a9356abd9"
-    },
-    "src/memory.py": {
-      "path": "src/memory.py",
-      "exists": true,
-      "size": 2139,
-      "sha256": "6889db02c5d791bdcbb417e7f33b69909cb9454b4bc769b0dad0e6ece9886dbc"
-    },
-    "src/prompts.py": {
-      "path": "src/prompts.py",
-      "exists": true,
-      "size": 7331,
-      "sha256": "73e59bd07c27d36b76746993206b466b8dd22429a08ebc4f05d6a3339900ae6e"
-    },
-    "src/chains.py": {
-      "path": "src/chains.py",
-      "exists": true,
-      "size": 49382,
-      "sha256": "f82eeea3c1be5fbebff21eea2c1ba6010bf755fe87443a3eb6761ef407e35371"
-    },
-    "src/scraper.py": {
-      "path": "src/scraper.py",
-      "exists": true,
-      "size": 17893,
-      "sha256": "2bc9fdfc9a89919554a3d1f376fe7cda6d11e07b9059f374da178aa5b4926bae"
-    },
-    "src/processing.py": {
-      "path": "src/processing.py",
-      "exists": true,
-      "size": 8265,
-      "sha256": "36de8b5025f06fbbd968564aa441182ccd79d4079decb9a55e242bda958c63e1"
-    },
-    "src/structured_tool.py": {
-      "path": "src/structured_tool.py",
-      "exists": true,
-      "size": 8164,
-      "sha256": "22620b84bd053582c7e6a0e70173abdb14a913584748b39baacc1b829e283175"
-    },
-    "src/tools.py": {
-      "path": "src/tools.py",
-      "exists": true,
-      "size": 8656,
-      "sha256": "3f4c8648cd5524401e43e48475316d934596c0f08128ebee8270d116ed9a293e"
-    },
-    "src/vector_store.py": {
-      "path": "src/vector_store.py",
-      "exists": true,
-      "size": 7673,
-      "sha256": "e7f8a7b2320243edd093a86c39a5585c6d3a52ce61b0d93c61c120c647d8dee1"
-    },
-    "app.py": {
-      "path": "app.py",
-      "exists": true,
-      "size": 20251,
-      "sha256": "11d201a4f60955aaba7c36fdf1a8f00dfc723464c7b2b4d69beef60fd2ca0475"
     }
   },
-  "generated_at": "2026-05-25T23:03:26.972589+00:00",
+  "generated_at": "2026-05-27T21:37:58.924549+00:00",
   "stats": {
     "documents": 25,
-    "knowledge_chars": 199250,
+    "knowledge_chars": 199533,
     "chunks": 185,
     "vectors": 185,
     "vector_dimensions": 384

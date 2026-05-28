@@ -44,22 +44,19 @@ def _fingerprint_file(base_dir: Path, path: Path) -> dict[str, str | int | bool]
 
 
 def _watched_local_files(config: AppConfig) -> list[Path]:
+    """Archivos cuyo cambio justifica reconstruir scraping + chunks + indice vectorial.
+
+    Solo vigilamos archivos de DATOS (URLs, prompts editables, datos estructurados).
+    Los .py se quedan fuera intencionalmente: editar codigo no debe disparar un
+    re-scraping; Streamlit ya hace hot-reload del codigo y un rebuild de Chroma
+    en vivo causa conflictos de lock SQLite (`code: 1032 readonly database`).
+    """
+
     base_dir = config.paths.base_dir
     return [
         config.paths.company_config_path,
         config.paths.structured_data_path,
         base_dir / "data" / "config" / "prompts_config.json",
-        base_dir / "src" / "agent.py",
-        base_dir / "src" / "config.py",
-        base_dir / "src" / "memory.py",
-        base_dir / "src" / "prompts.py",
-        base_dir / "src" / "chains.py",
-        base_dir / "src" / "scraper.py",
-        base_dir / "src" / "processing.py",
-        base_dir / "src" / "structured_tool.py",
-        base_dir / "src" / "tools.py",
-        base_dir / "src" / "vector_store.py",
-        base_dir / "app.py",
     ]
 
 

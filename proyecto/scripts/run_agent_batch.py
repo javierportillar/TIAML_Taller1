@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 import sys
+from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -26,6 +27,7 @@ def main() -> None:
         temperature=config.runtime.temperature,
     )
 
+    batch_thread_id = f"batch_agent_test_{uuid4().hex}"
     chat_history: list[dict[str, str]] = []
     rows: list[dict[str, str]] = []
     with questions_path.open(encoding="utf-8", newline="") as file:
@@ -42,6 +44,9 @@ def main() -> None:
                 max_context_chars=config.runtime.max_context_chars,
                 structured_data_path=config.paths.structured_data_path,
                 vector_index_path=config.paths.vector_index_path,
+                thread_id=batch_thread_id,
+                llm_provider=config.runtime.provider,
+                llm_model=config.runtime.model_name,
             )
             chat_history.append({"role": "user", "content": question})
             chat_history.append({"role": "assistant", "content": result.answer})
@@ -68,4 +73,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

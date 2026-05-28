@@ -34,8 +34,8 @@ _PROVIDER_ALIASES: dict[str, str] = {
 # Modelos por defecto cuando MODEL_NAME no esta en .env.
 _DEFAULT_MODELS: dict[str, str] = {
     "openai": "gpt-4o-mini",
-    "ollama": "gemma4:latest",
-    "google_genai": "gemini-2.0-flash",
+    "ollama": "gemma3:latest",
+    "google_genai": "gemini-2.5-flash",
 }
 
 
@@ -62,16 +62,18 @@ def _ensure_provider_credentials(provider: str) -> None:
         )
 
     if provider == "google_genai":
-        # Google permite tanto GOOGLE_API_KEY como GEMINI_API_KEY; aceptamos cualquiera.
-        key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
-        if not key:
+        # Si el usuario definio GEMINI_API_KEY en el .env, tiene prioridad absoluta sobre
+        # cualquier GOOGLE_API_KEY que pudiera estar exportada en el shell (p.ej. una key
+        # vieja en ~/.zshrc). Esto evita el escenario donde el SDK usa una key invalida.
+        gemini_key = os.getenv("GEMINI_API_KEY")
+        google_key = os.getenv("GOOGLE_API_KEY")
+        if gemini_key:
+            os.environ["GOOGLE_API_KEY"] = gemini_key
+        elif not google_key:
             raise RuntimeError(
                 "Para usar Gemini configura GEMINI_API_KEY (o GOOGLE_API_KEY) en .env. "
                 "Obten una gratis en https://aistudio.google.com/apikey"
             )
-        # init_chat_model espera GOOGLE_API_KEY; si solo hay GEMINI_API_KEY, la copiamos.
-        if not os.getenv("GOOGLE_API_KEY"):
-            os.environ["GOOGLE_API_KEY"] = key
 
 
 def create_chat_model(provider: str, model_name: str, temperature: float = 0.1):

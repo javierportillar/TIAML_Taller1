@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -8,14 +9,54 @@ import streamlit as st
 
 from src.agent import run_agent
 from src.chains import answer_question, generate_faq, generate_summary
+from src.checkpointer import clear_thread_messages, load_thread_messages
 from src.config import build_app_config
-from src.llm import create_chat_model
+from src.llm import create_chat_model, describe_active_provider
 from src.processing import load_chunks, load_knowledge_base
 from src.vector_store import load_vector_index
 from src.project_state import detect_local_state_changes, rebuild_processed_state
 from src.prompts import DEFAULT_PROMPTS, load_prompt_config, save_prompt_config
 
-st.set_page_config(page_title="Taller 2 - Agente Conversacional", layout="wide")
+STREAMLIT_THREAD_ID = "streamlit_local"
+
+PROVIDER_OPTIONS = ["ollama", "google_genai", "openai"]
+PROVIDER_LABELS = {
+    "ollama": "Ollama (local)",
+    "google_genai": "Google Gemini",
+    "openai": "OpenAI",
+}
+PROVIDER_DEFAULT_MODEL = {
+    "ollama": "gemma3:latest",
+    "google_genai": "gemini-2.5-flash",
+    "openai": "gpt-4o-mini",
+}
+
+
+def _on_provider_change() -> None:
+    """Cuando el usuario cambia el proveedor en el sidebar, sugerimos su modelo por defecto."""
+    selected = st.session_state.get("provider_param", "")
+    suggested = PROVIDER_DEFAULT_MODEL.get(selected)
+    if suggested:
+        st.session_state.model_name_param = suggested
+
+
+def _check_provider_credentials(provider: str) -> tuple[bool, str]:
+    """Verifica que existan credenciales validas para el proveedor seleccionado."""
+    if provider == "google_genai":
+        key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+        if not key:
+            return False, (
+                "Falta `GEMINI_API_KEY` en `.env`. Obten una gratis en "
+                "https://aistudio.google.com/apikey y reinicia Streamlit."
+            )
+    if provider == "openai" and not os.getenv("OPENAI_API_KEY"):
+        return False, "Falta `OPENAI_API_KEY` en `.env`. Configurala y reinicia Streamlit."
+    if provider == "ollama" and not os.getenv("OLLAMA_BASE_URL"):
+        # Ollama puede usar default, no es bloqueante
+        return True, ""
+    return True, ""
+
+st.set_page_config(page_title="Taller 3 - Agente Conversacional", layout="wide")
 
 st.markdown(
     """
@@ -97,10 +138,20 @@ def _init_session_state(config) -> None:
         "agent_events": [],
         "temperature_param": float(config.runtime.temperature),
         "max_context_chars_param": int(config.runtime.max_context_chars),
+        "provider_param": config.runtime.provider,
+        "model_name_param": config.runtime.model_name,
     }
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
+    if not st.session_state.agent_messages:
+        try:
+            persisted_messages = load_thread_messages(STREAMLIT_THREAD_ID)
+        except Exception:
+            persisted_messages = []
+        if persisted_messages:
+            st.session_state.agent_messages = persisted_messages
+            st.session_state.agent_events = [{} for _ in persisted_messages]
 
 
 def _reset_generated_outputs() -> None:
@@ -129,6 +180,53 @@ if st.session_state.runtime_signature != runtime_signature:
     st.session_state.runtime_signature = runtime_signature
     st.session_state.temperature_param = float(config.runtime.temperature)
     st.session_state.max_context_chars_param = int(config.runtime.max_context_chars)
+    # Resincronizar el selector con los valores del .env solo al detectar cambios externos.
+    if config.runtime.provider in PROVIDER_OPTIONS:
+        st.session_state.provider_param = config.runtime.provider
+    st.session_state.model_name_param = config.runtime.model_name
+
+# Si el provider guardado en sesion no esta en la lista (por ejemplo, valor raro de .env), lo normalizamos.
+if st.session_state.provider_param not in PROVIDER_OPTIONS:
+    st.session_state.provider_param = PROVIDER_OPTIONS[0]
+
+# ---------------------------------------------------------------------------
+# Sidebar: selector multi-LLM (Taller 3, cierre del pendiente del Taller 2)
+# ---------------------------------------------------------------------------
+with st.sidebar:
+    st.header("Modelo LLM activo")
+    st.caption(
+        "Cambia de proveedor y modelo sin reiniciar Streamlit. "
+        "Las API keys siguen leyendose desde `.env` por seguridad."
+    )
+    st.selectbox(
+        "Proveedor",
+        options=PROVIDER_OPTIONS,
+        format_func=lambda value: PROVIDER_LABELS.get(value, value),
+        key="provider_param",
+        on_change=_on_provider_change,
+    )
+    st.text_input(
+        "Modelo",
+        key="model_name_param",
+        help=(
+            "Sugerencias: `gemma3:latest` para Ollama, `gemini-2.5-flash` para Gemini, "
+            "`gpt-4o-mini` para OpenAI."
+        ),
+    )
+    st.slider(
+        "Temperatura",
+        min_value=0.0,
+        max_value=1.0,
+        step=0.05,
+        key="temperature_param",
+    )
+    creds_ok, creds_msg = _check_provider_credentials(st.session_state.provider_param)
+    if not creds_ok:
+        st.error(creds_msg)
+    else:
+        st.success(
+            f"Activo: {describe_active_provider(st.session_state.provider_param, st.session_state.model_name_param)}"
+        )
 
 rebuild_required, changed_files, _ = detect_local_state_changes(config)
 if rebuild_required:
@@ -156,8 +254,8 @@ if st.session_state.config_save_notice:
     st.success(st.session_state.config_save_notice)
     st.session_state.config_save_notice = ""
 
-provider = config.runtime.provider
-model_name = config.runtime.model_name
+provider = st.session_state.provider_param
+model_name = (st.session_state.model_name_param or "").strip() or PROVIDER_DEFAULT_MODEL.get(provider, "")
 temperature = float(st.session_state.temperature_param)
 max_context_chars = int(st.session_state.max_context_chars_param)
 
@@ -210,6 +308,10 @@ with agent_tab:
         if st.button("Limpiar conversacion", use_container_width=True):
             st.session_state.agent_messages = []
             st.session_state.agent_events = []
+            try:
+                clear_thread_messages(STREAMLIT_THREAD_ID)
+            except Exception:
+                pass
             st.rerun()
         st.markdown("**Herramientas disponibles**")
         st.write("- `memory`: seguimiento por historial")
@@ -262,6 +364,9 @@ with agent_tab:
                     max_context_chars=max_context_chars,
                     structured_data_path=config.paths.structured_data_path,
                     vector_index_path=config.paths.vector_index_path,
+                    thread_id=STREAMLIT_THREAD_ID,
+                    llm_provider=provider,
+                    llm_model=model_name,
                 )
                 st.session_state.agent_messages.append(
                     {"role": "assistant", "content": result.answer}
@@ -387,15 +492,8 @@ with config_tab:
 
     st.markdown("#### Parametros de ejecucion")
     st.caption(
-        "Estos valores controlan como el modelo genera respuestas durante esta sesion. "
-        "No obligan a hacer scraping porque no cambian las fuentes."
-    )
-    st.slider(
-        "Temperatura",
-        min_value=0.0,
-        max_value=1.0,
-        step=0.05,
-        key="temperature_param",
+        "El proveedor, modelo y la temperatura ahora se controlan desde el sidebar izquierdo "
+        "(seccion 'Modelo LLM activo'). Aqui solo configuras el limite de contexto y las fuentes."
     )
     st.number_input(
         "Maximo de caracteres de contexto",
@@ -405,9 +503,14 @@ with config_tab:
         key="max_context_chars_param",
     )
     with st.expander("Configuracion tecnica", expanded=False):
-        st.write(f"Proveedor: `{config.runtime.provider}`")
-        st.write(f"Modelo: `{config.runtime.model_name}`")
-        st.write("Proveedor, modelo y valores iniciales se leen desde `.env`.")
+        st.write(f"Proveedor activo: `{provider}`")
+        st.write(f"Modelo activo: `{model_name}`")
+        st.write(f"Proveedor inicial (.env): `{config.runtime.provider}`")
+        st.write(f"Modelo inicial (.env): `{config.runtime.model_name}`")
+        st.caption(
+            "Usa el sidebar para cambiar proveedor / modelo en caliente. "
+            "Las API keys (`GEMINI_API_KEY`, `OPENAI_API_KEY`) se siguen leyendo desde `.env`."
+        )
 
     with st.form("company_profile_form"):
         st.markdown("#### Empresa y fuentes")

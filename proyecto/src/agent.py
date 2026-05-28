@@ -8,7 +8,13 @@ from typing import Any
 from langchain.agents import create_agent
 
 from .chains import QAResult, answer_question
-from .memory import answer_follow_up_from_memory, format_chat_history
+from .checkpointer import get_checkpointer, load_thread_messages, save_thread_turn
+from .memory import (
+    acknowledge_personal_declaration,
+    answer_follow_up_from_memory,
+    answer_personal_question_from_memory,
+    format_chat_history,
+)
 from .prompts import load_prompt_config
 from .tools import ToolRuntimeContext, build_agent_tools, decode_tool_payload
 
@@ -557,6 +563,48 @@ def _agent_result_from_payload(payload: dict[str, Any]) -> AgentResult:
     )
 
 
+def _load_effective_chat_history(
+    thread_id: str,
+    chat_history: list[dict[str, str]],
+) -> list[dict[str, str]]:
+    if chat_history:
+        return chat_history
+    try:
+        return load_thread_messages(thread_id)
+    except Exception:
+        return []
+
+
+def _save_result_for_thread(
+    *,
+    thread_id: str,
+    question: str,
+    result: AgentResult,
+    llm_provider: str | None = None,
+    llm_model: str | None = None,
+) -> AgentResult:
+    try:
+        save_thread_turn(
+            thread_id=thread_id,
+            question=question,
+            answer=result.answer,
+            route=result.route,
+            context_mode=result.context_mode,
+            llm_provider=llm_provider,
+            llm_model=llm_model,
+        )
+    except Exception:
+        pass
+    return result
+
+
+def _get_agent_checkpointer():
+    try:
+        return get_checkpointer()
+    except Exception:
+        return None
+
+
 def run_agent(
     *,
     model,
@@ -568,29 +616,89 @@ def run_agent(
     max_context_chars: int,
     structured_data_path: Path,
     vector_index_path: Path,
+    thread_id: str = "streamlit_local",
+    llm_provider: str | None = None,
+    llm_model: str | None = None,
 ) -> AgentResult:
+    effective_chat_history = _load_effective_chat_history(thread_id, chat_history)
+
     conversational_answer = _answer_conversational_message(question)
     if conversational_answer:
-        return AgentResult(
+        result = AgentResult(
             answer=conversational_answer,
             route="conversation",
             reasoning="La entrada es conversacional y no requiere consultar la base de conocimiento.",
             context_mode="conversation",
             sources=[],
         )
+        return _save_result_for_thread(
+            thread_id=thread_id,
+            question=question,
+            result=result,
+            llm_provider=llm_provider,
+            llm_model=llm_model,
+        )
 
-    memory_answer = answer_follow_up_from_memory(question, chat_history)
+    memory_answer = answer_follow_up_from_memory(question, effective_chat_history)
     if memory_answer:
-        return AgentResult(
+        result = AgentResult(
             answer=memory_answer,
             route="memory",
             reasoning="La pregunta depende del turno anterior; se resolvio con el historial de conversacion.",
             context_mode="conversation_memory",
             sources=[],
         )
+        return _save_result_for_thread(
+            thread_id=thread_id,
+            question=question,
+            result=result,
+            llm_provider=llm_provider,
+            llm_model=llm_model,
+        )
 
-    effective_question = _rewrite_combo_difference_follow_up(question, chat_history)
-    history_context = format_chat_history(chat_history)
+    # Declaraciones personales del usuario ("Mi papa se llama Francisco", "Yo soy Javier").
+    # Se acusan recibo sin disparar tools ni RAG; el dato queda en el historial.
+    personal_ack = acknowledge_personal_declaration(question)
+    if personal_ack:
+        result = AgentResult(
+            answer=personal_ack,
+            route="conversation",
+            reasoning="Declaracion personal del usuario; se acuso recibo y se preserva en el historial.",
+            context_mode="conversation",
+            sources=[],
+        )
+        return _save_result_for_thread(
+            thread_id=thread_id,
+            question=question,
+            result=result,
+            llm_provider=llm_provider,
+            llm_model=llm_model,
+        )
+
+    # Preguntas sobre informacion personal compartida en turnos previos
+    # ("Como me llamo?", "Como se llama mi papa?", "Que te dije sobre X?").
+    # Se resuelven mirando el historial con el LLM, no consultando RAG ni datos corporativos.
+    personal_memory_answer = answer_personal_question_from_memory(
+        question, effective_chat_history, model
+    )
+    if personal_memory_answer:
+        result = AgentResult(
+            answer=personal_memory_answer,
+            route="memory",
+            reasoning="Pregunta sobre informacion personal del usuario; se respondio con el historial.",
+            context_mode="conversation_memory",
+            sources=[],
+        )
+        return _save_result_for_thread(
+            thread_id=thread_id,
+            question=question,
+            result=result,
+            llm_provider=llm_provider,
+            llm_model=llm_model,
+        )
+
+    effective_question = _rewrite_combo_difference_follow_up(question, effective_chat_history)
+    history_context = format_chat_history(effective_chat_history)
     runtime_context = ToolRuntimeContext(
         model=model,
         company_name=company_name,
@@ -603,12 +711,14 @@ def run_agent(
         conversation_history=history_context,
     )
     tools = build_agent_tools(runtime_context)
+    checkpointer = _get_agent_checkpointer()
 
     try:
         graph = create_agent(
             model=model,
             tools=tools,
             system_prompt=_build_agent_system_prompt(),
+            checkpointer=checkpointer,
         )
         agent_output = graph.invoke(
             {
@@ -618,11 +728,13 @@ def run_agent(
                         "content": _build_agent_user_message(effective_question, history_context),
                     }
                 ]
-            }
+            },
+            config={"configurable": {"thread_id": thread_id}},
         )
         payload = _extract_tool_payload(agent_output)
         if payload:
-            return _agent_result_from_payload(payload)
+            result = _agent_result_from_payload(payload)
+            return _save_result_for_thread(thread_id=thread_id, question=question, result=result, llm_provider=llm_provider, llm_model=llm_model)
     except Exception:
         payload = None
 
@@ -633,7 +745,8 @@ def run_agent(
             f"{payload.get('reasoning', '')} "
             "Se uso como respaldo porque el modelo no completo una invocacion de tool valida."
         ).strip()
-        return _agent_result_from_payload(payload)
+        result = _agent_result_from_payload(payload)
+        return _save_result_for_thread(thread_id=thread_id, question=question, result=result, llm_provider=llm_provider, llm_model=llm_model)
 
     qa_result: QAResult = answer_question(
         model=model,
@@ -645,7 +758,7 @@ def run_agent(
         vector_index_path=vector_index_path,
         conversation_history=history_context,
     )
-    return AgentResult(
+    result = AgentResult(
         answer=qa_result.answer,
         route="consultar_informacion_corporativa",
         reasoning=(
@@ -654,3 +767,4 @@ def run_agent(
         context_mode=qa_result.context_mode,
         sources=qa_result.sources,
     )
+    return _save_result_for_thread(thread_id=thread_id, question=question, result=result, llm_provider=llm_provider, llm_model=llm_model)
