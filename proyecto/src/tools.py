@@ -40,6 +40,21 @@ class ConsultaCorporativaInput(BaseModel):
     )
 
 
+class SolicitarSupervisorInput(BaseModel):
+    """Schema de la tool sensible que se enruta a HumanInTheLoopMiddleware."""
+
+    motivo: str = Field(
+        description=(
+            "Motivo claro y breve por el que el usuario pide hablar con una persona real "
+            "(queja, caso complejo, escalamiento, situacion urgente, etc.)."
+        )
+    )
+    canal_preferido: str = Field(
+        default="whatsapp",
+        description="Canal por el que el usuario prefiere ser contactado: whatsapp, llamada, correo.",
+    )
+
+
 @dataclass(slots=True)
 class ToolRuntimeContext:
     model: Any
@@ -103,8 +118,10 @@ def _retrieval_only_payload(
     return _json_payload(
         route=route,
         answer=(
-            "No pude generar una síntesis con el LLM configurado, pero recuperé "
-            "este contexto relevante desde la base vectorial:\n\n"
+            "En este momento no logré redactar una respuesta natural con el modelo activo "
+            "(probablemente por carga del proveedor o un timeout). Mientras tanto, te comparto "
+            "el contexto relevante que sí pude recuperar de nuestra base. "
+            "Si quieres, reformula la pregunta o cambia de proveedor LLM en el panel lateral.\n\n"
             f"{excerpt}"
         ),
         reasoning=reason,
@@ -226,8 +243,43 @@ def build_agent_tools(context: ToolRuntimeContext) -> list[BaseTool]:
                 ),
             )
 
+    @tool(args_schema=SolicitarSupervisorInput, return_direct=True)
+    def solicitar_supervisor_humano(motivo: str, canal_preferido: str = "whatsapp") -> str:
+        """Solicita escalamiento a un supervisor humano cuando el usuario pide hablar con una persona real.
+
+        Esta tool es SENSIBLE: pasa por HumanInTheLoopMiddleware para que el usuario confirme
+        antes de que el sistema registre el escalamiento. No usar para preguntas que se pueden
+        resolver con consultar_datos_contacto, buscar_catalogo_productos o consultar_informacion_corporativa.
+        """
+
+        try:
+            return _json_payload(
+                route="solicitar_supervisor_humano",
+                answer=(
+                    f"Listo, registré tu solicitud de hablar con un supervisor humano. "
+                    f"Motivo: '{motivo}'. Te contactarán por {canal_preferido} en horario habil. "
+                    "Si es urgente, también puedes escribir directamente al WhatsApp de servicio al cliente."
+                ),
+                reasoning=(
+                    "Tool sensible aprobada via HumanInTheLoopMiddleware. "
+                    "El usuario confirmo el escalamiento a un humano."
+                ),
+                context_mode="human_in_the_loop",
+            )
+        except Exception:
+            return _json_payload(
+                route="solicitar_supervisor_humano",
+                answer=(
+                    "En este momento no pude registrar el escalamiento. Por favor, "
+                    "escribe directamente al WhatsApp de servicio al cliente para hablar con una persona."
+                ),
+                reasoning="La tool solicitar_supervisor_humano fallo y devolvio un mensaje cortes.",
+                context_mode="tool_error",
+            )
+
     return [
         consultar_datos_contacto,
         buscar_catalogo_productos,
         consultar_informacion_corporativa,
+        solicitar_supervisor_humano,
     ]

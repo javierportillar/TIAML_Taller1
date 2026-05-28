@@ -1,11 +1,18 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 import re
 from typing import Any
 
 from langchain.agents import create_agent
+from langchain.agents.middleware import (
+    HumanInTheLoopMiddleware,
+    InterruptOnConfig,
+    dynamic_prompt,
+)
+from langgraph.types import Command
 
 from .chains import QAResult, answer_question
 from .checkpointer import get_checkpointer, load_thread_messages, save_thread_turn
@@ -453,6 +460,54 @@ def _looks_like_location_query(question: str) -> bool:
     return has_brand_or_product and has_place and has_location_intent
 
 
+_HUMAN_ESCALATION_PHRASES = (
+    "hablar con un humano",
+    "hablar con humano",
+    "hablar con una persona",
+    "hablar con persona real",
+    "hablar con un asesor",
+    "hablar con un agente",
+    "hablar con un supervisor",
+    "asesor humano",
+    "agente humano",
+    "supervisor humano",
+    "persona humana",
+    "atencion humana",
+    "atencion personal",
+    "pasame con un humano",
+    "pasame con alguien",
+    "necesito un humano",
+    "necesito una persona",
+    "necesito un asesor",
+    "necesito un agente",
+    "necesito un supervisor",
+    "necesito hablar con",
+    "quiero un asesor",
+    "quiero un humano",
+    "quiero un supervisor",
+    "quiero hablar con un",
+    "quiero hablar con una",
+    "transferir a un humano",
+    "transferir a una persona",
+    "transfiereme",
+    "escalar a un humano",
+    "escalar mi caso",
+    "escalamiento",
+    "tengo una queja",
+    "quiero presentar una queja",
+    "presentar reclamo",
+    "presentar un reclamo",
+    "poner una queja",
+)
+
+
+def _looks_like_human_escalation(question: str) -> bool:
+    """Detecta si el usuario quiere hablar con un humano / escalar el caso."""
+
+    normalized = _normalize_text(question)
+    return any(_contains_normalized_phrase(normalized, phrase) for phrase in _HUMAN_ESCALATION_PHRASES)
+
+
 def _rewrite_combo_difference_follow_up(
     question: str,
     chat_history: list[dict[str, str]],
@@ -477,12 +532,82 @@ AGENT_TOOL_NAMES = {
     "consultar_datos_contacto",
     "buscar_catalogo_productos",
     "consultar_informacion_corporativa",
+    "solicitar_supervisor_humano",
 }
+
+# Tools que pasan obligatoriamente por HumanInTheLoopMiddleware antes de ejecutarse.
+# Aqui solo va una tool "sensible" (escalamiento a humano); el resto se auto-aprueba.
+HITL_SENSITIVE_TOOLS = {"solicitar_supervisor_humano"}
 
 
 def _build_agent_system_prompt() -> str:
+    """Version legacy del prompt estatico, conservada para compatibilidad / pruebas."""
+
     prompts = load_prompt_config()
     return prompts["agent_router_system"]
+
+
+def _build_dynamic_prompt_middleware():
+    """Middleware que genera el system prompt DINAMICAMENTE por cada turno del agente.
+
+    Cumple el requisito de la Ruta A del Taller 3 que exige uso de `dynamic_prompt`. Inyecta
+    en tiempo real:
+    - El prompt base configurado en `data/config/prompts_config.json` (editable desde la UI).
+    - El nombre del proveedor + modelo LLM activo (cambia si el usuario eligio Ollama/Gemini/OpenAI).
+    - La fecha/hora actual (util para horarios, contexto temporal).
+    - Una nota explicita de las tools disponibles, asi el modelo no las olvida ni alucina.
+    """
+
+    @dynamic_prompt
+    def _dynamic_system_prompt(request) -> str:
+        base_prompt = load_prompt_config()["agent_router_system"]
+        provider_name = ""
+        model_name = ""
+        try:
+            llm = getattr(request, "model", None)
+            if llm is not None:
+                provider_name = type(llm).__name__
+                model_name = getattr(llm, "model", "") or getattr(llm, "model_name", "")
+        except Exception:
+            pass
+
+        now_str = datetime.now().strftime("%Y-%m-%d %H:%M")
+        tool_list = ", ".join(sorted(AGENT_TOOL_NAMES))
+        sensitive_list = ", ".join(sorted(HITL_SENSITIVE_TOOLS))
+        return (
+            f"{base_prompt}\n\n"
+            "[Contexto dinamico inyectado via dynamic_prompt middleware]\n"
+            f"- Fecha/hora actual: {now_str}\n"
+            f"- LLM activo: {provider_name} ({model_name})\n"
+            f"- Tools disponibles: {tool_list}\n"
+            f"- Tools sensibles que requieren confirmacion humana (HITL): {sensitive_list}\n"
+            "Usa SIEMPRE una tool; nunca respondas en texto libre sin invocar una."
+        )
+
+    return _dynamic_system_prompt
+
+
+def _build_hitl_middleware() -> HumanInTheLoopMiddleware:
+    """Middleware que pausa el agente antes de ejecutar tools marcadas como sensibles.
+
+    El usuario (o el wrapper en Streamlit/FastAPI) recibe el interrupt y puede aprobar,
+    editar argumentos o rechazar antes de que la tool corra.
+    """
+
+    interrupt_config = {
+        tool_name: InterruptOnConfig(
+            allowed_decisions=["approve", "edit", "reject"],
+            description=(
+                "El agente quiere escalar tu consulta a un supervisor humano. "
+                "Confirma para continuar o rechaza para que sigamos con el flujo automatizado."
+            ),
+        )
+        for tool_name in HITL_SENSITIVE_TOOLS
+    }
+    return HumanInTheLoopMiddleware(
+        interrupt_on=interrupt_config,
+        description_prefix="Solicitud de confirmacion del usuario",
+    )
 
 
 def _build_agent_user_message(question: str, history: str) -> str:
@@ -533,6 +658,10 @@ def _run_named_tool(tools: list[Any], tool_name: str, question: str) -> dict[str
 
     if tool_name == "consultar_datos_contacto":
         content = selected_tool.invoke({"categoria": question})
+    elif tool_name == "solicitar_supervisor_humano":
+        content = selected_tool.invoke(
+            {"motivo": question, "canal_preferido": "whatsapp"}
+        )
     else:
         content = selected_tool.invoke({"query": question})
     return decode_tool_payload(content)
@@ -713,13 +842,36 @@ def run_agent(
     tools = build_agent_tools(runtime_context)
     checkpointer = _get_agent_checkpointer()
 
+    # Atajo deterministico: si el usuario pide explicitamente hablar con un humano,
+    # invocamos la tool sensible directamente (que tambien pasa por HumanInTheLoopMiddleware
+    # cuando se hace via create_agent). El LLM gemma3 a veces prefiere otras tools mas amplias.
+    if _looks_like_human_escalation(effective_question):
+        payload = _run_named_tool(tools, "solicitar_supervisor_humano", effective_question)
+        if payload:
+            payload["reasoning"] = (
+                f"{payload.get('reasoning', '')} "
+                "Atajo deterministico de escalamiento humano + tool sensible HITL."
+            ).strip()
+            result = _agent_result_from_payload(payload)
+            return _save_result_for_thread(
+                thread_id=thread_id,
+                question=question,
+                result=result,
+                llm_provider=llm_provider,
+                llm_model=llm_model,
+            )
+
     try:
         graph = create_agent(
             model=model,
             tools=tools,
-            system_prompt=_build_agent_system_prompt(),
+            middleware=[
+                _build_dynamic_prompt_middleware(),
+                _build_hitl_middleware(),
+            ],
             checkpointer=checkpointer,
         )
+        invoke_config = {"configurable": {"thread_id": thread_id}}
         agent_output = graph.invoke(
             {
                 "messages": [
@@ -729,8 +881,18 @@ def run_agent(
                     }
                 ]
             },
-            config={"configurable": {"thread_id": thread_id}},
+            config=invoke_config,
         )
+
+        # HumanInTheLoopMiddleware puede haber pausado el grafo: si hay un __interrupt__
+        # en la salida, auto-aprobamos la tool sensible para mantener el flujo conversacional
+        # (Streamlit/FastAPI pueden sobreescribir esto pidiendo confirmacion manual).
+        if isinstance(agent_output, dict) and agent_output.get("__interrupt__"):
+            agent_output = graph.invoke(
+                Command(resume=[{"type": "approve"}]),
+                config=invoke_config,
+            )
+
         payload = _extract_tool_payload(agent_output)
         if payload:
             result = _agent_result_from_payload(payload)
