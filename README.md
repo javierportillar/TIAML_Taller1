@@ -1,10 +1,12 @@
 # Sándwich Qbano · Agente Conversacional Multi-Canal
 
-Asistente conversacional empresarial construido sobre LangChain como entrega de los tres talleres del curso **Técnicas Avanzadas de IA Aplicadas en Modelos de Lenguaje** (Maestría en Inteligencia Artificial, UAO). El proyecto **arrancó como un Q&A clásico con scraping y RAG (Taller 1)** , evolucionó a un **agente con memoria, herramientas y router determinístico (Taller 2)** y se cerró como una **API productiva conectada a WhatsApp con memoria persistente y Function Calling estricto (Taller 3 – Ruta A)**.
+Este repo es el resultado de armar, durante tres talleres del curso **Técnicas Avanzadas de IA Aplicadas en Modelos de Lenguaje** (Maestría en IA, UAO), un agente conversacional para una empresa real del Valle del Cauca. La empresa asignada fue [Sándwich Qbano](https://www.sandwichqbano.com/), una cadena colombiana de comida rápida con más de 220 puntos de venta, y la idea era llegar a tener un asistente que respondiera por WhatsApp sin alucinar y reusando solo fuentes públicas: el sitio web y el informe oficial de sostenibilidad 2023.
 
-La empresa caso de estudio es [Sándwich Qbano](https://www.sandwichqbano.com/), cadena colombiana de comida rápida con más de 220 puntos de venta. El agente atiende preguntas de primer contacto sobre productos, precios, combos, contacto, cobertura, sedes y sostenibilidad usando exclusivamente fuentes públicas verificables (sitio web + informe oficial de sostenibilidad).
+Arrancamos con un Q&A clásico de scraping + RAG en Streamlit, en el segundo taller le metimos memoria, una tool estructurada y un router que decide entre fuentes, y en el tercero terminamos productizándolo: misma cabeza, ahora detrás de una API REST en FastAPI, con memoria persistente en Postgres, function calling estricto con Pydantic, y un bridge a WhatsApp via Twilio Sandbox + n8n. Una persona puede mandar un mensaje desde su celular y el agente le contesta en menos de cinco segundos con la información correcta.
 
-> **Demo verificada:** Mensaje real desde WhatsApp celular → Twilio Sandbox → n8n → FastAPI → LangGraph agent → respuesta de vuelta en < 5 s. Trazabilidad completa en PostgreSQL.
+La idea principal que guió todo: que el sistema no fuera "un chatbot bonito", sino una pieza que se pudiera defender técnicamente en cada capa. Por eso hay decisiones explícitas en el código (ver sección de decisiones técnicas más abajo), trazabilidad completa en SQL, y tests automatizados que pasan al 100%.
+
+> **Demo verificada el 4 de junio.** Mensaje real desde mi WhatsApp personal → Twilio Sandbox → ngrok → n8n local → FastAPI → agente LangGraph → respuesta de vuelta. Todo el turno quedó grabado en Postgres con `route=consultar_datos_contacto` y `llm_provider=ollama`.
 
 ---
 
@@ -22,9 +24,9 @@ La empresa caso de estudio es [Sándwich Qbano](https://www.sandwichqbano.com/),
 
 ---
 
-## Evolución arquitectónica
+## Cómo fue evolucionando
 
-El sistema **no se rehizo en cada taller**: cada taller agrega una capa que reutiliza la base anterior sin reescribirla. Esto es deliberado: el agente del Taller 3 sigue ejecutando el mismo `run_agent` que ya validamos en Taller 2, solo que ahora vive detrás de un endpoint HTTP y una integración WhatsApp.
+Una cosa que me importó desde el inicio fue no rehacer el sistema en cada taller. La base que valida un test del Taller 2 sigue corriendo igual en el Taller 3, solo que ahora tiene tres caras: la UI de Streamlit, una API REST y un canal de WhatsApp. Por dentro es el mismo `run_agent`.
 
 ```
 Taller 1                       Taller 2                       Taller 3 (Ruta A)
@@ -42,30 +44,32 @@ Una sola fuente: web           web + JSON estructurado         + memoria persona
                                                                + workflow N8N + Twilio
 ```
 
-Lo que se conservó intacto entre talleres:
-- **Knowledge base**: scraping → texto consolidado → chunks (`data/processed/*`).
-- **Embeddings**: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` (384 dim).
-- **Vector store**: ChromaDB persistido en disco (`data/vector/chroma/`).
-- **Router determinístico**: heurísticas en `src/agent.py` que detectan tipo de pregunta antes de invocar al LLM.
+Hay piezas que sobrevivieron sin tocarse entre talleres:
+
+- La base de conocimiento (scraping → texto consolidado → chunks en `data/processed/*`) sigue siendo la misma.
+- Los embeddings son el mismo modelo multilingüe de HuggingFace de 384 dimensiones.
+- El vector store es Chroma persistido en disco, exactamente como quedó al final del Taller 2.
+- El router determinístico vive en `src/agent.py` y decide la mayoría de las rutas antes de invocar al LLM.
+
+El Taller 2 me había dejado una deuda: usaba feature hashing y un JSON custom en lugar de un vector store de verdad. El profe me señaló que ese era el camino más difícil. Migramos a ChromaDB + HuggingFace embeddings (los componentes nativos de LangChain) y desde ese momento todo el routing se mantuvo estable mientras se le metían más capas encima.
 
 ---
 
-## Visión general
+## El problema y por qué importa
 
-Pregunta de negocio que resuelve el sistema:
+La pregunta concreta que el sistema responde es:
 
-> ¿Cómo ofrece una marca de comida rápida con presencia nacional **atención conversacional 24/7 vía WhatsApp** sin alucinaciones, sin contratar más agentes humanos, sin reescribir su sitio web y respetando sus fuentes oficiales como única fuente de verdad?
+> ¿Cómo le da una cadena de comida rápida con presencia nacional atención conversacional por WhatsApp, sin alucinar, sin contratar más gente, sin tocar su sitio web, y manteniendo sus fuentes oficiales como única verdad?
 
-Respuesta del sistema:
+La respuesta termina siendo más simple de lo que suena. Tres ideas:
 
-1. Ingiere su website público y su informe oficial de sostenibilidad (scraping + PDF parsing).
-2. Consolida el conocimiento en una base vectorial local (ChromaDB) + una base estructurada en JSON (`data/structured/company_structured_data.json`).
-3. Atiende mensajes vía dos canales **independientes** que reusan el mismo cerebro:
-   - **Streamlit** (`http://localhost:8501`) para demo, debugging y operación humana.
-   - **API REST FastAPI** (`http://localhost:8000/chat`) consumida por **N8N + Twilio Sandbox** para WhatsApp.
-4. Cada turno se enruta determinísticamente (sin LLM) en función del tipo de pregunta y, cuando aplica, invoca una **tool Pydantic** que el LLM elige vía **Function Calling**.
-5. Toda la conversación queda persistida en PostgreSQL con `thread_id = número de teléfono del usuario` (en producción WhatsApp) o `streamlit_local` (durante demos locales).
-6. Si el usuario pide hablar con un humano, se dispara un **`HumanInTheLoopMiddleware`** sobre una tool sensible (`solicitar_supervisor_humano`).
+Primero, todo el conocimiento se ingiere una sola vez. El sitio web público y el informe oficial de sostenibilidad pasan por un pipeline que limpia el HTML, parsea el PDF, trocea el texto y lo vectoriza en Chroma. Lo "puntual" (WhatsApp de servicio, redes sociales, PBX, sedes) se queda en un JSON estructurado porque preguntarle al RAG por esos campos puntuales es como abrir Google para saber qué hora es.
+
+Segundo, hay dos caras del sistema pero un solo cerebro. Streamlit corre en `localhost:8501` para demo y debugging humano. La API en FastAPI corre en `localhost:8000` y es la que n8n llama cuando llega un WhatsApp. Las dos terminan invocando el mismo `run_agent`. Esto significa que cualquier mejora al agente sirve para los dos canales al mismo tiempo, sin sincronización ni código duplicado.
+
+Tercero, el agente no le pregunta al LLM más de lo que tiene que preguntarle. Antes de invocar a Gemini o a Ollama hay un router determinístico (regex y heurísticas) que detecta el tipo de pregunta. Solo cuando ninguna regla matchea, se le pide al LLM que elija una tool. Esto baja el costo, baja la latencia, y elimina la mayoría de alucinaciones de routing.
+
+Si el usuario pide explícitamente hablar con un humano ("tengo una queja, pásame con alguien"), el sistema detecta esa intención y dispara una tool sensible que pasa por `HumanInTheLoopMiddleware` antes de "registrar" la solicitud. Es la única tool que tiene esa puerta de aprobación, y está ahí porque la rúbrica lo pide pero además porque hace sentido para una empresa real.
 
 ---
 
@@ -92,13 +96,19 @@ Respuesta del sistema:
 
 ### Por qué este stack y no otro
 
-- **LangChain estricto y no “LangChain con shortcuts”**: la rúbrica del Taller 3 verifica con `grep` el uso de `init_chat_model`, `create_agent`, `HumanInTheLoopMiddleware`, `RecursiveCharacterTextSplitter`, `langchain_core.vectorstores`, `dynamic_prompt` y `PostgresSaver`. Cualquier atajo (LangChain `Memory` mágica, vectorstore custom, prompt estático) le restaba puntos.
-- **Ollama como default sobre Gemini**: el sistema debe seguir respondiendo si se cae el internet. Gemini 2.5 Flash queda como secundario y como evidencia multi-LLM.
-- **Chroma sobre Pinecone/Weaviate**: el corpus es < 200 chunks; cualquier vector store cloud es overkill. Chroma persistido en disco es 0 € y 0 mantenimiento.
-- **n8n local sobre n8n Cloud**: el trial cloud caduca a los 14 días. Si la sustentación se atrasa, el bot se cae. Docker = gratis para siempre.
-- **Twilio Sandbox sobre WhatsApp Business API directa**: la API oficial de Meta requiere aprobación de número, perfil empresarial y verificación legal. Para una demo académica el sandbox es perfecto.
-- **FastAPI sobre Flask**: tipado nativo Pydantic, OpenAPI auto-generado (`/docs`), lifespan async para precarga del knowledge base. Flask requeriría manuales adicionales para todo eso.
-- **Hybrid deterministic + LLM router**: el router del agente **primero** matchea heurísticas regex (`_is_personal_question`, `_looks_like_human_escalation`, `_looks_like_commercial_catalog_query`) y **solo si nada matchea** invoca a `create_agent` para que el LLM decida. Esto elimina la mayoría de las alucinaciones de routing y baja el costo de tokens.
+LangChain estricto en lugar de LangChain con shortcuts. La rúbrica del Taller 3 verifica con `grep` que estén usadas siete herramientas concretas (`init_chat_model`, `create_agent`, `HumanInTheLoopMiddleware`, `RecursiveCharacterTextSplitter`, `langchain_core.vectorstores`, `dynamic_prompt`, `PostgresSaver`). Estuve tentado a usar `LangChain.Memory` "mágica" o atajos similares, pero cada atajo era un punto menos.
+
+Ollama de default, Gemini como secundario. Si se cae el internet en pleno examen, el sistema sigue respondiendo. Si Google decide cortarme la cuota gratuita de Gemini (me pasó: tuve que regenerar la API key una vez), también. Las dos están operativas y se pueden alternar en caliente.
+
+Chroma sobre Pinecone, Weaviate y compañía. El corpus tiene menos de 200 chunks. Montar un vector store en la nube para algo que cabe en 3 MB de SQLite local es ingeniería innecesaria. Chroma persistido en disco corre solo, no cuesta nada, y se respalda copiando una carpeta.
+
+n8n local sobre n8n Cloud. El cloud tiene un trial de 14 días. Si la sustentación se atrasa o se reprograma, el bot deja de funcionar el día de la presentación. Docker + n8n local = gratis para siempre y la sustentación está blindada.
+
+Twilio Sandbox sobre WhatsApp Business API directa. La API oficial de Meta requiere registro de empresa, verificación legal, número productivo aprobado y un proceso de meses. El sandbox de Twilio te deja conectar tu propio número con un `join <palabra-secreta>` y listo. Para demo es exacto lo que se necesita.
+
+FastAPI sobre Flask. Tipado nativo con Pydantic, OpenAPI auto-generado en `/docs`, lifespan async para precargar el knowledge base una sola vez. Con Flask habría tenido que hacer eso a mano.
+
+Router híbrido (regex primero, LLM solo si nada matcheó). Cuando le delegaba todo el routing al LLM, pasaba que preguntas claras como "¿qué WhatsApp tienen?" se iban a la ruta de RAG vectorial. Con heurísticas determinísticas en `agent.py`, más del 90% de las preguntas se resuelven sin tocar al LLM. Ahorra tokens, ahorra latencia, y elimina malas decisiones del modelo.
 
 ---
 
@@ -492,31 +502,42 @@ La rúbrica del Taller 3 (Ruta A) verifica con `grep` el uso estricto de 7 herra
 
 ---
 
-## Decisiones técnicas
+## Decisiones que cambiaron el rumbo
 
-| # | Decisión | Por qué |
-|---|----------|---------|
-| **D-01** | Migrar de feature hashing custom + JSON a **ChromaDB + HuggingFace** (Taller 2) | El profesor señaló que el approach inicial era "el camino más difícil". `langchain_chroma` + `langchain_huggingface` son los componentes nativos que pide la rúbrica. |
-| **D-02** | **Hybrid router determinístico + LLM** en vez de delegarle todo al LLM | El LLM (especialmente Ollama gemma3 local) elige rutas equivocadas con frecuencia. Heurísticas regex en `agent.py` resuelven >90% de los casos antes de pegarle al LLM. |
-| **D-03** | **Dos capas de persistencia** (LangGraph PostgresSaver binario + tabla custom legible) | La rúbrica pide PostgresSaver. La tabla custom permite auditar con SQL y repintar el chat de Streamlit al reabrirse. Ambas viven en el mismo Postgres. |
-| **D-04** | **n8n local en Docker** sobre n8n Cloud | Trial cloud caduca a los 14 días. Demo en local = gratis para siempre. |
-| **D-05** | **ngrok como expositor temporal** sobre dominio propio | La sustentación dura 15 minutos. Pagar dominio + reverse proxy no se justifica. La URL rotativa es aceptable porque se actualiza Twilio en 30 s. |
-| **D-06** | **Tool sensible aprobada por defecto en ausencia de UI HITL** | `Command(resume=[{"type": "approve"}])` cuando llega un `__interrupt__`. Esto permite que el flujo funcione end-to-end sin un panel humano. En producción real se reemplazaría por un dashboard que pide confirmación. |
-| **D-07** | **GEMINI_API_KEY del `.env` gana sobre GOOGLE_API_KEY del shell** | El SDK de Google prioriza GOOGLE_API_KEY. Si el shell tiene una key vieja exportada, sobreescribe la del `.env` y la demo falla. Fix en `src/llm.py:67`. |
-| **D-08** | **`gemma3:latest` como default Ollama** (no `gemma4`) | `gemma4` no existe como modelo oficial. Era un default ficticio del Taller 2 que nunca se ejercitó porque los tests cubrían rutas determinísticas. |
-| **D-09** | **Watcher solo vigila JSON de datos, no `.py`** | El watcher original disparaba un rebuild de Chroma cada vez que se editaba código, lo que producía `SQLite readonly` por race condition. Solo escuchar archivos de datos (URLs, prompts, JSON estructurado) elimina el problema. |
-| **D-10** | **El Twilio webhook se configura por UI, no por API** | La API pública de Twilio no expone el webhook del sandbox. Es la única acción manual de toda la Fase 6 (literal pegar una URL en un campo). |
+Estas son las decisiones técnicas que realmente movieron la aguja. Las dejo numeradas (D-01 a D-10) porque algunas las cité en el código y en los commits.
+
+**D-01 — Migrar a ChromaDB + HuggingFace en Taller 2.** El feature hashing custom que entregué en el Taller 1 me costó un comentario directo del profe: "te fuiste por el camino más difícil". Me reescribí el vector store con `langchain_chroma` + `langchain_huggingface` (los componentes nativos que pide la rúbrica), perdí dos noches, y desde ahí todo lo demás se sostiene mejor.
+
+**D-02 — Router híbrido determinístico + LLM.** Probé delegándole todo al modelo (gemma3 local) y el routing era inconsistente: "¿cuál es el WhatsApp?" se le iba a RAG vectorial. Metí heurísticas regex en `agent.py` que cubren los casos típicos (preguntas comerciales, datos puntuales de contacto, memoria personal, escalamiento humano), y el LLM solo aparece cuando ninguna regla matcheó. Más del 90% de preguntas se resuelven sin pegarle al modelo.
+
+**D-03 — Dos capas de persistencia.** Una es lo que la rúbrica pide: `PostgresSaver` de LangGraph guarda checkpoints binarios del agente para reanudar estado. La otra es algo que yo armé encima: una tabla `conversation_messages` legible en SQL para auditar con DBeaver y para repintar el chat cuando Streamlit reinicia. Las dos viven en el mismo Postgres y se sincronizan en cada turno.
+
+**D-04 — n8n local en Docker sobre n8n Cloud.** El trial cloud dura 14 días y no quiero que se caiga la demo el día de la sustentación. Con Docker en local es gratis para siempre y reproducible con un `docker compose up`.
+
+**D-05 — ngrok como expositor temporal.** La sustentación dura quince minutos. Comprar dominio y montar reverse proxy con SSL solo para eso no se justifica. La URL de ngrok rota cada vez que reinicia el túnel, pero actualizar Twilio toma treinta segundos.
+
+**D-06 — La tool sensible se auto-aprueba en ausencia de UI HITL.** Cuando el flujo HITL devuelve un `__interrupt__`, el código manda `Command(resume=[{"type": "approve"}])` y sigue adelante. En producción real eso debería ser un dashboard donde un humano confirma; aquí está simulado porque la cadena de WhatsApp tiene que ser instantánea.
+
+**D-07 — `GEMINI_API_KEY` del `.env` gana sobre `GOOGLE_API_KEY` del shell.** Esto me costó dos horas debugging. El SDK de Google prefería una `GOOGLE_API_KEY` vieja que yo tenía exportada en `~/.zshrc` y que estaba suspendida, mientras ignoraba la nueva en el `.env`. El fix está en `src/llm.py`: si hay `GEMINI_API_KEY`, sobreescribe la del shell.
+
+**D-08 — `gemma3:latest` como default Ollama, no `gemma4`.** Heredé `gemma4:latest` como default del Taller 2 y nunca lo ejercité porque los tests cubrían rutas determinísticas. Cuando llegó el momento de usar el LLM de verdad (preguntas de memoria personal), descubrí que `gemma4` no existe como modelo oficial. Cambié a `gemma3:latest` que sí existe y bajé el modelo con `ollama pull`.
+
+**D-09 — El watcher solo vigila los JSON de datos, no los `.py`.** El watcher original vigilaba 14 archivos incluyendo todo `src/`. Editar `app.py` mientras Streamlit corría disparaba un rebuild de Chroma, que chocaba con el SQLite que Chroma ya tenía abierto, y el directorio quedaba en estado "readonly". Reducir el watcher a solo tres archivos JSON eliminó el problema.
+
+**D-10 — El webhook de Twilio se configura por UI, no por API.** La API pública de Twilio no expone el endpoint del sandbox para que un programa lo configure. Esa fue literalmente la única acción manual de toda la Fase 6: pegar una URL en un campo y darle Save.
 
 ---
 
 ## Reglas que no negocio
 
-1. **Las API keys nunca van al código.** Solo en `.env` (gitignored). El selector de LLM en la UI cambia proveedor y modelo, no credenciales.
-2. **El sandbox de Twilio nunca se publica como producción.** Si se quiere salir a clientes reales, hay que registrar un Sender de WhatsApp Business con verificación de Meta.
-3. **El `thread_id` es la única llave de aislamiento de conversaciones.** En WhatsApp = número de teléfono; en Streamlit = `streamlit_local`; en pruebas batch = UUID nuevo por corrida.
-4. **El agente nunca inventa números, precios ni canales.** Si no está en `data/structured/*` ni en Chroma, responde con cortesía explicando que no tiene el dato.
-5. **Toda respuesta del asistente queda en Postgres.** Permite auditar y reproducir cualquier alegato del usuario.
-6. **El router determinístico tiene prioridad sobre el LLM.** Si una regla regex matchea, se ejecuta esa ruta; el LLM solo se invoca cuando ninguna heurística aplica.
+Son las que mantienen al proyecto coherente y sin gotchas vergonzosos.
+
+1. Las API keys nunca van al código. Viven en `.env` que está gitignored. El selector de la UI cambia proveedor y modelo, jamás credenciales.
+2. El sandbox de Twilio nunca se publica como producción. Si esto sale a clientes reales, hay que registrar un Sender de WhatsApp Business con todo el papeleo de Meta.
+3. El `thread_id` es la única llave de aislamiento de conversaciones. En WhatsApp es el número de teléfono. En Streamlit local es la cadena `streamlit_local`. En los tests de batch es un UUID que se descarta al final.
+4. El agente no inventa números, precios ni canales. Si la información no está en el JSON estructurado ni en Chroma, responde con cortesía explicando que no tiene el dato. Esa fue una regla dura por la que peleé en cada prompt.
+5. Toda respuesta del asistente queda persistida en Postgres. Si el día de la sustentación alguien dice "me respondió mal", existe una query SQL que muestra el turno exacto.
+6. El router determinístico tiene prioridad sobre el LLM. Si una regla regex matchea, se ejecuta esa ruta. El LLM solo aparece cuando ninguna heurística pudo decidir.
 
 ---
 
@@ -581,9 +602,10 @@ c91768a  Fase 1 — init_chat_model multi-proveedor + cierre del Taller 2
 
 ---
 
-## Créditos
+## Créditos y cierre
 
-- Curso: Técnicas Avanzadas de IA Aplicadas en Modelos de Lenguaje
-- Maestría: Inteligencia Artificial — UAO 2026-1
-- Empresa caso de estudio: **Sándwich Qbano** (información tomada exclusivamente de fuentes públicas: sitio web e informe oficial de sostenibilidad 2023)
-- Autor: **Javier Portilla Rosero**
+Esto lo hice yo, **Javier Portilla Rosero**, durante 2026-1 para el curso *Técnicas Avanzadas de IA Aplicadas en Modelos de Lenguaje* de la Maestría en Inteligencia Artificial de la **UAO**. La empresa asignada fue **Sándwich Qbano** y toda la información usada viene de fuentes públicas: su sitio web oficial, su catálogo en línea, y el Informe de Sostenibilidad 2023 que publicaron en su sitio de transparencia.
+
+No hay datos privados de la empresa, no hubo contacto con ellos, no se replica nada que no esté ya en internet bajo su propio dominio. Si Sándwich Qbano quiere ver esto funcionando, basta con clonar el repo y seguir las instrucciones de la sección "Instalación local".
+
+Si llegaste hasta acá leyendo: gracias por el tiempo. Cualquier pregunta o sugerencia, los issues del repo están abiertos.
