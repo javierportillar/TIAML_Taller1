@@ -6,3 +6,6 @@ __pycache__/
 proyecto/.env
 proyecto/.venv/
 .claude/
+
+# Instrucciones internas (clase) — no se entregan
+taller-instrucciones.md
