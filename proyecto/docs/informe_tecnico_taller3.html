@@ -395,9 +395,10 @@ sedes, horarios) coincida con las fuentes oficiales de la marca.</p>
 <p>La pregunta concreta que este sistema responde es:</p>
 <blockquote>
 <p>¿Cómo le da una cadena de comida rápida con presencia nacional
-<strong>atención conversacional 24/7 vía WhatsApp</strong>, sin
-alucinaciones, sin contratar más agentes humanos, sin reescribir su
-sitio web, y manteniendo sus fuentes oficiales como única verdad?</p>
+<strong>atención conversacional 24/7 vía WhatsApp</strong>, sin inventar
+datos fuera de sus fuentes oficiales, sin contratar más agentes humanos,
+sin reescribir su sitio web, y manteniendo sus fuentes oficiales como
+única verdad?</p>
 </blockquote>
 <h2 id="la-solución-propuesta">1.2 La solución propuesta</h2>
 <p>Un agente conversacional empresarial que:</p>
@@ -1222,8 +1223,11 @@ ese momento el resto del sistema se apoyó en una base estable.</p>
 Delegarle todo el routing al LLM (especialmente con Ollama gemma3 local)
 resultaba en decisiones inconsistentes: preguntas claras como “¿cuál es
 el WhatsApp?” se enviaban al RAG vectorial. La implementación de
-heurísticas regex en <code>agent.py</code> resuelve más del 90% de los
-casos antes de pegarle al LLM.</p>
+heurísticas regex en <code>agent.py</code> reduce drásticamente la
+dependencia del LLM. Medición sobre los 33 casos del batch: el 33% se
+resuelve sin invocar al LLM (atajos puros) y un 64% adicional pasa por
+el agente solo para elegir tool, pero la respuesta final viene del JSON
+estructurado (no de generación libre).</p>
 <p><strong>D-03 — Dos capas de persistencia.</strong>
 <code>PostgresSaver</code> cumple la rúbrica pero guarda estado binario
 serializado. La tabla custom <code>conversation_messages</code>
@@ -1355,10 +1359,10 @@ sustentación</td>
 <h1 id="conclusiones">10. Conclusiones</h1>
 <p>El sistema responde la pregunta de negocio inicial: una cadena de
 comida rápida puede ofrecer atención conversacional 24/7 por WhatsApp
-sin alucinar, sin contratar más gente, sin reescribir su sitio web, y
-manteniendo sus fuentes oficiales como única verdad. La demo del 4 de
-junio lo prueba end-to-end con un mensaje real desde un celular
-personal.</p>
+con respuestas ancladas en fuentes oficiales (no generadas libremente
+por el LLM), sin contratar más gente, sin reescribir su sitio web. La
+demo del 4 de junio lo prueba end-to-end con un mensaje real desde un
+celular personal.</p>
 <p>La arquitectura final no es la primera que se intentó. El Taller 1
 entregó un vector store custom que el profesor calificó como “el camino
 más difícil”; el Taller 2 corrigió ese rumbo migrando a los componentes
@@ -1371,10 +1375,10 @@ módulos.</p>
 <p>Las decisiones técnicas más importantes están documentadas
 explícitamente (D-01 a D-10) porque defienden el “por qué” detrás de
 cada elección. La separación entre router determinístico (heurísticas
-regex que cubren el 90% de los casos) y router LLM
-(<code>create_agent</code> que decide cuando ninguna regla matchea)
-reduce drásticamente las alucinaciones de routing y baja el costo de
-tokens.</p>
+regex que sobre el batch resuelven el 33% de los casos sin LLM) y router
+LLM (<code>create_agent</code> que decide solo cuando ninguna regla
+matchea) reduce drásticamente las decisiones equivocadas de routing y
+baja el costo de tokens.</p>
 <p>El análisis t-SNE/UMAP del bonus muestra que las distintas rutas del
 agente generan respuestas semánticamente distinguibles, lo que confirma
 que el sistema no está homogeneizando lo que produce. Con más datos de

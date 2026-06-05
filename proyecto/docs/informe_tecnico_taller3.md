@@ -14,7 +14,7 @@ Sándwich Qbano es una cadena colombiana de comida rápida con más de **220 pun
 
 La pregunta concreta que este sistema responde es:
 
-> ¿Cómo le da una cadena de comida rápida con presencia nacional **atención conversacional 24/7 vía WhatsApp**, sin alucinaciones, sin contratar más agentes humanos, sin reescribir su sitio web, y manteniendo sus fuentes oficiales como única verdad?
+> ¿Cómo le da una cadena de comida rápida con presencia nacional **atención conversacional 24/7 vía WhatsApp**, sin inventar datos fuera de sus fuentes oficiales, sin contratar más agentes humanos, sin reescribir su sitio web, y manteniendo sus fuentes oficiales como única verdad?
 
 ## 1.2 La solución propuesta
 
@@ -419,7 +419,7 @@ Decisiones de ingeniería con impacto explícito en el resultado, numeradas para
 
 **D-01 — Migrar a ChromaDB + HuggingFace en Taller 2.** El feature hashing custom del Taller 1 generó un comentario directo del profesor: "te fuiste por el camino más difícil". La reescritura usando los componentes nativos de LangChain (`langchain_chroma` + `langchain_huggingface`) tomó dos sesiones de trabajo y desde ese momento el resto del sistema se apoyó en una base estable.
 
-**D-02 — Router híbrido determinístico + LLM.** Delegarle todo el routing al LLM (especialmente con Ollama gemma3 local) resultaba en decisiones inconsistentes: preguntas claras como "¿cuál es el WhatsApp?" se enviaban al RAG vectorial. La implementación de heurísticas regex en `agent.py` resuelve más del 90% de los casos antes de pegarle al LLM.
+**D-02 — Router híbrido determinístico + LLM.** Delegarle todo el routing al LLM (especialmente con Ollama gemma3 local) resultaba en decisiones inconsistentes: preguntas claras como "¿cuál es el WhatsApp?" se enviaban al RAG vectorial. La implementación de heurísticas regex en `agent.py` reduce drásticamente la dependencia del LLM. Medición sobre los 33 casos del batch: el 33% se resuelve sin invocar al LLM (atajos puros) y un 64% adicional pasa por el agente solo para elegir tool, pero la respuesta final viene del JSON estructurado (no de generación libre).
 
 **D-03 — Dos capas de persistencia.** `PostgresSaver` cumple la rúbrica pero guarda estado binario serializado. La tabla custom `conversation_messages` proporciona auditoría SQL legible y permite repintar el chat de Streamlit al reabrirse. Ambas coexisten en el mismo Postgres y se sincronizan en cada turno.
 
@@ -467,11 +467,11 @@ Son las que mantuvieron el proyecto coherente y sin gotchas vergonzosos durante 
 
 # 10. Conclusiones
 
-El sistema responde la pregunta de negocio inicial: una cadena de comida rápida puede ofrecer atención conversacional 24/7 por WhatsApp sin alucinar, sin contratar más gente, sin reescribir su sitio web, y manteniendo sus fuentes oficiales como única verdad. La demo del 4 de junio lo prueba end-to-end con un mensaje real desde un celular personal.
+El sistema responde la pregunta de negocio inicial: una cadena de comida rápida puede ofrecer atención conversacional 24/7 por WhatsApp con respuestas ancladas en fuentes oficiales (no generadas libremente por el LLM), sin contratar más gente, sin reescribir su sitio web. La demo del 4 de junio lo prueba end-to-end con un mensaje real desde un celular personal.
 
 La arquitectura final no es la primera que se intentó. El Taller 1 entregó un vector store custom que el profesor calificó como "el camino más difícil"; el Taller 2 corrigió ese rumbo migrando a los componentes nativos de LangChain (Chroma + HuggingFace). El Taller 3 productizó el sistema con FastAPI, memoria persistente en Postgres, Function Calling estricto con Pydantic, y un canal real de WhatsApp via n8n + Twilio. Cada taller añadió una capa sin reescribir las anteriores, lo que permitió mantener la suite de tests automatizados pasando al 100% entre módulos.
 
-Las decisiones técnicas más importantes están documentadas explícitamente (D-01 a D-10) porque defienden el "por qué" detrás de cada elección. La separación entre router determinístico (heurísticas regex que cubren el 90% de los casos) y router LLM (`create_agent` que decide cuando ninguna regla matchea) reduce drásticamente las alucinaciones de routing y baja el costo de tokens.
+Las decisiones técnicas más importantes están documentadas explícitamente (D-01 a D-10) porque defienden el "por qué" detrás de cada elección. La separación entre router determinístico (heurísticas regex que sobre el batch resuelven el 33% de los casos sin LLM) y router LLM (`create_agent` que decide solo cuando ninguna regla matchea) reduce drásticamente las decisiones equivocadas de routing y baja el costo de tokens.
 
 El análisis t-SNE/UMAP del bonus muestra que las distintas rutas del agente generan respuestas semánticamente distinguibles, lo que confirma que el sistema no está homogeneizando lo que produce. Con más datos de operación real, este mismo análisis permitiría detectar conversaciones fallidas, picos de escalamiento humano y preguntas recurrentes mal resueltas — todos hallazgos accionables para el equipo de operación.
 

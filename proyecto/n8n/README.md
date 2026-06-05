@@ -149,9 +149,13 @@ Toda la conversacion queda registrada en Postgres (`conversation_messages`):
 ```sql
 SELECT role, route, context_mode, llm_provider, left(content, 80) AS preview, created_at
 FROM conversation_messages
-WHERE thread_id = '573001234567'   -- tu numero sin '+' ni 'whatsapp:'
+WHERE thread_id = '+573001234567'   -- tu numero E.164, conserva el '+' y sin prefijo 'whatsapp:'
 ORDER BY id DESC LIMIT 20;
 ```
+
+> El workflow extrae `From` (formato Twilio `whatsapp:+57...`) y solo remueve el
+> prefijo `whatsapp:`, dejando el `+` E.164 intacto. Eso es lo que termina
+> guardado en la tabla, no la versión sin signo.
 
 ## Notas de seguridad
 

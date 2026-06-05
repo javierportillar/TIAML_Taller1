@@ -1,6 +1,6 @@
 # Sándwich Qbano · Agente Conversacional Multi-Canal
 
-Este repo es el resultado de armar, durante tres talleres del curso **Técnicas Avanzadas de IA Aplicadas en Modelos de Lenguaje** (Maestría en IA, UAO), un agente conversacional para una empresa real del Valle del Cauca. La empresa asignada fue [Sándwich Qbano](https://www.sandwichqbano.com/), una cadena colombiana de comida rápida con más de 220 puntos de venta, y la idea era llegar a tener un asistente que respondiera por WhatsApp sin alucinar y reusando solo fuentes públicas: el sitio web y el informe oficial de sostenibilidad 2023.
+Este repo es el resultado de armar, durante tres talleres del curso **Técnicas Avanzadas de IA Aplicadas en Modelos de Lenguaje** (Maestría en IA, UAO), un agente conversacional para una empresa real del Valle del Cauca. La empresa asignada fue [Sándwich Qbano](https://www.sandwichqbano.com/), una cadena colombiana de comida rápida con más de 220 puntos de venta, y la idea era llegar a tener un asistente que respondiera por WhatsApp **sin inventar datos fuera de las fuentes oficiales**, reusando solo lo público: el sitio web y el informe oficial de sostenibilidad 2023.
 
 Arrancamos con un Q&A clásico de scraping + RAG en Streamlit, en el segundo taller le metimos memoria, una tool estructurada y un router que decide entre fuentes, y en el tercero terminamos productizándolo: misma cabeza, ahora detrás de una API REST en FastAPI, con memoria persistente en Postgres, function calling estricto con Pydantic, y un bridge a WhatsApp via Twilio Sandbox + n8n. Una persona puede mandar un mensaje desde su celular y el agente le contesta en menos de cinco segundos con la información correcta.
 
@@ -59,7 +59,7 @@ El Taller 2 me había dejado una deuda: usaba feature hashing y un JSON custom e
 
 La pregunta concreta que el sistema responde es:
 
-> ¿Cómo le da una cadena de comida rápida con presencia nacional atención conversacional por WhatsApp, sin alucinar, sin contratar más gente, sin tocar su sitio web, y manteniendo sus fuentes oficiales como única verdad?
+> ¿Cómo le da una cadena de comida rápida con presencia nacional atención conversacional por WhatsApp, sin inventar datos fuera de sus fuentes, sin contratar más gente, sin tocar su sitio web, y manteniendo sus fuentes oficiales como única verdad?
 
 La respuesta termina siendo más simple de lo que suena. Tres ideas:
 
@@ -108,7 +108,7 @@ Twilio Sandbox sobre WhatsApp Business API directa. La API oficial de Meta requi
 
 FastAPI sobre Flask. Tipado nativo con Pydantic, OpenAPI auto-generado en `/docs`, lifespan async para precargar el knowledge base una sola vez. Con Flask habría tenido que hacer eso a mano.
 
-Router híbrido (regex primero, LLM solo si nada matcheó). Cuando le delegaba todo el routing al LLM, pasaba que preguntas claras como "¿qué WhatsApp tienen?" se iban a la ruta de RAG vectorial. Con heurísticas determinísticas en `agent.py`, más del 90% de las preguntas se resuelven sin tocar al LLM. Ahorra tokens, ahorra latencia, y elimina malas decisiones del modelo.
+Router híbrido (regex primero, LLM solo si nada matcheó). Cuando le delegaba todo el routing al LLM, pasaba que preguntas claras como "¿qué WhatsApp tienen?" se iban a la ruta de RAG vectorial. Con heurísticas determinísticas en `agent.py`, la mayoría de respuestas terminan viniendo de fuentes verificables. Sobre los 33 casos del batch automatizado: **33% se resuelven sin invocar al LLM** (atajos `deterministic` + ruta `conversation`) y **un 64% adicional pasa por el agente solo para elegir tool, pero la respuesta final viene del JSON estructurado** (`context_mode=structured_json`). Solo un puñado de turnos requieren generación libre. Ahorra tokens, ahorra latencia, y elimina malas decisiones del modelo.
 
 ---
 
@@ -335,9 +335,11 @@ docker compose up -d
 # qbano_postgres → puerto 5432
 # qbano_n8n      → puerto 5678 (UI web)
 
-# 6. Construir la base de conocimiento (una sola vez, salvo cambios en URLs)
+# 6. Construir la base de conocimiento (obligatorio en primer clone)
 python scripts/build_knowledge_base.py --max-pages 25
-# genera: data/processed/* + data/vector/chroma/* + data/raw/*
+# Genera: data/processed/*, data/vector/chroma/*, data/raw/*
+# Los archivos binarios de Chroma NO están versionados (regenerables).
+# Toma ~30 s la primera vez (descarga modelo de embeddings).
 ```
 
 ### Configuración del modelo (`.env`)
@@ -431,11 +433,15 @@ docker start qbano_n8n
 
 ### Pruebas en lote del agente
 
+> Asume que el venv está activo (`source .venv/bin/activate`). Si no, reemplaza
+> `python` por `.venv/bin/python` en todos los comandos de esta sección.
+
 ```bash
+source .venv/bin/activate                # solo la primera vez por sesión
 python scripts/run_agent_batch.py
 # lee results/agent_test_questions.csv (33 casos)
 # escribe results/agent_test_results.csv
-# imprime totales por ruta esperada vs obtenida
+# imprime totales: "RESULTADO BATCH: 33/33 rutas correctas" + desglose por contexto
 ```
 
 ### Smoke test de la API
@@ -508,7 +514,7 @@ Estas son las decisiones técnicas que realmente movieron la aguja. Las dejo num
 
 **D-01 — Migrar a ChromaDB + HuggingFace en Taller 2.** El feature hashing custom que entregué en el Taller 1 me costó un comentario directo del profe: "te fuiste por el camino más difícil". Reescribí el vector store con `langchain_chroma` + `langchain_huggingface` (los componentes nativos que pide la rúbrica) y desde ahí todo lo demás se sostiene sobre una base estándar.
 
-**D-02 — Router híbrido determinístico + LLM.** Probé delegándole todo al modelo (gemma3 local) y el routing era inconsistente: "¿cuál es el WhatsApp?" se le iba a RAG vectorial. Metí heurísticas regex en `agent.py` que cubren los casos típicos (preguntas comerciales, datos puntuales de contacto, memoria personal, escalamiento humano), y el LLM solo aparece cuando ninguna regla matcheó. Más del 90% de preguntas se resuelven sin pegarle al modelo.
+**D-02 — Router híbrido determinístico + LLM.** Probé delegándole todo al modelo (gemma3 local) y el routing era inconsistente: "¿cuál es el WhatsApp?" se le iba a RAG vectorial. Metí heurísticas regex en `agent.py` que cubren los casos típicos (preguntas comerciales, datos puntuales de contacto, memoria personal, escalamiento humano), y el LLM solo aparece cuando ninguna regla matcheó. Sobre los 33 casos del batch: 33% se resuelven sin invocar al LLM (atajos puros), 64% pasa por el agente para elegir tool pero la respuesta final viene del JSON estructurado (no de generación libre), y solo el resto requiere síntesis con LLM.
 
 **D-03 — Dos capas de persistencia.** Una es lo que la rúbrica pide: `PostgresSaver` de LangGraph guarda checkpoints binarios del agente para reanudar estado. La otra es algo que yo armé encima: una tabla `conversation_messages` legible en SQL para auditar con DBeaver y para repintar el chat cuando Streamlit reinicia. Las dos viven en el mismo Postgres y se sincronizan en cada turno.
 

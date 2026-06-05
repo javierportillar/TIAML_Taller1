@@ -70,6 +70,39 @@ def main() -> None:
 
     print(f"Resultados escritos en {output_path}")
 
+    # Reporte ejecutivo en stdout para que el revisor no tenga que abrir el CSV.
+    total = len(rows)
+    passed = sum(1 for r in rows if r["passed_route"] == "True")
+    print()
+    print("=" * 60)
+    print(f"RESULTADO BATCH: {passed}/{total} rutas correctas "
+          f"({passed / max(total, 1):.0%})")
+    print("=" * 60)
+
+    # Desglose por modo de contexto: confirma que la mayoria de turnos se
+    # resuelven con atajos deterministicos sin pegarle al LLM.
+    from collections import Counter
+
+    by_context = Counter(r["context_mode"] for r in rows)
+    print()
+    print("Desglose por modo de contexto:")
+    for mode, count in sorted(by_context.items(), key=lambda kv: -kv[1]):
+        marker = " <-- determinista" if mode == "deterministic" else ""
+        print(f"  {mode:32s} {count:3d}  ({count / total:.0%}){marker}")
+
+    deterministic_count = by_context.get("deterministic", 0)
+    print()
+    print(f"Atajos deterministicos: {deterministic_count}/{total} "
+          f"({deterministic_count / max(total, 1):.0%})")
+
+    fails = [r for r in rows if r["passed_route"] != "True"]
+    if fails:
+        print()
+        print("Casos fallidos:")
+        for r in fails:
+            print(f"  - {r['case_id']}: esperaba={r['expected_route']} "
+                  f"obtuvo={r['actual_route']} | {r['question'][:60]}")
+
 
 if __name__ == "__main__":
     main()

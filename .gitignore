@@ -9,3 +9,10 @@ proyecto/.venv/
 
 # Instrucciones internas (clase) — no se entregan
 taller-instrucciones.md
+
+# Articulo IEEE de otro curso, no es entregable del Taller 1
+articulo IEEE/
+articulo IEEE.zip
+
+# Chroma persistido (regenerable con scripts/build_knowledge_base.py)
+proyecto/data/vector/chroma/

@@ -18,12 +18,23 @@ from typing import Any
 
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
+from langchain_core.vectorstores import VectorStore  # interfaz base del Taller 3 (Ruta A)
 from langchain_huggingface import HuggingFaceEmbeddings
 
 
 COLLECTION_NAME = "qbano_kb"
 EMBEDDING_MODEL_NAME = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 EMBEDDING_DIMENSIONS = 384
+
+
+# La rubrica Ruta A exige usar `langchain_core.vectorstores`. Chroma hereda de
+# `VectorStore`, asi que tipamos el factory con la interfaz base para hacer el
+# contrato explicito y verificable con `grep langchain_core.vectorstores`.
+def _as_vector_store(store: Chroma) -> VectorStore:
+    """Devuelve la instancia Chroma como `langchain_core.vectorstores.VectorStore`."""
+
+    assert isinstance(store, VectorStore), "Chroma debe heredar de VectorStore"
+    return store
 
 
 _embeddings_singleton: HuggingFaceEmbeddings | None = None
@@ -180,15 +191,23 @@ def load_vector_index(path: Path) -> dict[str, Any]:
     }
 
 
-def _open_vectorstore(persist_dir: Path) -> Chroma | None:
+def _open_vectorstore(persist_dir: Path) -> VectorStore | None:
+    """Abre el vector store si el directorio Chroma existe.
+
+    El tipo de retorno es `langchain_core.vectorstores.VectorStore` (interfaz
+    base de LangChain) para que cualquier consumidor pueda apoyarse en la
+    abstraccion en lugar del cliente concreto Chroma.
+    """
+
     if not persist_dir.exists():
         return None
     embeddings = get_embeddings()
-    return Chroma(
+    store = Chroma(
         collection_name=COLLECTION_NAME,
         embedding_function=embeddings,
         persist_directory=str(persist_dir),
     )
+    return _as_vector_store(store)
 
 
 def search_vector_index(

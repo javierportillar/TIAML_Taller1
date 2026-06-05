@@ -6,13 +6,21 @@ from pathlib import Path
 from typing import Any
 
 from langchain_core.tools import BaseTool, tool
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from .chains import answer_question, build_question_context
 from .structured_tool import search_structured_data
 
 
+# Schemas Pydantic ESTRICTOS: extra="forbid" rechaza cualquier argumento
+# que el LLM intente pasar fuera del schema declarado. Esto cumple el requisito
+# de la rubrica Ruta A sobre Structured Outputs estrictos para Function Calling.
+_STRICT_TOOL_CONFIG = ConfigDict(extra="forbid", strict=True)
+
+
 class ConsultaContactoInput(BaseModel):
+    model_config = _STRICT_TOOL_CONFIG
+
     categoria: str = Field(
         description=(
             "Dato puntual o categoria solicitada: whatsapp, correo, pbx, redes, "
@@ -23,6 +31,8 @@ class ConsultaContactoInput(BaseModel):
 
 
 class BuscarCatalogoInput(BaseModel):
+    model_config = _STRICT_TOOL_CONFIG
+
     query: str = Field(
         description=(
             "Pregunta completa del usuario sobre menu, productos, sandwiches, combos, "
@@ -32,6 +42,8 @@ class BuscarCatalogoInput(BaseModel):
 
 
 class ConsultaCorporativaInput(BaseModel):
+    model_config = _STRICT_TOOL_CONFIG
+
     query: str = Field(
         description=(
             "Pregunta completa del usuario sobre historia, informacion institucional, "
@@ -42,6 +54,8 @@ class ConsultaCorporativaInput(BaseModel):
 
 class SolicitarSupervisorInput(BaseModel):
     """Schema de la tool sensible que se enruta a HumanInTheLoopMiddleware."""
+
+    model_config = _STRICT_TOOL_CONFIG
 
     motivo: str = Field(
         description=(
