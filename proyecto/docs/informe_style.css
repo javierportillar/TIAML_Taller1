@@ -1,0 +1,228 @@
+/* Estilo para el informe técnico - PDF generado vía Chrome headless */
+
+@page {
+  size: A4;
+  margin: 22mm 18mm 22mm 18mm;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 11pt;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #1f2937;
+  line-height: 1.55;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  background: #ffffff;
+}
+
+/* Título principal */
+h1 {
+  color: #b91c1c;
+  border-bottom: 3px solid #b91c1c;
+  padding-bottom: 6px;
+  margin-top: 28px;
+  margin-bottom: 14px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  page-break-before: auto;
+  page-break-after: avoid;
+}
+
+h1:first-of-type {
+  margin-top: 0;
+}
+
+/* Numeración de secciones */
+h1[id^="1"] + h2,
+h1[id^="2"] + h2,
+h1[id^="3"] + h2 {
+  margin-top: 16px;
+}
+
+h2 {
+  color: #374151;
+  border-left: 4px solid #b91c1c;
+  padding-left: 10px;
+  margin-top: 24px;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  page-break-after: avoid;
+}
+
+h3 {
+  color: #4b5563;
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  page-break-after: avoid;
+}
+
+h4 {
+  color: #6b7280;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 1rem;
+  page-break-after: avoid;
+}
+
+p {
+  margin: 0.6rem 0;
+  text-align: justify;
+}
+
+/* Bloques de cita */
+blockquote {
+  border-left: 4px solid #93c5fd;
+  background: #eff6ff;
+  padding: 10px 14px;
+  margin: 14px 0;
+  color: #1e3a8a;
+  font-style: italic;
+}
+
+/* Listas */
+ul, ol {
+  margin: 0.6rem 0 0.6rem 1.4rem;
+  padding-left: 0.6rem;
+}
+
+li {
+  margin: 0.3rem 0;
+}
+
+/* Inline code */
+code {
+  background: #f3f4f6;
+  color: #b91c1c;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: "SF Mono", "Menlo", "Monaco", monospace;
+  font-size: 0.88em;
+}
+
+/* Code blocks */
+pre {
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 12px 14px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 12px 0;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  page-break-inside: avoid;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 0.88rem;
+  page-break-inside: avoid;
+}
+
+thead {
+  background: #b91c1c;
+  color: white;
+}
+
+th {
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 7px 10px;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+}
+
+tr:nth-child(even) td {
+  background: #f9fafb;
+}
+
+/* Imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 14px auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  page-break-inside: avoid;
+}
+
+/* Horizontal rules entre secciones */
+hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 24px 0;
+}
+
+/* Header del documento (titulo, autor, fecha generados por pandoc) */
+.title {
+  font-size: 2.2rem;
+  color: #b91c1c;
+  text-align: center;
+  border: none;
+  padding: 0;
+  margin: 16px 0 6px 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #6b7280;
+  text-align: center;
+  margin: 0 0 22px 0;
+  font-weight: 400;
+}
+
+.author, .date {
+  text-align: center;
+  color: #6b7280;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.date {
+  margin-bottom: 28px;
+}
+
+/* Evitar saltos de página feos */
+table, pre, blockquote, img {
+  page-break-inside: avoid;
+}
+
+h1, h2, h3, h4 {
+  page-break-after: avoid;
+}
+
+/* Print specific */
+@media print {
+  body {
+    font-size: 10.5pt;
+  }
+  pre {
+    font-size: 0.72rem;
+  }
+}
