@@ -12,5 +12,29 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  # N8N local: orquestador del flujo WhatsApp -> nuestra API -> WhatsApp (Fase 6).
+  # No depende de la nube; gratis para siempre. Accesible en http://localhost:5678
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: qbano_n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      # Owner por defecto del workspace local; n8n te lo pide en el primer arranque.
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      # Permite ejecutar funciones externas (HTTP a nuestra API local).
+      - N8N_RUNNERS_ENABLED=true
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+      # Zona horaria de Colombia para que los logs de workflows tengan la hora local.
+      - GENERIC_TIMEZONE=America/Bogota
+      - TZ=America/Bogota
+    volumes:
+      - n8n_data:/home/node/.n8n
+
 volumes:
   postgres_data:
+  n8n_data:

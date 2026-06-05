@@ -1,0 +1,215 @@
+{
+  "name": "Sandwich Qbano - WhatsApp Bridge",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "twilio-qbano",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-twilio",
+      "name": "Webhook Twilio (entrante)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        240
+      ],
+      "webhookId": "twilio-qbano"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "extract-from",
+              "name": "from_whatsapp",
+              "value": "={{ $json.body.From || $json.From }}",
+              "type": "string"
+            },
+            {
+              "id": "extract-to",
+              "name": "to_whatsapp",
+              "value": "={{ $json.body.To || $json.To }}",
+              "type": "string"
+            },
+            {
+              "id": "extract-body",
+              "name": "user_message",
+              "value": "={{ $json.body.Body || $json.Body }}",
+              "type": "string"
+            },
+            {
+              "id": "thread-id",
+              "name": "thread_id",
+              "value": "={{ ($json.body.From || $json.From || '').replace('whatsapp:', '') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "extract-fields",
+      "name": "Extraer campos Twilio",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/chat",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"thread_id\": \"{{ $json.thread_id }}\",\n  \"message\": \"{{ $json.user_message }}\",\n  \"provider\": \"ollama\",\n  \"model\": \"gemma3:latest\"\n}",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "call-agent-api",
+      "name": "Llamar agente Qbano (FastAPI)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.twilio.com/2010-04-01/Accounts/{{ $env.TWILIO_ACCOUNT_SID || '__REPLACE_WITH_YOUR_TWILIO_ACCOUNT_SID__' }}/Messages.json",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "twilioApi",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "From",
+              "value": "={{ $('Extraer campos Twilio').item.json.to_whatsapp }}"
+            },
+            {
+              "name": "To",
+              "value": "={{ $('Extraer campos Twilio').item.json.from_whatsapp }}"
+            },
+            {
+              "name": "Body",
+              "value": "={{ $json.answer }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "send-twilio-reply",
+      "name": "Responder por WhatsApp (Twilio API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        240
+      ],
+      "credentials": {
+        "twilioApi": {
+          "id": "twilio-qbano-credential-1",
+          "name": "Twilio Qbano"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<Response></Response>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/xml"
+              }
+            ]
+          }
+        }
+      },
+      "id": "respond-twilio",
+      "name": "ACK 200 a Twilio",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        240
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook Twilio (entrante)": {
+      "main": [
+        [
+          {
+            "node": "Extraer campos Twilio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer campos Twilio": {
+      "main": [
+        [
+          {
+            "node": "Llamar agente Qbano (FastAPI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Llamar agente Qbano (FastAPI)": {
+      "main": [
+        [
+          {
+            "node": "Responder por WhatsApp (Twilio API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Responder por WhatsApp (Twilio API)": {
+      "main": [
+        [
+          {
+            "node": "ACK 200 a Twilio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "taller3"
+    },
+    {
+      "name": "whatsapp"
+    }
+  ]
+}
