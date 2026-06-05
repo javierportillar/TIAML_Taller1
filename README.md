@@ -506,7 +506,7 @@ La rúbrica del Taller 3 (Ruta A) verifica con `grep` el uso estricto de 7 herra
 
 Estas son las decisiones técnicas que realmente movieron la aguja. Las dejo numeradas (D-01 a D-10) porque algunas las cité en el código y en los commits.
 
-**D-01 — Migrar a ChromaDB + HuggingFace en Taller 2.** El feature hashing custom que entregué en el Taller 1 me costó un comentario directo del profe: "te fuiste por el camino más difícil". Me reescribí el vector store con `langchain_chroma` + `langchain_huggingface` (los componentes nativos que pide la rúbrica), perdí dos noches, y desde ahí todo lo demás se sostiene mejor.
+**D-01 — Migrar a ChromaDB + HuggingFace en Taller 2.** El feature hashing custom que entregué en el Taller 1 me costó un comentario directo del profe: "te fuiste por el camino más difícil". Reescribí el vector store con `langchain_chroma` + `langchain_huggingface` (los componentes nativos que pide la rúbrica) y desde ahí todo lo demás se sostiene sobre una base estándar.
 
 **D-02 — Router híbrido determinístico + LLM.** Probé delegándole todo al modelo (gemma3 local) y el routing era inconsistente: "¿cuál es el WhatsApp?" se le iba a RAG vectorial. Metí heurísticas regex en `agent.py` que cubren los casos típicos (preguntas comerciales, datos puntuales de contacto, memoria personal, escalamiento humano), y el LLM solo aparece cuando ninguna regla matcheó. Más del 90% de preguntas se resuelven sin pegarle al modelo.
 
@@ -518,7 +518,7 @@ Estas son las decisiones técnicas que realmente movieron la aguja. Las dejo num
 
 **D-06 — La tool sensible se auto-aprueba en ausencia de UI HITL.** Cuando el flujo HITL devuelve un `__interrupt__`, el código manda `Command(resume=[{"type": "approve"}])` y sigue adelante. En producción real eso debería ser un dashboard donde un humano confirma; aquí está simulado porque la cadena de WhatsApp tiene que ser instantánea.
 
-**D-07 — `GEMINI_API_KEY` del `.env` gana sobre `GOOGLE_API_KEY` del shell.** Esto me costó dos horas debugging. El SDK de Google prefería una `GOOGLE_API_KEY` vieja que yo tenía exportada en `~/.zshrc` y que estaba suspendida, mientras ignoraba la nueva en el `.env`. El fix está en `src/llm.py`: si hay `GEMINI_API_KEY`, sobreescribe la del shell.
+**D-07 — `GEMINI_API_KEY` del `.env` gana sobre `GOOGLE_API_KEY` del shell.** El SDK de Google priorizaba una `GOOGLE_API_KEY` vieja que tenía exportada en `~/.zshrc` (suspendida) mientras ignoraba la nueva en el `.env`. La demo fallaba sin explicación visible. El fix está en `src/llm.py`: si hay `GEMINI_API_KEY`, sobreescribe la del shell.
 
 **D-08 — `gemma3:latest` como default Ollama, no `gemma4`.** Heredé `gemma4:latest` como default del Taller 2 y nunca lo ejercité porque los tests cubrían rutas determinísticas. Cuando llegó el momento de usar el LLM de verdad (preguntas de memoria personal), descubrí que `gemma4` no existe como modelo oficial. Cambié a `gemma3:latest` que sí existe y bajé el modelo con `ollama pull`.
 
@@ -535,7 +535,7 @@ Son las que mantienen al proyecto coherente y sin gotchas vergonzosos.
 1. Las API keys nunca van al código. Viven en `.env` que está gitignored. El selector de la UI cambia proveedor y modelo, jamás credenciales.
 2. El sandbox de Twilio nunca se publica como producción. Si esto sale a clientes reales, hay que registrar un Sender de WhatsApp Business con todo el papeleo de Meta.
 3. El `thread_id` es la única llave de aislamiento de conversaciones. En WhatsApp es el número de teléfono. En Streamlit local es la cadena `streamlit_local`. En los tests de batch es un UUID que se descarta al final.
-4. El agente no inventa números, precios ni canales. Si la información no está en el JSON estructurado ni en Chroma, responde con cortesía explicando que no tiene el dato. Esa fue una regla dura por la que peleé en cada prompt.
+4. El agente no inventa números, precios ni canales. Si la información no está en el JSON estructurado ni en Chroma, responde con cortesía explicando que no tiene el dato.
 5. Toda respuesta del asistente queda persistida en Postgres. Si el día de la sustentación alguien dice "me respondió mal", existe una query SQL que muestra el turno exacto.
 6. El router determinístico tiene prioridad sobre el LLM. Si una regla regex matchea, se ejecuta esa ruta. El LLM solo aparece cuando ninguna heurística pudo decidir.
 

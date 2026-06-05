@@ -332,57 +332,82 @@ ORDER BY id DESC;
 
 # 6. Análisis t-SNE / UMAP de conversaciones (Ruta Transversal A — opcional)
 
-## 6.1 Objetivo
+## 6.1 Objetivo y honestidad metodológica
 
-Verificar visualmente que las distintas rutas del agente generan respuestas semánticamente distinguibles, es decir, que el router determinístico + Function Calling **no están homogeneizando** lo que el agente produce.
+La intención inicial fue verificar visualmente que las distintas rutas del agente generan respuestas semánticamente distinguibles. El resultado real **matizó esa hipótesis** y obligó a una lectura más cuidadosa. Esta sección reporta lo que el análisis muestra, no lo que esperábamos que mostrara.
 
 ## 6.2 Metodología
 
-1. Se extrajeron del Postgres las **158 respuestas del asistente** con `route` asignada (turnos del usuario excluidos porque no llevan ruta).
-2. Cada respuesta fue vectorizada con el **mismo modelo de embeddings que usa el RAG** (`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, 384 dimensiones) para garantizar consistencia con el espacio semántico operativo.
-3. La matriz resultante (158 × 384) fue proyectada a 2D con dos técnicas complementarias: **t-SNE** (preserva estructura local) y **UMAP** (preserva estructura global).
-4. Se calculó el **coeficiente de silueta** en el espacio original (384d, métrica coseno) para tener una medida cuantitativa de la separación entre clústeres independiente del algoritmo de reducción.
+1. Se extrajeron del Postgres las **191 respuestas del asistente** con `route` asignada (turnos del usuario excluidos porque no llevan ruta).
+2. Cada respuesta fue vectorizada con el **mismo modelo de embeddings que usa el RAG en producción** (`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, 384 dimensiones). Mantener el mismo modelo garantiza que el análisis viva en el mismo espacio semántico que la operación real.
+3. La matriz resultante (191 × 384) fue proyectada a 2D con dos técnicas complementarias: **t-SNE** (preserva estructura local) y **UMAP** (preserva estructura global).
+4. Se calculó el **coeficiente de silueta** en el espacio original (384d, métrica coseno) para tener una medida cuantitativa independiente del algoritmo de reducción.
 
-## 6.3 Métricas obtenidas
-
-| Métrica | Valor | Interpretación |
-|---------|-------|----------------|
-| **Silhouette score** (cosine, 384d) | **0.165** | Separabilidad moderada — los clústeres existen pero comparten fronteras, lo cual es esperable porque todas las respuestas siguen plantillas léxicas similares (frases estructuradas en español). |
-| Número de clases (rutas) | 6 | `consultar_datos_contacto`, `buscar_catalogo_productos`, `consultar_informacion_corporativa`, `conversation`, `memory`, `solicitar_supervisor_humano`. |
-| Respuestas analizadas | 158 | Subconjunto: solo `role=assistant` con `route IS NOT NULL`. |
-
-## 6.4 Distribución por ruta
+## 6.3 Distribución de rutas en el corpus
 
 | Ruta del agente | Turnos | % del corpus |
-|-----------------|--------|-------------|
-| `consultar_datos_contacto` | 97 | 61.4% |
-| `buscar_catalogo_productos` | 46 | 29.1% |
-| `memory` | 5 | 3.2% |
-| `conversation` | 5 | 3.2% |
-| `consultar_informacion_corporativa` | 4 | 2.5% |
-| `solicitar_supervisor_humano` | 1 | 0.6% |
+|-----------------|--------|--------------|
+| `consultar_datos_contacto` | 118 | 61.8% |
+| `buscar_catalogo_productos` | 56 | 29.3% |
+| `memory` | 6 | 3.1% |
+| `conversation` | 6 | 3.1% |
+| `consultar_informacion_corporativa` | 4 | 2.1% |
+| `solicitar_supervisor_humano` | 1 | 0.5% |
+
+**Observación importante**: el corpus está **fuertemente desbalanceado**. La ruta `consultar_datos_contacto` representa el 62% del corpus porque la mayoría del tráfico durante desarrollo fueron pruebas de la tool estructurada. Cualquier métrica de clustering global queda sesgada por esa dominancia. Esto se reporta explícitamente para que la lectura del análisis sea honesta.
+
+## 6.4 Métricas obtenidas
+
+| Métrica | Valor | Lectura académica |
+|---------|-------|-------------------|
+| **Silhouette score** (cosine, 384d) | **0.167** | **Estructura débil**. |
+| Número de clases (rutas distintas) | 6 | Las seis rutas que el agente puede tomar. |
+| Respuestas analizadas | 191 | Solo `role=assistant` con `route IS NOT NULL`. |
+
+Calibración del coeficiente de silueta:
+
+| Rango | Interpretación |
+|-------|----------------|
+| > 0.70 | Estructura fuerte. |
+| 0.50 – 0.70 | Estructura razonable. |
+| 0.25 – 0.50 | Estructura débil pero defendible. |
+| < 0.25 | Prácticamente sin estructura. |
+
+El valor obtenido (**0.167**) cae en el rango bajo. La conclusión técnica es directa: en el espacio embedding original, los clústeres por ruta existen pero con mucho solapamiento. **No se presenta como evidencia fuerte de separabilidad**, sino como un análisis exploratorio con limitaciones reportadas.
 
 ## 6.5 Visualización
 
-![Proyección t-SNE 2D de las 158 respuestas del agente, coloreadas por ruta](tsne_2d_static.png){ width=100% }
+![Proyección t-SNE 2D de las 191 respuestas del agente, coloreadas por ruta](tsne_2d_static.png){ width=100% }
 
-## 6.6 Interpretación de los clústeres
+## 6.6 Interpretación honesta del plot
 
-**Clúster grande, denso, bien definido — `consultar_datos_contacto`.** Es el clúster más fácil de identificar. Estas respuestas siguen un molde casi idéntico ("Encontré esta información estructurada: …") porque vienen de la tool determinística que lee del JSON, no del LLM. El embedding multilingüe captura ese molde con muy poca dispersión.
+**Nota metodológica**: t-SNE asigna coordenadas arbitrarias y la orientación cambia entre runs si cambia el dataset. Por eso esta sección habla en términos de **agrupamiento relativo**, no de posiciones absolutas en la gráfica.
 
-**Clúster medio con sub-núcleos — `buscar_catalogo_productos`.** Aparece más disperso porque mezcla respuestas determinísticas (rankings de precios con formato tabular) con respuestas generadas por el LLM sobre RAG. Se notan dos sub-núcleos: uno corresponde al atajo determinístico, otro al fallback con síntesis del modelo.
+**`consultar_datos_contacto` (n=118)** — Contraintuitivamente, **es la clase más dispersa**, no la más densa. Sus puntos se distribuyen ampliamente por la proyección. La explicación: aunque todas estas respuestas comparten una frase introductoria ("Encontré esta información estructurada…"), el **contenido cambia mucho** entre turnos: unos hablan de WhatsApp, otros de redes sociales, otros de cobertura por ciudad, otros de horarios. El embedding multilingüe captura el cuerpo de la respuesta más que la frase de molde, así que la dispersión refleja diversidad temática real dentro de esta ruta.
 
-**Clústeres satélite — `memory`, `conversation`, `solicitar_supervisor_humano`.** Aparecen como pequeños grupos aislados en los bordes del gráfico, lejos de los clústeres principales. Esto confirma que el agente **sí responde distinto** cuando la ruta es conversacional o de memoria personal, en lugar de caer siempre en plantillas RAG. La ruta sensible HITL tiene solo un ejemplo en el corpus actual.
+**`buscar_catalogo_productos` (n=56)** — Es la clase con **agrupamiento visual más claro**. Sus puntos forman una nube reconocible aunque no perfectamente delimitada. La explicación: estas respuestas son casi siempre **tablas de precios** con formato muy similar (producto, precio, categoría). El embedding identifica ese patrón estructural y los acerca.
 
-**Solapamiento `consultar_informacion_corporativa` ↔ `buscar_catalogo_productos`.** Algunos puntos quedan en zona fronteriza. Refleja una realidad operativa del agente: preguntas como "¿en qué ciudades están?" pueden resolverse por RAG corporativo o por catálogo dependiendo del fraseo. El embedding captura correctamente esta ambigüedad.
+**`memory` (n=6)** — Con solo 6 ejemplos no se puede afirmar que forma un clúster estable. Los puntos están relativamente cerca entre sí, pero el tamaño muestral no permite conclusión estadística.
 
-## 6.7 Hallazgos accionables
+**`conversation` (n=6)** — Mismo caveat que `memory`: 6 puntos no es muestra suficiente. Visualmente los puntos quedan en una zona común pero no es prueba de clustering.
 
-Con más datos (un mes de operación real, por ejemplo) este análisis permitiría:
+**`consultar_informacion_corporativa` (n=4)** — Solo 4 puntos. Aparecen dispersos sin estructura visible. Sería necesario mucho más tráfico de preguntas abiertas para evaluar esta ruta.
 
-1. Detectar **conversaciones fallidas** como un clúster propio (turnos que cayeron al fallback de cortesía). Hoy son pocos pero ya se diferencian visualmente.
-2. Identificar **picos de quejas** en periodos específicos (clúster `solicitar_supervisor_humano` creciendo = indicador operativo).
-3. Encontrar **preguntas recurrentes mal resueltas** (clústeres densos con baja diversidad de respuesta = candidatos a entrar al JSON estructurado).
+**`solicitar_supervisor_humano` (n=1)** — Un solo punto. Es la ruta sensible que pasa por HITL. La estadística aquí es trivial: con un único ejemplo no hay clúster que medir, solo se confirma que el sistema lo registró correctamente.
+
+## 6.7 Lo que el plot enseña, dicho sin inflar
+
+1. **El agente sí responde diferente según la ruta**, pero la diferencia no se traduce automáticamente en clústeres separados en el espacio semántico. Las rutas con respuestas estructuralmente uniformes (`buscar_catalogo_productos`) se agrupan mejor que la ruta dominante (`consultar_datos_contacto`).
+2. **La intuición inicial fue equivocada**. Se asumió que las respuestas determinísticas (las del JSON estructurado) serían las más fáciles de agrupar porque "siguen molde". El plot mostró lo contrario: el contenido variado dentro de esa ruta pesa más que el molde.
+3. **El silhouette bajo es coherente con lo que se ve**. No es un fallo del agente: es una limitación del corpus actual (desbalanceado, sesgado por pruebas de desarrollo).
+
+## 6.8 Hallazgos accionables con más datos reales
+
+Con un mes de operación real (decenas de miles de turnos diversos) este análisis sería más útil. Las dimensiones interesantes serían:
+
+1. Detectar **conversaciones fallidas** como un clúster propio (turnos que cayeron al fallback cortés porque el LLM no respondió a tiempo).
+2. Identificar **picos de quejas** en periodos específicos (`solicitar_supervisor_humano` creciendo = indicador operativo).
+3. Encontrar **preguntas recurrentes mal resueltas** dentro de `consultar_informacion_corporativa` que ameritarían entrar al JSON estructurado para acelerar respuesta.
 
 El script reproducible vive en `scripts/run_tsne_analysis.py` y el notebook con la versión interactiva en `scripts/bonus_tsne_conversaciones.ipynb`.
 

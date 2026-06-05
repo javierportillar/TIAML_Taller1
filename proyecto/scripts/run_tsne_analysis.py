@@ -193,7 +193,13 @@ def compute_metrics(X: np.ndarray, labels: list[str]) -> dict[str, object]:
 
 
 def write_analysis(metrics: dict[str, object], n_total: int, path: Path) -> None:
-    """Markdown corto que el informe técnico puede embeber tal cual."""
+    """Markdown con interpretación HONESTA del plot generado.
+
+    Importante: las afirmaciones de esta sección deben coincidir con lo que el
+    PNG realmente muestra, no con lo que intuiríamos. Las primeras versiones de
+    este script inventaron clústeres que el plot no exhibía y eso quedó como
+    bandera roja del review.
+    """
 
     counts: dict[str, int] = metrics["counts"]  # type: ignore[assignment]
     sil = metrics["silhouette"]  # type: ignore[assignment]
@@ -202,98 +208,153 @@ def write_analysis(metrics: dict[str, object], n_total: int, path: Path) -> None
         for route, count in sorted(counts.items(), key=lambda kv: -kv[1])
     )
 
-    quality_label = (
-        "muy alta separabilidad" if sil > 0.5 else
-        "separabilidad clara" if sil > 0.3 else
-        "separabilidad moderada" if sil > 0.1 else
-        "separabilidad baja"
-    )
+    # Calificación académica honesta del silhouette.
+    if sil > 0.5:
+        quality_label = "estructura clara"
+        quality_caveat = "los clústeres están bien separados."
+    elif sil > 0.25:
+        quality_label = "estructura razonable"
+        quality_caveat = "los clústeres son distinguibles aunque con solapamientos."
+    elif sil > 0.10:
+        quality_label = "estructura débil"
+        quality_caveat = (
+            "los clústeres existen pero con mucho solapamiento; no se debe "
+            "presentar como evidencia fuerte de separabilidad."
+        )
+    else:
+        quality_label = "prácticamente sin estructura"
+        quality_caveat = (
+            "los embeddings de las distintas rutas se mezclan en el espacio "
+            "original; cualquier separación visual viene de la proyección."
+        )
 
-    md = f"""# Bonus — Análisis t-SNE / UMAP de conversaciones reales
+    dominant_route = max(counts.items(), key=lambda kv: kv[1])
+    dominant_pct = dominant_route[1] / n_total
 
-## Resumen ejecutivo
+    md = f"""# Bonus — Análisis t-SNE / UMAP de respuestas reales del agente
 
-Tomamos {n_total} respuestas reales del agente almacenadas en Postgres
-(`conversation_messages`, role=assistant), las vectorizamos con el mismo
-modelo de embeddings que usa el RAG
-(`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, 384 dimensiones),
-y proyectamos el espacio resultante a 2D usando dos técnicas complementarias:
-**t-SNE** (preserva estructura local) y **UMAP** (preserva estructura global).
+## Qué se hizo
 
-El objetivo: verificar visualmente que las distintas rutas del agente
-(`consultar_datos_contacto`, `buscar_catalogo_productos`, `memory`,
-`conversation`, `consultar_informacion_corporativa`, `solicitar_supervisor_humano`)
-generan respuestas semánticamente distinguibles, es decir, que el router
-determinístico + Function Calling no están homogeneizando lo que el agente
-produce.
+Se extrajeron del Postgres (`conversation_messages`, `role='assistant'`,
+`route IS NOT NULL`) un total de **{n_total} respuestas reales** del agente.
+Cada texto se vectorizó con el **mismo modelo que usa el RAG en producción**
+(`sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`, 384 dimensiones)
+para que el análisis viva en el mismo espacio semántico que la operación
+real. Luego se redujo a 2D con dos técnicas:
+
+- **t-SNE** (perplejidad 12, métrica coseno) — preserva estructura local.
+- **UMAP** (n_neighbors 15, métrica coseno) — preserva estructura global.
+
+La intención inicial era verificar visualmente que las distintas rutas del
+agente generan respuestas semánticamente distintas. El resultado real
+matizó esa hipótesis y obligó a una lectura más cuidadosa.
+
+## Distribución de rutas en el corpus
+
+| Ruta del agente | Turnos | % del corpus |
+|-----------------|--------|--------------|
+{rows}
+
+**Observación importante**: el corpus está **fuertemente desbalanceado**.
+La ruta `{dominant_route[0]}` representa el {dominant_pct:.0%} de todas
+las respuestas. Esto se debe a que la mayoría del tráfico durante desarrollo
+fueron pruebas de la tool estructurada de contacto. Cualquier métrica de
+clustering global queda sesgada por esa dominancia.
 
 ## Métricas
 
-- **Coeficiente de silueta (cosine, espacio original):** **{sil:.3f}** — {quality_label}.
-- **Número de clases (rutas):** {metrics["n_classes"]}.
-- **Total de respuestas analizadas:** {n_total}.
+- **Silhouette score (cosine, espacio 384d original):** **{sil:.3f}** — {quality_label}.
+- **Número de clases (rutas distintas):** {metrics["n_classes"]}.
+- **Respuestas analizadas:** {n_total}.
 
-> Para referencia: silhouette > 0.5 es considerado fuerte; 0.25 - 0.5 es razonable
-> en problemas reales con clases solapadas; valores bajos indican que los grupos
-> se mezclan. Como las rutas del agente comparten plantilla léxica (todas son
-> respuestas estructuradas en español), un silhouette > 0.2 ya valida la separación.
+Lectura del silhouette en el contexto académico:
 
-## Distribución por ruta
+| Rango | Interpretación |
+|-------|----------------|
+| > 0.70 | Estructura fuerte. |
+| 0.50 – 0.70 | Estructura razonable. |
+| 0.25 – 0.50 | Estructura débil pero defendible. |
+| < 0.25 | Prácticamente sin estructura. |
 
-| Ruta del agente | Turnos | % del corpus |
-|----------------|--------|-------------|
-{rows}
+El valor obtenido ({sil:.3f}) cae **en el rango bajo**: {quality_caveat}
 
-## Interpretación de los clústeres visuales
+## Interpretación honesta del plot
 
-**Clúster grande inferior-derecho — `consultar_datos_contacto`.**
-Es el clúster más denso y mejor definido. Tiene sentido: estas respuestas
-siguen un molde casi idéntico ("Encontré esta información estructurada: …")
-porque vienen de la tool determinística que lee del JSON, no del LLM.
-El embedding multilingüe captura ese molde con facilidad.
+> Nota metodológica: t-SNE asigna coordenadas arbitrarias (la orientación cambia
+> entre runs aunque la semilla sea la misma si cambia el dataset). Por eso esta
+> sección habla en términos de **agrupamiento relativo**, no de posiciones
+> absolutas en la gráfica.
 
-**Clúster medio — `buscar_catalogo_productos`.**
-Más disperso que el anterior porque mezcla respuestas determinísticas
-(rankings de precios) con respuestas generadas por el LLM sobre RAG.
-Forma una nube ovalada con dos sub-núcleos: uno corresponde al atajo
-determinístico y otro al fallback con síntesis del modelo.
+**`consultar_datos_contacto` (n={counts.get('consultar_datos_contacto', 0)})** —
+contraintuitivamente, **es la clase más dispersa**, no la más densa. Sus
+puntos se distribuyen ampliamente por la proyección. La explicación: aunque
+todas estas respuestas comparten una frase introductoria ("Encontré esta
+información estructurada…"), el **contenido cambia mucho** entre turnos:
+unos hablan de WhatsApp, otros de redes sociales, otros de cobertura por
+ciudad, otros de horarios. El embedding multilingüe captura el cuerpo de
+la respuesta más que la frase de molde, así que la dispersión refleja
+diversidad temática real dentro de esta ruta.
 
-**Clústeres satélite pequeños — `memory`, `conversation`, `solicitar_supervisor_humano`.**
-Aparecen como puntos aislados en los bordes del gráfico, lejos de los
-clústeres principales. Esto confirma que el agente *sí* responde distinto
-cuando la ruta es conversacional o de memoria personal, en lugar de
-caer siempre en plantillas de RAG. La ruta sensible HITL
-(`solicitar_supervisor_humano`) tiene solo un ejemplo en el corpus actual,
-así que su clúster es un único punto: se aprecia su posición pero no su
-densidad.
+**`buscar_catalogo_productos` (n={counts.get('buscar_catalogo_productos', 0)})** —
+es la clase con **agrupamiento visual más claro**. Sus puntos forman una
+nube reconocible aunque no perfectamente delimitada. La explicación: estas
+respuestas son casi siempre **tablas de precios** con formato muy similar
+(producto, precio, categoría). El embedding identifica ese patrón estructural
+y los acerca.
 
-**Solapamientos entre `consultar_informacion_corporativa` y `buscar_catalogo_productos`.**
-Algunos puntos quedan en zona fronteriza. Esto refleja una realidad del
-agente: preguntas como "¿cuántas sedes tienen?" pueden resolverse por
-RAG corporativo *o* por catálogo dependiendo del fraseo. El embedding
-captura esa ambigüedad correctamente.
+**`memory` (n={counts.get('memory', 0)})** —
+con solo 6 ejemplos no se puede afirmar que forma un clúster estable. Los
+puntos están relativamente cerca entre sí, pero el tamaño muestral no
+permite conclusión estadística.
 
-## Qué se podría hacer si tuviéramos más datos
+**`conversation` (n={counts.get('conversation', 0)})** —
+mismo caveat que `memory`: 6 puntos no es muestra suficiente. Visualmente
+los puntos quedan en una zona común pero no es prueba de clustering.
 
-El corpus actual viene principalmente de pruebas de desarrollo y la
-demo real de WhatsApp del 4 de junio. Si esto saliera a clientes reales
-durante un mes, las dimensiones interesantes serían:
+**`consultar_informacion_corporativa` (n={counts.get('consultar_informacion_corporativa', 0)})** —
+solo 4 puntos. Aparecen dispersos sin estructura visible. Sería necesario
+mucho más tráfico de preguntas abiertas para evaluar esta ruta.
 
-- Detectar **conversaciones fallidas** como un clúster propio (turnos donde
-  el agente cae al fallback de RAG con mensaje cortés de error). Hoy son
-  pocos pero ya se diferencian visualmente.
-- Identificar **picos de quejas** (clúster `solicitar_supervisor_humano`
-  creciendo en periodos específicos = indicador operativo).
-- Encontrar **preguntas recurrentes mal resueltas** (clústeres densos con
-  baja diversidad de respuesta = candidatos a entrar al JSON estructurado).
+**`solicitar_supervisor_humano` (n={counts.get('solicitar_supervisor_humano', 0)})** —
+un solo punto. Es la ruta sensible que pasa por HITL. La estadística aquí
+es trivial: con un único ejemplo no hay clúster que medir, solo se confirma
+que el sistema lo registró correctamente.
+
+## Lo que el plot enseña, dicho sin inflar
+
+1. **El agente sí responde diferente según la ruta**, pero la diferencia
+   no se traduce automáticamente en clústeres separados en el espacio
+   semántico. Las rutas con respuestas estructuralmente uniformes
+   (`buscar_catalogo_productos`, `memory`, `conversation`) se agrupan
+   mejor que la ruta dominante (`consultar_datos_contacto`).
+2. **La intuición inicial fue equivocada**. Asumí que las respuestas
+   determinísticas (las del JSON estructurado) serían las más fáciles
+   de agrupar porque "siguen molde". El plot mostró lo contrario: el
+   contenido variado dentro de esa ruta pesa más que el molde.
+3. **El silhouette bajo es coherente con lo que se ve**. No es un fallo
+   del agente: es una limitación del corpus actual (desbalanceado, sesgado
+   por pruebas de desarrollo).
+
+## Qué pasaría con más datos reales
+
+Si el sistema saliera a clientes durante un mes el análisis sería más
+útil. Las dimensiones interesantes serían:
+
+- Detectar **conversaciones fallidas** como un clúster propio (turnos
+  donde el agente cae al fallback cortés porque el LLM no respondió).
+- Identificar **picos de quejas** en periodos específicos
+  (`solicitar_supervisor_humano` creciendo = indicador operativo).
+- Sub-clústeres densos dentro de `consultar_informacion_corporativa`
+  indicarían preguntas frecuentes mal resueltas que ameritan entrar al
+  JSON estructurado.
 
 ## Archivos generados por este script
 
 | Archivo | Para qué sirve |
-|---------|---------------|
-| `results/tsne_2d_static.png` | Imagen para embeber en el PDF del informe. |
-| `results/tsne_2d_interactive.html` | Versión interactiva con hover y zoom. |
-| `results/umap_2d_interactive.html` | Misma data con UMAP — comparación de estabilidad. |
+|---------|----------------|
+| `results/tsne_2d_static.png` | Imagen para embeber en el PDF. |
+| `results/tsne_2d_interactive.html` | Plotly con hover sobre cada punto (texto + thread). |
+| `results/umap_2d_interactive.html` | Versión UMAP — comparación. |
 | `results/tsne_analysis.md` | Este archivo. |
 
 ## Cómo reproducir
@@ -303,7 +364,7 @@ cd proyecto
 python scripts/run_tsne_analysis.py
 ```
 
-Tiempo aproximado: 30 segundos (vectorización + ambas reducciones).
+Tiempo aproximado: 30 segundos (vectorización + ambas reducciones + plots).
 """
 
     path.write_text(md, encoding="utf-8")
