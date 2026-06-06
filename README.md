@@ -17,8 +17,8 @@ La idea principal que guió todo: que el sistema no fuera "un chatbot bonito", s
 | **Taller 1** | Pipeline Q&A clásico: scraping + chunking + RAG + Streamlit | ✅ Cerrado |
 | **Taller 2** | Agente conversacional con memoria + tool estructurada + ChromaDB + multi-LLM | ✅ Cerrado |
 | **Taller 3 – Ruta A** | Function Calling estricto + FastAPI + PostgresSaver + WhatsApp via N8N + Twilio | ✅ Cerrado, demo en vivo verificada |
-| Bonus t-SNE | Análisis de clústeres de conversaciones | ⬜ Opcional |
-| Informe técnico | PDF unificado para sustentación | ⏳ En preparación |
+| Bonus t-SNE | Análisis t-SNE/UMAP de conversaciones | ✅ Cerrado, análisis honesto incluido |
+| Informe técnico | PDF unificado para sustentación | ✅ Cerrado, PDF 12 páginas generado |
 
 **Pruebas automatizadas que pasaron:** 33/33 batch del agente · 5/5 rutas de memoria personal · 20/20 smoke API FastAPI · 1/1 prueba real WhatsApp end-to-end.
 
@@ -578,8 +578,8 @@ Son las que mantienen al proyecto coherente y sin gotchas vergonzosos.
 ✅ Taller 2   Agente + memoria + tool estructurada + ChromaDB
 ✅ Taller 3   Function Calling estricto + FastAPI + PostgresSaver +
               WhatsApp via N8N + Twilio + multi-LLM + HITL
-🟡 Bonus      t-SNE/UMAP de conversaciones para análisis de clústeres
-🟡 Informe    PDF unificado para sustentación
+✅ Bonus      t-SNE/UMAP de conversaciones con análisis honesto
+✅ Informe    PDF unificado para sustentación (12 páginas)
 ─────────────────────────────────────────────────────────────
 ⬜ V2         Producción real: número WhatsApp Business propio,
               dashboard humano para HITL, dominio propio,
