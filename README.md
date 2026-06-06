@@ -83,7 +83,7 @@ Si el usuario pide explícitamente hablar con un humano ("tengo una queja, pása
 | **Function Calling** | Pydantic v2 schemas + `langchain_core.tools.tool` | Cada tool tiene `BaseModel` estricto en `src/tools.py`. El LLM no puede invocar tools con argumentos malformados. |
 | **API REST** | FastAPI 0.136 + Uvicorn | OpenAPI auto-generado en `/docs`, lifespan async para precargar config, payload `ChatRequest` validado con Pydantic. |
 | **UI demo** | Streamlit 1.33 | UI rápida para sustentación humana. Sidebar con selector multi-LLM en caliente. |
-| **LLMs** | Ollama (`gemma3:latest` local) + Google Gemini (`gemini-2.5-flash`) + OpenAI (`gpt-4o-mini`) opcional | Selector por sesión Streamlit **y por request** en `POST /chat`. Permite alternar en vivo sin reiniciar nada. |
+| **LLMs** | OpenCode Go (`kimi-k2.6` cloud para WhatsApp) + Ollama (`gemma3:latest` local) + Google Gemini (`gemini-2.5-flash`) + OpenAI (`gpt-4o-mini`) opcional | Selector por sesión Streamlit **y por request** en `POST /chat`. Permite alternar en vivo sin reiniciar nada. |
 | **Embeddings** | `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` vía `langchain-huggingface` | Multilingüe (es necesario porque el corpus mezcla español e inglés). 384 dim. Corre local, no consume cuota de API. |
 | **Vector store** | ChromaDB persistido (`langchain-chroma`) | 185 vectores indexados, < 3 MB en disco. Suficiente para una empresa de un solo sitio web. |
 | **Memoria persistente** | PostgresSaver de LangGraph + tabla custom `conversation_messages` | PostgresSaver guarda el estado binario del agente (rúbrica); la tabla custom guarda turnos legibles para auditoría SQL y para repintar el chat al reabrir Streamlit. |
@@ -352,6 +352,12 @@ OLLAMA_BASE_URL=http://127.0.0.1:11434
 TEMPERATURE=0.0
 MAX_CONTEXT_CHARS=200000
 
+# === OpenCode Go (recomendado para WhatsApp: cloud, no consume CPU local) ===
+# LLM_PROVIDER=opencode_go
+# MODEL_NAME=kimi-k2.6
+# OPENCODE_API_KEY=tu_clave_de_opencode
+# OPENCODE_BASE_URL=https://opencode.ai/zen/go/v1
+
 # === Memoria persistente (Taller 3 Fase 4) ===
 LANGGRAPH_DB_URL=postgresql://qbano:qbano_dev@localhost:5432/qbano_agent
 
@@ -399,6 +405,11 @@ curl -X POST http://127.0.0.1:8000/chat \
 curl -X POST http://127.0.0.1:8000/chat \
   -H "Content-Type: application/json" \
   -d '{"thread_id":"demo_curl","message":"¿Cuáles son los sándwiches más baratos?","provider":"google_genai","model":"gemini-2.5-flash"}'
+
+# Con OpenCode Go (cloud)
+curl -X POST http://127.0.0.1:8000/chat \
+  -H "Content-Type: application/json" \
+  -d '{"thread_id":"demo_curl","message":"¿Cual es el WhatsApp?","provider":"opencode_go","model":"kimi-k2.6"}'
 
 # Pedir escalamiento humano (dispara HITL)
 curl -X POST http://127.0.0.1:8000/chat \

@@ -32,22 +32,22 @@ class ChatRequest(BaseModel):
         description="Texto crudo enviado por el usuario.",
         examples=["¿Cual es el WhatsApp de la empresa?"],
     )
-    provider: Literal["ollama", "google_genai", "openai"] | None = Field(
+    provider: Literal["ollama", "google_genai", "openai", "opencode_go"] | None = Field(
         default=None,
         description=(
             "Proveedor LLM a utilizar en este turno. Si se omite, se toma del .env "
-            "(LLM_PROVIDER). Permite alternar Ollama/Gemini/OpenAI desde el cliente."
+            "(LLM_PROVIDER). Permite alternar Ollama/Gemini/OpenAI/OpenCode Go desde el cliente."
         ),
-        examples=["ollama", "google_genai"],
+        examples=["ollama", "google_genai", "opencode_go"],
     )
     model: str | None = Field(
         default=None,
         max_length=128,
         description=(
             "Nombre del modelo concreto del proveedor seleccionado (gemma3:latest, "
-            "gemini-2.5-flash, gpt-4o-mini, etc.). Si se omite, se toma el default del proveedor."
+            "gemini-2.5-flash, gpt-4o-mini, kimi-k2.6, etc.). Si se omite, se toma el default del proveedor."
         ),
-        examples=["gemma3:latest", "gemini-2.5-flash"],
+        examples=["gemma3:latest", "gemini-2.5-flash", "kimi-k2.6"],
     )
     temperature: float | None = Field(
         default=None,

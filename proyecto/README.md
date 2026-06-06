@@ -14,8 +14,8 @@ en Modelos de Lenguaje** (Maestría en IA, UAO).
 python3.13 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env             # ajustar GEMINI_API_KEY si aplica
-ollama pull gemma3:latest        # modelo default Taller 3
+cp .env.example .env             # ajustar OPENCODE_API_KEY/GEMINI_API_KEY si aplica
+ollama pull gemma3:latest        # solo si usaras el proveedor local ollama
 docker compose up -d             # Postgres 16 + n8n 2.x
 python scripts/build_knowledge_base.py --max-pages 25
 ```

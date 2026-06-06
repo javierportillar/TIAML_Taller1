@@ -74,7 +74,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"thread_id\": \"{{ $json.thread_id }}\",\n  \"message\": \"{{ $json.user_message }}\",\n  \"provider\": \"ollama\",\n  \"model\": \"gemma3:latest\"\n}",
+        "jsonBody": "={\n  \"thread_id\": \"{{ $json.thread_id }}\",\n  \"message\": \"{{ $json.user_message }}\",\n  \"provider\": \"opencode_go\",\n  \"model\": \"kimi-k2.6\"\n}",
         "options": {
           "timeout": 60000
         }

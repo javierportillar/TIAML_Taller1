@@ -156,7 +156,16 @@ def build_app_config(company_config_path: Path | None = None) -> AppConfig:
 
     company = load_company_config(paths.company_config_path)
     provider = os.getenv("LLM_PROVIDER", "openai").strip().lower()
-    default_model = "gpt-4o-mini" if provider == "openai" else "llama3.1:8b"
+    default_models = {
+        "openai": "gpt-4o-mini",
+        "ollama": "gemma3:latest",
+        "google_genai": "gemini-2.5-flash",
+        "gemini": "gemini-2.5-flash",
+        "opencode_go": "kimi-k2.6",
+        "opencode": "kimi-k2.6",
+        "go": "kimi-k2.6",
+    }
+    default_model = default_models.get(provider, "gpt-4o-mini")
 
     runtime = RuntimeConfig(
         provider=provider,

@@ -44,6 +44,7 @@ PROVIDER_DEFAULT_MODEL: dict[str, str] = {
     "ollama": "gemma3:latest",
     "google_genai": "gemini-2.5-flash",
     "openai": "gpt-4o-mini",
+    "opencode_go": "kimi-k2.6",
 }
 
 
@@ -196,7 +197,7 @@ def info() -> InfoResponse:
     resources = get_resources()
     config = resources.config
 
-    available_providers = ["ollama", "google_genai", "openai"]
+    available_providers = ["ollama", "google_genai", "openai", "opencode_go"]
     return InfoResponse(
         company=config.company.company_name,
         description=config.company.company_description,

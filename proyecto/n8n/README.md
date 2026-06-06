@@ -46,7 +46,7 @@ El workflow esta versionado en `workflows/whatsapp_qbano.json`. Tiene 5 nodos:
 
 1. **Webhook Twilio (entrante)** — POST `/webhook/twilio-qbano` (form-urlencoded de Twilio).
 2. **Extraer campos Twilio** — extrae `From`, `To`, `Body`; genera `thread_id` = numero sin `whatsapp:`.
-3. **Llamar agente Qbano (FastAPI)** — POST `http://host.docker.internal:8000/chat`.
+3. **Llamar agente Qbano (FastAPI)** — POST `http://host.docker.internal:8000/chat`, usando `provider=opencode_go` y `model=kimi-k2.6` para que WhatsApp ejecute el LLM en la nube de OpenCode Go y no en Ollama local.
 4. **Responder por WhatsApp (Twilio API)** — POST `https://api.twilio.com/2010-04-01/Accounts/{SID}/Messages.json` con Basic Auth (credencial `Twilio Qbano`).
 5. **ACK 200 a Twilio** — devuelve `<Response></Response>` para cerrar el ciclo HTTP.
 
