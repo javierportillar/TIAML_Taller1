@@ -824,15 +824,17 @@ restringido al historial</td>
 </table>
 <h2 id="selector-multi-llm-en-caliente">4.4 Selector multi-LLM en
 caliente</h2>
-<p>El sistema soporta tres proveedores LLM intercambiables sin
-reinicio:</p>
+<p>El sistema soporta <strong>cuatro proveedores LLM</strong>
+intercambiables sin reinicio:</p>
 <ul>
-<li><strong>Ollama</strong> (<code>gemma3:latest</code>, local,
-default).</li>
+<li><strong>Ollama</strong> (<code>gemma3:latest</code>, local, default
+para la UI Streamlit).</li>
 <li><strong>Google Gemini</strong> (<code>gemini-2.5-flash</code>,
 validado en demo).</li>
 <li><strong>OpenAI</strong> (<code>gpt-4o-mini</code>,
 configurable).</li>
+<li><strong>OpenCode Go</strong> (<code>kimi-k2.6</code>, cloud,
+<strong>default para WhatsApp</strong>).</li>
 </ul>
 <p>El selector vive:</p>
 <ul>
@@ -840,10 +842,52 @@ configurable).</li>
 para la siguiente pregunta.</li>
 <li>En el <strong>body de <code>POST /chat</code></strong>: cambia el
 proveedor por request individual.</li>
+<li>En el <strong>workflow de N8N</strong>: hardcoded a
+<code>provider=&quot;opencode_go&quot;</code> para que el tráfico de WhatsApp NO
+sature el equipo local cuando todo el grupo de clase prueba la demo
+simultáneamente.</li>
 </ul>
 <p>Las API keys siguen leyéndose desde <code>.env</code> por seguridad.
 El selector solo cambia proveedor + nombre de modelo, nunca
 credenciales.</p>
+<h3 id="por-qué-opencode-go-para-whatsapp">Por qué OpenCode Go para
+WhatsApp</h3>
+<p>Cuando el grupo entero de la sustentación se une al sandbox de Twilio
+y hace pruebas concurrentes, <strong>Ollama local saturaría el equipo
+del autor</strong> (es un modelo de 4B parámetros corriendo en CPU). La
+solución fue separar los dos canales:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 54%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Canal</th>
+<th>Proveedor default</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Streamlit (uso individual)</td>
+<td>Ollama local (<code>gemma3:latest</code>)</td>
+<td>Cero costo, cero red, suficiente para demostración 1 a 1</td>
+</tr>
+<tr>
+<td>WhatsApp (uso del grupo)</td>
+<td>OpenCode Go (<code>kimi-k2.6</code>, cloud)</td>
+<td>Absorbe la carga concurrente sin tocar el equipo local</td>
+</tr>
+</tbody>
+</table>
+<p>OpenCode Go es un endpoint compatible con la API de OpenAI
+(<code>https://opencode.ai/zen/go/v1/chat/completions</code>). En
+<code>src/llm.py</code> se implementa con <code>ChatOpenAI</code>
+pasando <code>base_url</code> y <code>api_key</code> explícitos, de modo
+que el cliente OpenAI no intente leer la env var
+<code>OPENAI_API_KEY</code> por defecto.</p>
 <h2 id="memoria-persistente-dos-capas-en-el-mismo-postgres">4.5 Memoria
 persistente — dos capas en el mismo Postgres</h2>
 <table>
@@ -1269,6 +1313,20 @@ Reducir el watcher a solo tres archivos JSON eliminó el problema.</p>
 API.</strong> La API pública de Twilio no expone el endpoint del sandbox
 para configuración programática. Esa fue la única acción manual de toda
 la Fase 6.</p>
+<p><strong>D-11 — OpenCode Go (<code>kimi-k2.6</code>) como proveedor
+por defecto del canal WhatsApp.</strong> El día previo a la sustentación
+se identificó un riesgo operativo: si el grupo completo de la clase
+prueba el sandbox de Twilio simultáneamente, Ollama local saturaría el
+equipo del autor (CPU). La solución fue dejar Ollama solo para la UI
+Streamlit (uso individual) y configurar el workflow de N8N para que las
+llamadas vengan con <code>provider=&quot;opencode_go&quot;</code>, descargando la
+inferencia a un endpoint cloud compatible con la API de OpenAI. Esto
+preserva el comportamiento del agente (las mismas tools, la misma
+memoria, el mismo router) cambiando solo el LLM que sintetiza la
+respuesta final cuando aplica. Documentado en <code>src/llm.py</code>
+con la rama específica que usa <code>ChatOpenAI</code> directo (no
+<code>init_chat_model</code>) para poder pasar <code>base_url</code> y
+<code>api_key</code> explícitos.</p>
 <hr />
 <h1 id="reglas-que-no-se-negociaron">8. Reglas que no se negociaron</h1>
 <p>Son las que mantuvieron el proyecto coherente y sin gotchas
@@ -1352,6 +1410,22 @@ mitigaciones</h1>
 <td>Crítico</td>
 <td>Archivo <code>infodata.md</code> fuera del repo; rotar tokens tras
 sustentación</td>
+</tr>
+<tr>
+<td>Saturación de CPU si el grupo prueba WhatsApp con Ollama local</td>
+<td>Alta el día de la demo</td>
+<td>Alto (latencia, posibles errores)</td>
+<td><strong>Resuelto en D-11</strong>: workflow N8N envía
+<code>provider=&quot;opencode_go&quot;</code> para que la inferencia ocurra en
+cloud, no en el equipo del autor</td>
+</tr>
+<tr>
+<td>Cuota de OpenCode Go agotada durante demo grupal</td>
+<td>Media</td>
+<td>Medio (WhatsApp deja de responder)</td>
+<td>Fallback manual: editar nodo HTTP de n8n para cambiar
+<code>provider</code> a <code>google_genai</code> (toma 30 s en el
+dashboard de n8n)</td>
 </tr>
 </tbody>
 </table>

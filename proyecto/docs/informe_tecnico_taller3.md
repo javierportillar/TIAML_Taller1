@@ -219,18 +219,38 @@ Algunas rutas se resuelven antes de invocar al LLM o a una tool:
 
 ## 4.4 Selector multi-LLM en caliente
 
-El sistema soporta tres proveedores LLM intercambiables sin reinicio:
+El sistema soporta **cuatro proveedores LLM** intercambiables sin reinicio:
 
-- **Ollama** (`gemma3:latest`, local, default).
+- **Ollama** (`gemma3:latest`, local, default para la UI Streamlit).
 - **Google Gemini** (`gemini-2.5-flash`, validado en demo).
 - **OpenAI** (`gpt-4o-mini`, configurable).
+- **OpenCode Go** (`kimi-k2.6`, cloud, **default para WhatsApp**).
 
 El selector vive:
 
 - En el **sidebar de Streamlit**: cambia el proveedor para la siguiente pregunta.
 - En el **body de `POST /chat`**: cambia el proveedor por request individual.
+- En el **workflow de N8N**: hardcoded a `provider="opencode_go"` para que el tráfico de WhatsApp NO sature el equipo local cuando todo el grupo de clase prueba la demo simultáneamente.
 
 Las API keys siguen leyéndose desde `.env` por seguridad. El selector solo cambia proveedor + nombre de modelo, nunca credenciales.
+
+### Por qué OpenCode Go para WhatsApp
+
+Cuando el grupo entero de la sustentación se une al sandbox de Twilio
+y hace pruebas concurrentes, **Ollama local saturaría el equipo del autor**
+(es un modelo de 4B parámetros corriendo en CPU). La solución fue separar
+los dos canales:
+
+| Canal | Proveedor default | Por qué |
+|-------|-------------------|---------|
+| Streamlit (uso individual) | Ollama local (`gemma3:latest`) | Cero costo, cero red, suficiente para demostración 1 a 1 |
+| WhatsApp (uso del grupo) | OpenCode Go (`kimi-k2.6`, cloud) | Absorbe la carga concurrente sin tocar el equipo local |
+
+OpenCode Go es un endpoint compatible con la API de OpenAI
+(`https://opencode.ai/zen/go/v1/chat/completions`). En `src/llm.py` se
+implementa con `ChatOpenAI` pasando `base_url` y `api_key` explícitos,
+de modo que el cliente OpenAI no intente leer la env var
+`OPENAI_API_KEY` por defecto.
 
 ## 4.5 Memoria persistente — dos capas en el mismo Postgres
 
@@ -437,6 +457,8 @@ Decisiones de ingeniería con impacto explícito en el resultado, numeradas para
 
 **D-10 — Webhook de Twilio configurado por UI, no por API.** La API pública de Twilio no expone el endpoint del sandbox para configuración programática. Esa fue la única acción manual de toda la Fase 6.
 
+**D-11 — OpenCode Go (`kimi-k2.6`) como proveedor por defecto del canal WhatsApp.** El día previo a la sustentación se identificó un riesgo operativo: si el grupo completo de la clase prueba el sandbox de Twilio simultáneamente, Ollama local saturaría el equipo del autor (CPU). La solución fue dejar Ollama solo para la UI Streamlit (uso individual) y configurar el workflow de N8N para que las llamadas vengan con `provider="opencode_go"`, descargando la inferencia a un endpoint cloud compatible con la API de OpenAI. Esto preserva el comportamiento del agente (las mismas tools, la misma memoria, el mismo router) cambiando solo el LLM que sintetiza la respuesta final cuando aplica. Documentado en `src/llm.py` con la rama específica que usa `ChatOpenAI` directo (no `init_chat_model`) para poder pasar `base_url` y `api_key` explícitos.
+
 ---
 
 # 8. Reglas que no se negociaron
@@ -462,6 +484,8 @@ Son las que mantuvieron el proyecto coherente y sin gotchas vergonzosos durante 
 | Ollama tarda más de 30 s en frío (primera pregunta) | Alta | Bajo (UX) | Hacer una pregunta de prueba 5 minutos antes de la sustentación |
 | Twilio Sandbox bloquea por inactividad | Baja | Alto | Mantener mensaje de prueba reciente en el sandbox |
 | Token de ngrok / Twilio expuestos | Baja | Crítico | Archivo `infodata.md` fuera del repo; rotar tokens tras sustentación |
+| Saturación de CPU si el grupo prueba WhatsApp con Ollama local | Alta el día de la demo | Alto (latencia, posibles errores) | **Resuelto en D-11**: workflow N8N envía `provider="opencode_go"` para que la inferencia ocurra en cloud, no en el equipo del autor |
+| Cuota de OpenCode Go agotada durante demo grupal | Media | Medio (WhatsApp deja de responder) | Fallback manual: editar nodo HTTP de n8n para cambiar `provider` a `google_genai` (toma 30 s en el dashboard de n8n) |
 
 ---
 
